@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-item nav-logo">
+                <a href="#">
+                    <span>B&R</span>
+                </a>
+            </div>
+            <div class="nav-item nav-search">
+                <input type="text" placeholder="Szukaj tutaj...">
+                <select>
+                    <option selected="">Kategorie</option>
+                    <option>opcja 1</option>
+                    <option>opcja 2</option>
+                </select>
+                <button>lupa</button>
+            </div>
+            <div class="nav-item nav-cart">
+                <p>Koszyk (0)</p>
+            </div>
+        </nav>
+        <main>
+            <section id="hero">
+                <div class="hero-title">
+                    <h1>NAJLEPSZE<br/>OKAZJE</h1>
+                    <h3>SPECJALNIE DLA CIEBIE</h3>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-product-container">
+                        <div class="hero-product">
+                            <img src="" alt="telfon"/>
+                            <strong>TELFON</strong>
+                            <p>Tylko teraz przesyłka za darmowo!</p>
+                        </div>
+                        <button>DODAJ DO KOSZYKA</button>
+                    </div>
+                </div>
+            </section>
+            <section id="products">
+                <h1>NOWE OFERTY</h1>
+                <div class="product-list">
+                    <div class="product">
+                        <div class="product-top-half">
+                            <img src="" alt="zelazko"/>
+                        </div>
+                        <div class="product-bottom-half">
+                            <div class="product-description">
+                                <div class="product-name">
+                                    <span>Żelazko TEFAL Easygliss</span>
+                                    <span>
+                                        <strong>499,99zł</strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="product-cart-btn">ok</button>
+                        </div>
+                    </div>
+                </div>
+                <h1>POLECANE</h1>
+                <div class="product-list">
+
+                </div>
+                <a href="#">
+                    <strong>ok</strong>
+                    <span>Zobacz wszystkie produkty</span>
+                </a>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-logo">
+                <span>B&R</span>
+            </div>
+            <div class="footer-content">
+                <div class="footer-content-item">
+                    <label for="footer-contact">Kontakt</label>
+                    <ul id="footer-contact">
+                        <li>
+                            <a href="mailto:admin@example.com">admin@example.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-content-item">
+                    <label for="footer-info">Informacje</label>
+                    <ul id="footer-info">
+                        <li>
+                            <a href="#">Regulamin</a>
+                        </li>
+                        <li>
+                            <a href="#">Polityka prywatności</a>
+                        </li>
+                        <li>
+                            <a href="#">Dostawa i płatność</a>
+                        </li>
+                        <li>
+                            <a href="#">Zwroty i reklamacje</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-content-item">
+                    <label for="footer-media">Nasze media</label>
+                    <ul id="footer-media">
+                        <li>
+                            <a href="#">
+                                <strong>@</strong>
+                                <span>Instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <strong>f</strong>
+                                <span>Facebook</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-content-item">
+                    <label for="footer-promo">Strona wykonana przez G&G</label>
+                    <ul id="footer-promo">
+                        <li>
+                            <a href="#">
+                                <u>ggweb.pl</u>
+                            </a>
+                            <a href="#">[</a>
+                            <a href="#">@</a>
+                            <a href="#">f</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </body>
+    <script>
+        let product = document.querySelector(".product");
+        let container1 = document.querySelector(".product-list:nth-child(2)");
+        for (let i = 0; i < 5; i++) {
+            container1.appendChild(product.cloneNode(true));
+        }
+        let container2 = document.querySelector(".product-list:nth-child(4)");
+        for (let i = 0; i < 5; i++) {
+            container2.appendChild(product.cloneNode(true));
+        }
+    </script>
+</html>
