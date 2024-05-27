@@ -1,18 +1,3 @@
-// GLOBALNE
-let cart = [];
-let cartCount = 0;
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('cart-modal');
-
-    // Event listener do zamykania modalu po kliknięciu poza modalem
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
-});
-
 // PRODUCTS
 
 let product = document.querySelector(".product");
@@ -25,7 +10,10 @@ for (let i = 0; i < 5; i++) {
     container2.appendChild(product.cloneNode(true));
 }
 
-// MODAL
+/* MODAL */
+
+let cart = [];
+let cartCount = 0;
 
 function addToCart(productName, productPrice) {
     const existingProductIndex = cart.findIndex(item => item.name === productName);
@@ -101,6 +89,7 @@ function updateCartItems() {
 
     document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
 }
+
 
 function removeFromCart(index) {
     if (cart[index].quantity > 1) {
