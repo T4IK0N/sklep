@@ -301,10 +301,15 @@ footer {
 
 /* OTHER */
 
-.product {
-    width: 300px;
+.product-list {
     display: grid;
-    grid-template-rows: 200px 50px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.product {
+    display: grid;
+    grid-template-rows: 400px 75px;
     border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
@@ -312,7 +317,7 @@ footer {
 
 .product-bottom-half {
     display: grid;
-    grid-template-columns: 1fr 50px;
+    grid-template-columns: 1fr 75px;
     background: white;
     color: black;
     border-top: 1px solid black;
@@ -324,7 +329,8 @@ footer {
     justify-content: center;
     align-items: flex-start;
     box-sizing: border-box;
-    padding-left: 10px;
+    padding-left: 20px;
+    gap: 5px;
 }
 
 .product-cart-btn {
@@ -333,7 +339,10 @@ footer {
     border-radius: 0;
 }
 
-.product-
+.product-img {
+    width: 100%;
+    height: 100%;
+}
 
 html {
     animation: html 3600s linear infinite;
