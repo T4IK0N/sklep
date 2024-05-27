@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style/common.css">
         <link rel="stylesheet" href="style/index.css">
-        <script src="scripts/index.js" defer></script>
+        <script src="scripts/index_script.js" defer></script>
         <title>Strona internetowa</title>
     </head>
     <body>
@@ -43,7 +43,9 @@
                 </div>
             </div>
         </nav>
-        <div class="whiteLine"></div>
+
+        <hr class="whiteLine"></hr>
+
         <main>
             <section id="hero">
                 <div class="hero-bg">
@@ -95,8 +97,10 @@
                 </a>
             </section>
         </main>
-        <div class="whiteLine"></div>
-        <footer class="horizontal-padding">
+
+        <hr class="whiteLine"></hr>
+
+        <footer>
             <div class="footer-div">
                 <div class="footer-logo">
                     <a href="index.html">
@@ -162,16 +166,22 @@
                 </div>
             </div>
         </footer>
+
         <!-- Modal HTML -->
         <div id="cart-modal" class="modal">
             <div id="modal-content" class="modal-content">
-                <div>
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <div id="cart-items"></div>
-                    <p id="cart-total"></p>
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-content-div">
+                    <div id="cart-items" class="cart-items"></div>
+                </div>
+                <hr class="whiteLine"></hr>
+                <div class="modal-price inter-light-font">
+                    <p class="cart-total">Kwota</p>
+                    <p id="cart-total" class="cart-total"></p>
                 </div>
                 <button onclick="placeOrder()" class="btn-order">ZAMÓWIENIE</button>
             </div>
         </div>
+
     </body>
 </html>
