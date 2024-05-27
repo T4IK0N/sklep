@@ -44,7 +44,7 @@
         </div>
     </nav>
 
-    <div class="whiteLine"></div>
+    <hr class="whiteLine"></hr>
 
     <main>
         <section id="hero">
@@ -93,7 +93,7 @@
         </section>
     </main>
 
-    <div class="whiteLine"></div>
+    <hr class="whiteLine"></hr>
 
     <footer>
         <div class="footer-div">
@@ -168,10 +168,14 @@
     <!-- Modal HTML -->
     <div id="cart-modal" class="modal">
         <div id="modal-content" class="modal-content">
-            <div>
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div id="cart-items"></div>
-                <p id="cart-total"></p>
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-content-div">
+                <div id="cart-items" class="cart-items"></div>
+            </div>
+            <hr class="whiteLine"></hr>
+            <div class="modal-price inter-light-font">
+                <p class="cart-total">Kwota</p>
+                <p id="cart-total" class="cart-total"></p>
             </div>
             <button onclick="placeOrder()" class="btn-order">ZAMÓWIENIE</button>
         </div>

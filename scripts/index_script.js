@@ -63,16 +63,24 @@ function updateCartItems() {
 
     cart.forEach((item, index) => {
         const itemElement = document.createElement('div');
+        const itemElement2 = document.createElement('div');
         itemElement.classList.add('cart-item');
         itemElement.innerHTML = `
-            <span>${item.name} (Ilość: ${item.quantity})</span>
-            <button class="remove-button" onclick="removeFromCart(${index})">x</button>
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
+        `;
+        itemElement2.classList.add('cart-item-remove');
+        itemElement2.innerHTML = `
+            <button class="btn-remove" onclick="removeFromCart(${index})">
+                <span class="material-symbols-light--close"></span>
+            </button>
         `;
         cartItemsContainer.appendChild(itemElement);
+        cartItemsContainer.appendChild(itemElement2);
         total += item.price;
     });
 
-    document.getElementById('cart-total').textContent = `Kwota: ${total.toFixed(2)} zł`;
+    document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
 }
 
 function removeFromCart(index) {
