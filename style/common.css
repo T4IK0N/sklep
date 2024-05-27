@@ -316,6 +316,10 @@ footer {
     margin: 0;
 }
 
+.font-bayon {
+    font-weight: 400;
+}
+
 .inter-light-font {
     font-weight: var(--font-light);
 }
