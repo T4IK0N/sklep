@@ -29,6 +29,16 @@
     mask-size: 100% 100%;
     }
 
+.horizontal-padding {
+    padding-left: var(--horizontal-padding);
+    padding-right: var(--horizontal-padding);
+}
+
+.vertical-padding {
+    padding-top: var(--vertical-padding);
+    padding-bottom: var(--vertical-padding);
+}
+
 * {
     font-family: var(--main-font), sans-serif;
     margin: 0;
@@ -39,12 +49,6 @@
 body {
     background-color: var(--background-color);
     /* padding: 0 var(--site-padding); */
-}
-
-nav,
-main,
-footer {
-    padding: 0 var(--horizontal-padding);
 }
 
 .logo  {
