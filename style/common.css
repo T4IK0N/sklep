@@ -13,6 +13,16 @@
     --font-regular: 400;
 }
 
+.horizontal-padding {
+    padding-left: var(--horizontal-padding);
+    padding-right: var(--horizontal-padding);
+}
+
+.vertical-padding {
+    padding-top: var(--vertical-padding);
+    padding-bottom: var(--vertical-padding);
+}
+
 * {
     font-family: var(--main-font), sans-serif;
     margin: 0;
