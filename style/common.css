@@ -198,24 +198,28 @@ footer {
 /* MODAL */
 
 .modal {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border: 1px solid #888;
-    width: 300px;
-    background-color: var(--cart-background-color);
-    transform: translate(-180px, 20px);
+    z-index: 1000;
 }
 
 .modal-content {
+    position: relative;
     padding: 20px;
     color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: var(--cart-background-color);
+    transform: translate(-400px 100px);
+
 }
 
 .modal-content-div {
@@ -223,7 +227,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: var(--cart-padding);
+    height: fit-content;
+    padding-bottom: 0.5rem;
 }
 
 .modal-price {
@@ -239,14 +244,22 @@ footer {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
 .cart-item {
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.cart-item-nameAndPrice {
+    display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    width: fit-content;
+    height: fit-content;
 }
 
 .cart-item-name {
@@ -271,35 +284,16 @@ footer {
 }
 
 .remove-icon {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
 }
 
-/* cart.forEach((item, index) => {
-    const itemElement = document.createElement('div');
-    itemElement.classList.add('cart-item');
-    itemElement.innerHTML = `
-        <span class="cart-item-name">${item.name}</span>
-        <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
-        <button class="remove-button" onclick="removeFromCart(${index})">x</button>
-    `;
-    cartItemsContainer.appendChild(itemElement);
-    total += item.price;
-}); */
-
-.close {
-    /* background-image: url() */
-    color: #fff;
-    float: right;
-    font-size: 22px;
-    font-weight: 400;
-}
-
-.close:hover,
-.close:focus {
-    color: #b00;
-    text-decoration: none;
-    cursor: pointer;
+.cartLine {
+    width: 100%;
+    height: 1px;
+    background-color: #3a3a3a;
+    margin: 0;
+    border: 0;
 }
 
 .btn-order {
@@ -314,6 +308,7 @@ footer {
     height: 1px;
     background-color: #fff;
     margin: 0;
+    border: 0;
 }
 
 .font-bayon {

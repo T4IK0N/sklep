@@ -1,4 +1,19 @@
-/* PRODUCTS */
+// GLOBALNE
+let cart = [];
+let cartCount = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('cart-modal');
+
+    // Event listener do zamykania modalu po kliknięciu poza modalem
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+});
+
+// PRODUCTS
 
 let product = document.querySelector(".product");
 let container1 = document.querySelector(".product-list:nth-child(2)");
@@ -10,10 +25,7 @@ for (let i = 0; i < 5; i++) {
     container2.appendChild(product.cloneNode(true));
 }
 
-/* MODAL */
-
-let cart = [];
-let cartCount = 0;
+// MODAL
 
 function addToCart(productName, productPrice) {
     const existingProductIndex = cart.findIndex(item => item.name === productName);
@@ -63,20 +75,27 @@ function updateCartItems() {
 
     cart.forEach((item, index) => {
         const itemElement = document.createElement('div');
-        const itemElement2 = document.createElement('div');
         itemElement.classList.add('cart-item');
-        itemElement.innerHTML = `
+
+        const itemElement2 = document.createElement('div');
+        itemElement2.classList.add('cart-item-nameAndPrice');
+        itemElement2.innerHTML = `
             <span class="cart-item-name">${item.name}</span>
             <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
         `;
-        itemElement2.classList.add('cart-item-remove');
-        itemElement2.innerHTML = `
+
+        const itemRemoveElement = document.createElement('div');
+        itemRemoveElement.classList.add('cart-item-remove');
+        itemRemoveElement.innerHTML = `
             <button class="btn-remove" onclick="removeFromCart(${index})">
-                <span class="material-symbols-light--close"></span>
+                <span class="material-symbols-light--close remove-icon"></span>
             </button>
         `;
+
+        itemElement.appendChild(itemElement2);
+        itemElement.appendChild(itemRemoveElement);
+
         cartItemsContainer.appendChild(itemElement);
-        cartItemsContainer.appendChild(itemElement2);
         total += item.price;
     });
 
