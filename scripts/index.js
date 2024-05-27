@@ -51,11 +51,6 @@ function showModal() {
     modal.style.display = "block";
 }
 
-function closeModal() {
-    const modal = document.getElementById('cart-modal');
-    modal.style.display = "none";
-}
-
 function updateCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
     cartItemsContainer.innerHTML = '';
@@ -103,10 +98,31 @@ function removeFromCart(index) {
     updateCartItems();
 }
 
+function redirectToSubpage(relativeUrl) {
+    window.location.href = relativeUrl;
+}
+
 function placeOrder() {
-    alert('tutaj bedzie przeniesienie do formularza!');
-    cart = [];
-    cartCount = 0;
-    updateCartIcon();
     closeModal();
+    updateCartIcon();
+    redirectToSubpage('subpages/koszyk.html');
+}
+
+function closeModalOnClickOutside(event) {
+    const modal = document.getElementById('cart-modal');
+    const cartIcon = document.getElementById('cart-icon-container');
+    const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
+
+    const isButtonClick = buttons.some(button => button.contains(event.target));
+
+    if (!modal.contains(event.target) && !cartIcon.contains(event.target) && !isButtonClick) {
+        closeModal();
+    }
+}
+
+document.addEventListener('click', closeModalOnClickOutside);
+
+function closeModal() {
+    const modal = document.getElementById('cart-modal');
+    modal.style.display = "none";
 }

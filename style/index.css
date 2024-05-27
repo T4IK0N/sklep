@@ -9,16 +9,7 @@
     height: calc(100dvh - 101px);
     position: absolute;
 }
-.hero-bg > img {
-    width: 100%;
-    height: 100%;
-}
-.hero-title {
-    font-size: 500%;
-}
-.hero-title > :nth-child(2) {
-    margin-top: -100px;
-}
+@@ -21,4 +22,39 @@
 .hero-title > :nth-child(3) {
     font-size: 70%;
     margin-top: -75px;
