@@ -40,7 +40,6 @@
 }
 
 * {
-    font-family: var(--main-font), sans-serif;
     margin: 0;
     padding: 0;
     color: #fff;
@@ -48,6 +47,7 @@
 
 body {
     background-color: var(--background-color);
+    font-family: var(--main-font), sans-serif;
     /* padding: 0 var(--site-padding); */
 }
 
@@ -317,6 +317,7 @@ footer {
 }
 
 .font-bayon {
+    font-family: var(--second-font), sans-serif;
     font-weight: 400;
 }
 
