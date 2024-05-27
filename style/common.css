@@ -4,7 +4,7 @@
 
 :root {
     --background-color: #212121;
-    --site-padding: 200px;
+    --site-padding: 150px;
     --main-font: inter;
     --second-font: bayon;
     --third-font: poppins;
@@ -64,7 +64,7 @@ nav {
 }
 
 .search-input {
-    padding: 10px;
+    padding: 7px;
     padding-left: 20px;
     color: #fff;
     background-color: #434343;
@@ -83,11 +83,11 @@ nav {
     align-items: center;
     justify-content: space-evenly;
     width: fit-content;
-    padding: 0 15px;
+    padding: 0 12px;
 }
 
 .search-select {
-    padding: 10px 0;
+    padding: 7px 0;
     background-color: #434343;
     color: #fff;
     outline: none;
@@ -115,17 +115,17 @@ nav {
 }
 
 .select-icon {
-    width: 17px;
-    height: 17px;
+    width: 13px;
+    height: 13px;
 }
 
 .search-icon {
-    width: 17px;
-    height: 17px;
+    width: 13px;
+    height: 13px;
 }
 
 .nav-cart {
-    width: 120px;
+    width: 100px;
 } 
 
 .cart-icon-container {
@@ -136,8 +136,13 @@ nav {
 }
 
 .cart-icon {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+}
+
+.cart-text {
+    font-family: var(--third-font);
+    font-size: 0.9rem;
 }
 
 /* FOOTER */
@@ -170,6 +175,49 @@ footer {
     width: 12px;
 }
 
+/* MODAL */
+
+.modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #888;
+    width: 300px;
+    background-color: #434343;
+    transform: translate(-180px, 20px);
+}
+
+.modal-content {
+    padding: 20px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.close {
+    /* background-image: url() */
+    color: #fff;
+    float: right;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.close:hover,
+.close:focus {
+    color: #b00;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-order {
+    width: 220px;
+    height: 30px;
+}
+
 /* OTHER */
 
 .whiteLine {
@@ -185,6 +233,7 @@ footer {
 
 .font-poppins {
     font-family: var(--third-font);
+    font-size: 0.7rem;
 }
 
 a {
