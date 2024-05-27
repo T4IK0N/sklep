@@ -13,6 +13,7 @@
     --font-regular: 400;
     --cart-padding: 0.5rem 0;
     --cart-background-color: #434343;
+    --nav-height: 100px;
 }
 
 .material-symbols-light--close {
@@ -59,7 +60,7 @@ body {
 /* NAV */
 
 nav {
-    height: 100px;
+    height: calc(var(--nav-height) - 1px);
 }
 
 .nav-div {
@@ -349,7 +350,19 @@ select::-ms-expand { /* IE10 */
 
 button {
     margin: 0;
-    padding: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: black;
+    font-weight: 700;
+    font-family: var(--third-font), sans-serif;
     border: none;
     cursor: pointer;
+}
+
+img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+    font-weight: 700;
 }

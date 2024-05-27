@@ -1,19 +1,31 @@
 #hero {
     width: 100%;
     height: calc(100dvh - 101px);
+    min-height: 600px;
 }
+
 .hero-bg {
     z-index: -1;
     width: 100%;
-    max-width: 100vw;
-    height: calc(100dvh - 101px);
+    height: calc(100dvh - var(--nav-height));
+    min-height: 600px;
     position: absolute;
 }
 
-.hero-title > :nth-child(3) {
-    font-size: 70%;
-    margin-top: -75px;
+.hero-bg > img {
+    width: 100%;
+    height: 100%;
 }
+
+.hero-title > h1 {
+    font-size: 600%;
+    margin-top: -90px;
+}
+.hero-title > h3 {
+    font-size: 275%;
+    margin-top: -50px;
+}
+
 .hero-container {
     display: grid;
     grid-template-columns: 1fr 500px;
@@ -29,6 +41,7 @@
     flex-direction: column;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
+    height: 100%;
 }
 .hero-product-container, .hero-product {
     display: flex;
