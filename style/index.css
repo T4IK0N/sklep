@@ -1,0 +1,14 @@
+#hero {
+    width: 100%;
+    height: calc(100dvh - 101px);
+}
+.hero-bg {
+    z-index: -1;
+    width: 100%;
+    height: calc(100dvh - 101px);
+    position: absolute;
+}
+.hero-bg > img {
+    width: 100%;
+    height: 100%;
+}
