@@ -21,6 +21,7 @@
     font-size: 600%;
     margin-top: -90px;
 }
+
 .hero-title > h3 {
     font-size: 275%;
     margin-top: -50px;
@@ -31,30 +32,37 @@
     grid-template-columns: 1fr 500px;
     height: 100%;
 }
+
 .hero-container > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
     height: 100%;
+    gap: 40px;
 }
+
 .hero-product-container, .hero-product {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .hero-product {
     gap: 10px;
 }
+
 .hero-product > img {
     width: 200px;
     height: 400px;
 }
+
 .hero-product-container {
     width: fit-content;
     height: fit-content;
