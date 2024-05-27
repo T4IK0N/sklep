@@ -301,6 +301,21 @@ footer {
 
 /* OTHER */
 
+
+html {
+    animation: sex 3600s linear infinite;
+    overflow-x: hidden;
+}
+
+@keyframes sex {
+    0% {
+        transform: none;
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
 .whiteLine {
     width: 100%;
     height: 1px;
