@@ -35,12 +35,6 @@ body {
     /* padding: 0 var(--site-padding); */
 }
 
-nav,
-main,
-footer {
-    padding: 0 var(--horizontal-padding);
-}
-
 .logo  {
     width: 140px;
     height: 55px;
