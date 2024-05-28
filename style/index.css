@@ -1,9 +1,3 @@
-#hero {
-    width: 100%;
-    height: calc(100dvh - 101px);
-    min-height: 600px;
-}
-
 .hero-bg {
     z-index: -1;
     width: 100%;
