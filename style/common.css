@@ -16,6 +16,10 @@
     --nav-height: 100px;
 }
 
+html {
+    min-height: 100dvh;
+}
+
 .material-symbols-light--close {
     display: inline-block;
     width: 1em;
