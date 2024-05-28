@@ -4,23 +4,22 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style/common.css">
-        <link rel="stylesheet" href="../style/polityka-prywatnosci.css">
+        <link rel="stylesheet" href="style/common.css">
+        <link rel="stylesheet" href="style/polityka-prywatnosci.css">
+        <script src="scripts/common.js" defer></script>
+        <script src="scripts/polityka-prywatnosci.js" defer></script>
         <title>Strona internetowa</title>
     </head>
     <body>
-        <nav>
+        <nav class="horizontal-padding">
             <div class="nav-div">
                 <div class="nav-item nav-logo">
-                    <a href="../index.html">
-                        <img src="../icons/logo.png" class="logo"/>
+                    <a href="index.html">
+                        <img src="icons/logo.png" class="logo" alt=""/>
                     </a>
                 </div>
                 <div class="nav-item nav-search">
                     <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">
-                    
-                    
-                    
                     <div class="category-div">
                         <select class="search-select font-poppins">
                             <option selected="">Kategorie</option>
@@ -28,113 +27,112 @@
                             <option>opcja 2</option>
                         </select>
                         <div class="select-icon-div">
-                            <img src="../icons/sort_down.png" class="select-icon">
+                            <img src="icons/sort_down.png" class="select-icon" alt="">
                         </div>
                     </div>
-
-
-
                     <div class="search-icon-div">
                         <a href="#" class="search-button">
-                            <img src="../icons/search.png" class="search-icon" />
+                            <img src="icons/search.png" class="search-icon" alt=""/>
                         </a>
                     </div>
                 </div>
-                <div class="nav-item nav-cart"> <!-- to bedzie inaczej, tutaj bedzie po kliknieciu lista rozwijana ale zrobie to  kiedy indziej -->
-                    <a href="../subpages/koszyk.html" class="cart-icon-container">
-                        <img src="../icons/cart.png" class="cart-icon"/>
-                        <p class="font-poppins">Koszyk (0)</p>
-                    </a>
+                <div class="nav-item nav-cart">
+                    <div id="cart-icon-container" onclick="cart_function()" class="cart-icon-container">
+                        <img src="icons/cart.png" class="cart-icon" alt=""/>
+                        <p class="cart-text">Koszyk (0)</p>
+                    </div>
                 </div>
             </div>
         </nav>
 
-
-        <div class="whiteLine"></div> <!-- fullscreen line -->
-
+        <hr class="whiteLine">
 
         <main>
-            POLITYKA PRYWATNOSCI
+            POLITYKA-PRYWATNOSCI.HTML
         </main>
-
         
-        <div class="whiteLine"></div> <!-- fullscreen line -->
+        <hr class="whiteLine">
 
-
-        <footer>
+        <footer class="horizontal-padding">
             <div class="footer-div">
                 <div class="footer-logo">
-                    <a href="../index.html">
-                        <img src="../icons/logo.png" class="logo"/>
+                    <a href="index.html">
+                        <img src="icons/logo.png" class="logo" alt=""/>
                     </a>
                 </div>
                 <div class="footer-content">
                     <div class="footer-content-item">
                         <label for="footer-contact">Kontakt</label>
-                        <ul class="footer-contact inter-light-font">
+                        <ul id="footer-contact" class="inter-light-font">
                             <li>
                                 <a href="mailto:admin@example.com">admin@example.com</a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- break -->
-
                     <div class="footer-content-item">
                         <label for="footer-info">Informacje</label>
-                        <ul class="footer-info inter-light-font">
+                        <ul id="footer-info" class="inter-light-font">
                             <li>
-                                <a href="../subpages/regulamin.html">Regulamin</a>
+                                <a href="regulamin.html">Regulamin</a>
                             </li>
                             <li>
-                                <a href="../subpages/polityka-prywatnosci.html">Polityka prywatności</a>
+                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
                             </li>
                             <li>
-                                <a href="../subpages/dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
                             </li>
                             <li>
-                                <a href="../subpages/zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- break -->
-
                     <div class="footer-content-item">
                         <label for="footer-media">Nasze media</label>
-                        <ul class="footer-media inter-light-font">
+                        <ul id="footer-media" class="inter-light-font">
                             <li>
-                                <a href="#" class="">
-                                    <img src="../icons/instagram.png" class="footer-icons" />
+                                <a href="#">
+                                    <img src="icons/instagram.png" class="footer-icons" alt=""/>
                                     <span>Instagram</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="../icons/facebook.png" class="footer-icons">
+                                    <img src="icons/facebook.png" class="footer-icons" alt=""/>
                                     <span>Facebook</span>
                                 </a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- break -->
-
                     <div class="footer-content-item">
                         <label for="footer-promo">Strona wykonana przez G&G</label>
-                        <ul class="footer-promo inter-light-font">
+                        <ul id="footer-promo" class="inter-light-font">
                             <li>
                                 <a href="https://ggweb.pl/">
                                     <u>ggweb.pl</u>
                                 </a>
-                                <a href="#"><img src="../icons/whatsapp.png" class="footer-icons"></a>
-                                <a href="#"><img src="../icons/instagram.png" class="footer-icons"></a>
-                                <a href="#"><img src="../icons/facebook.png" class="footer-icons"></a>
+                                <a href="#"><img src="icons/whatsapp.png" class="footer-icons" alt=""></a>
+                                <a href="#"><img src="icons/instagram.png" class="footer-icons" alt=""></a>
+                                <a href="#"><img src="icons/facebook.png" class="footer-icons" alt=""></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </footer>
+
+        <!-- Modal HTML -->
+        <div id="cart-modal" class="modal">
+            <div id="modal-content" class="modal-content">
+                <div class="modal-content-div">
+                    <div id="cart-items" class="cart-items"></div>
+                </div>
+                <hr class="cartLine">
+                <div class="modal-price inter-light-font">
+                    <p class="cart-total">Kwota</p>
+                    <p id="cart-total" class="cart-total"></p>
+                </div>
+                <button onclick="placeOrder()" class="btn-order">ZAMÓWIENIE</button>
+            </div>
+        </div>
     </body>
 </html>

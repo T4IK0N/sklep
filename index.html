@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style/common.css">
         <link rel="stylesheet" href="style/index.css">
+        <script src="scripts/common.js" defer></script>
         <script src="scripts/index.js" defer></script>
         <title>Strona internetowa</title>
     </head>
@@ -118,16 +119,16 @@
                         <label for="footer-info">Informacje</label>
                         <ul id="footer-info" class="inter-light-font">
                             <li>
-                                <a href="subpages/regulamin.html">Regulamin</a>
+                                <a href="regulamin.html">Regulamin</a>
                             </li>
                             <li>
-                                <a href="subpages/polityka-prywatnosci.html">Polityka prywatności</a>
+                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
                             </li>
                             <li>
-                                <a href="subpages/dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
                             </li>
                             <li>
-                                <a href="subpages/zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
                             </li>
                         </ul>
                     </div>
@@ -176,7 +177,7 @@
                     <p class="cart-total">Kwota</p>
                     <p id="cart-total" class="cart-total"></p>
                 </div>
-                <button onclick="placeOrder()" class="btn-order">ZAMÓWIENIE</button>
+                <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
             </div>
         </div>
     </body>
