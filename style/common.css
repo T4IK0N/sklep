@@ -14,6 +14,7 @@
     --cart-padding: 0.5rem 0;
     --cart-background-color: #434343;
     --nav-height: 100px;
+    --footer-height: 200px;
 }
 
 .material-symbols-light--close {
@@ -181,7 +182,7 @@ main {
 /* FOOTER */
 
 footer {
-    height: 200px;
+    height: calc(var(--footer-height) - 1px);
     background: #000;
 }
 
