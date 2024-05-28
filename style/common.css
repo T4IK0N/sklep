@@ -14,6 +14,7 @@
     --cart-padding: 0.5rem 0;
     --cart-background-color: #434343;
     --nav-height: 100px;
+    --site-padding: 2rem 0;
 }
 
 .material-symbols-light--close {
@@ -174,6 +175,16 @@ nav {
     min-height: 600px;
 }
 
+#hero-subpage {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 2rem;
+}
+
+#title-subpage {
+    font-size: 4rem;
+    padding: 2rem 0;
+}
 /* FOOTER */
 
 footer {
