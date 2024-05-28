@@ -4,7 +4,7 @@
 
 :root {
     --background-color: #212121;
-    --horizontal-padding: 150px;
+    --horizontal-padding: 17%;
     --vertical-padding: 50px;
     --main-font: 'Inter';
     --second-font: 'Bayon';
@@ -28,7 +28,7 @@
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
-    }
+}
 
 .horizontal-padding {
     padding-left: var(--horizontal-padding);
@@ -48,7 +48,7 @@
 body {
     background-color: var(--background-color);
     font-family: var(--main-font), sans-serif;
-    color: white;
+    color: #fff;
     /* padding: 0 var(--site-padding); */
 }
 
@@ -349,14 +349,14 @@ html {
     overflow-x: hidden;
 }
 
-@keyframes html {
+/* @keyframes html {
     0% {
         transform: none;
     }
     100% {
         transform: rotate(45deg);
     }
-}
+} */
 
 .whiteLine {
     width: 100%;
@@ -414,4 +414,67 @@ button {
     font-family: var(--third-font), sans-serif;
     border: none;
     cursor: pointer;
+}
+
+
+@media (min-width: 2200px) {
+    .search-input {
+        padding: 10px 30px;
+        font-size: 0.8rem;
+        width: 300px;
+    }
+
+    .search-select {
+        padding: 10px 0;
+        background-color: #434343;
+        color: #fff;
+        outline: none;
+        width: 75px;
+        font-size: 0.8rem;
+    }
+
+    .search-icon {
+        width: 18px;
+        height: fit-content;
+    }
+
+    .category-div {
+        padding: 0 20px;
+        justify-content: space-between;
+    }
+
+    .font-poppins {
+        font-size: 0.9rem;
+    }
+
+    .select-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .select-icon-div {
+        justify-content: flex-start;
+        width: fit-content;
+    }
+
+    .nav-cart {
+        width: 130px;
+    } 
+    
+    .cart-icon-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .cart-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .cart-text {
+        font-family: var(--third-font), sans-serif;
+        font-size: 1.05rem;
+    }
 }
