@@ -70,7 +70,7 @@ function updateCartItems() {
         const itemRemoveElement = document.createElement('div');
         itemRemoveElement.classList.add('cart-item-remove');
         itemRemoveElement.innerHTML = `
-            <button class="btn-remove" onclick="removeFromCart(${index})">
+            <button class="btn-remove" id="btn-remove" onclick="removeFromCart(${index})">
                 <span class="material-symbols-light--close remove-icon"></span>
             </button>
         `;
@@ -115,7 +115,7 @@ function closeModalOnClickOutside(event) {
 
     const isButtonClick = buttons.some(button => button.contains(event.target));
 
-    if (!modal.contains(event.target) && !cartIcon.contains(event.target) && !isButtonClick) {
+    if (!modal.contains(event.target) && !cartIcon.contains(event.target)) {
         closeModal();
     }
 }
