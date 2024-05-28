@@ -49,7 +49,6 @@ body {
     background-color: var(--background-color);
     font-family: var(--main-font), sans-serif;
     color: #fff;
-    min-height: 100dvh;
     /* padding: 0 var(--site-padding); */
 }
 
@@ -168,6 +167,10 @@ nav {
 }
 
 /* MAIN */
+
+main {
+    min-height: calc(100dvh - var(--nav-height) - 201px);
+}
 
 #hero {
     width: 100%;
