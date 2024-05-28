@@ -315,11 +315,12 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
+    z-index: 1;
 }
 
 .product {
     display: grid;
-    grid-template-rows: 400px 75px;
+    grid-template-rows: 1fr 75px;
     border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
