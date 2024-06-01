@@ -118,11 +118,10 @@ function closeModalOnClickOutside(event) {
     const modal = document.getElementById('cart-modal');
     const cartIcon = document.getElementById('cart-icon-container');
     const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
-    const button = document.getElementById('order-btn');
 
     const isButtonClick = buttons.some(button => button.contains(event.target));
-
-    if (!modal.contains(event.target) && !cartIcon.contains(event.target && !button.contains(event.target))) {
+    
+    if (!modal.contains(event.target) && !cartIcon.contains(event.target) && !isButtonClick) {
         closeModal();
     }
 }

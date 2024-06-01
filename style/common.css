@@ -15,6 +15,7 @@
     --cart-background-color: #434343;
     --nav-height: 100px;
     --site-padding: 2rem 0;
+    --footer-padding: 50px 0;
     --footer-height: 200px;
 }
 
@@ -174,34 +175,34 @@ main {
     min-height: calc(100dvh - var(--nav-height) - 201px);
 }
 
-#hero {
-    width: 100%;
-    height: calc(100dvh - 101px);
-    min-height: 600px;
-}
-
 #hero-subpage {
     width: 100%;
     height: fit-content;
     padding-bottom: 2rem;
 }
 
+#hero-subpage > p {
+    padding-bottom: 1rem;
+    line-height: 1.5;
+}
+
 #title-subpage {
     font-size: 4rem;
-    padding: 2rem 0;
+    padding: 30px 0;
 }
+
 /* FOOTER */
 
 footer {
-    height: 200px;
+    height: fit-content;
     background: #000;
+    padding: var(--footer-padding);
 }
 
 .footer-div {
     font-family: var(--third-font), sans-serif;
     height: 100%;
     box-sizing: border-box;
-    padding: 60px 0;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
