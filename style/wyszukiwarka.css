@@ -1,0 +1,11 @@
+h1 {
+    font-size: 600%;
+}
+.page-selector {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    padding-top: 50px;
+}
