@@ -11,6 +11,10 @@
     height: calc(100dvh - var(--nav-height));
     min-height: 600px;
     position: absolute;
+    background-color: #000;
+    background-image: url(../img/hero.jpg);
+    background-size: cover;
+    background-position: 0% 40%;
 }
 
 .hero-bg > img {

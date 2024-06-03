@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style/common.css">
         <link rel="stylesheet" href="style/wyszukiwarka.css">
         <script src="scripts/common.js" defer></script>
+        <script src="scripts/wyszukiwarka.js" defer></script>
         <title>Strona internetowa</title>
     </head>
     <body>
@@ -51,7 +52,7 @@
             <div class=" vertical-padding product-list">
                 <div class="product">
                     <div class="product-top-half">
-                        <img src="img/placeholder.png" alt="zelazko" class="product-img"/>
+                        <img src="img/product.jpg" alt="zelazko" class="product-img"/>
                     </div>
                     <div class="product-bottom-half">
                         <div class="product-description">
@@ -162,10 +163,4 @@
             </div>
         </div>
     </body>
-    <script>
-        let product = document.querySelector(".product");
-        for (let i = 0; i < 8; i++) {
-            product.parentElement.appendChild(product.cloneNode(true));
-        }
-    </script>
 </html>

@@ -48,6 +48,19 @@
     flex-direction: row;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -202,7 +215,7 @@ nav {
 
 .halt {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
 }
 
 /* MAIN */

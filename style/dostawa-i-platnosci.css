@@ -1,0 +1,26 @@
+.gap {
+    gap: 10px;
+}
+.giga-gap {
+    gap: 25px;
+}
+.payment-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+    color: white;
+}
+#kraj {
+    font-weight: 700;
+}
+.payment-page-finalize {
+    width: 100%;
+}
+label {
+    width: fit-content;
+}
+.bottom-thingy-container-idk {
+    width: 100%;
+}
