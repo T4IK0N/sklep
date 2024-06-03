@@ -68,7 +68,7 @@ function updateCartItems() {
         const itemRemoveElement = document.createElement('div');
         itemRemoveElement.classList.add('cart-item-remove');
         itemRemoveElement.innerHTML = `
-            <button class="btn-remove" id="btn-remove" onclick="removeFromCart(${index})">
+            <button class="btn-remove" onclick="removeFromCart(${index})">
                 <span class="material-symbols-light--close remove-icon"></span>
             </button>
         `;
@@ -82,7 +82,6 @@ function updateCartItems() {
 
     document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
 }
-
 
 function removeFromCart(index) {
     if (cart[index].quantity > 1) {
@@ -107,31 +106,42 @@ function placeOrder() {
     redirectToSubpage('koszyk.html');
 }
 
-// function placeOrderOther() {
-//     alert('uzywasz funkcji placeOrderOther() teraz');
-//     closeModal();
-//     updateCartIcon();
-//     redirectToSubpage('../koszyk.html');
-// }
+function closeModal() {
+    const modal = document.getElementById('cart-modal');
+    if (modal.style.display !== "none") {
+        modal.style.display = "none";
+        console.log('zamknalem modal');
+    }
+}
+
+function isCloseModal() {
+    const modal = document.getElementById('cart-modal');
+    return modal.style.display === "none";
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', closeModalOnClickOutside);
+});
 
 function closeModalOnClickOutside(event) {
     const modal = document.getElementById('cart-modal');
     const cartIcon = document.getElementById('cart-icon-container');
     const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
-    const button = document.getElementById('order-btn');
+    // const removeButtons = Array.from(document.getElementsByClassName('cart-item-remove'));
 
     const isButtonClick = buttons.some(button => button.contains(event.target));
-
-    if (!modal.contains(event.target) && !cartIcon.contains(event.target && !button.contains(event.target))) {
+    // const isButtonRemoveClick = removeButtons.some(button => button.contains(event.target));
+ 
+    // console.log('Clicked element:', event.target);
+    // console.log('isButtonClick:', isButtonClick);
+    // console.log('isButtonRemoveClick:', isButtonRemoveClick);
+    
+    if (modal.style.display !== "none" && 
+        !modal.contains(event.target) && 
+        !cartIcon.contains(event.target) && 
+        !isButtonClick ) {
         closeModal();
     }
-}
-
-document.addEventListener('click', closeModalOnClickOutside);
-
-function closeModal() {
-    const modal = document.getElementById('cart-modal');
-    modal.style.display = "none";
 }
 
 closeModal();

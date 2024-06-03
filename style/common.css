@@ -193,15 +193,17 @@ main {
 /* FOOTER */
 
 footer {
-    height: 200px;
+    min-height: 200px;
+    height: fit-content;
     background: #000;
+    font-size: 0.75rem;
 }
 
 .footer-div {
     font-family: var(--third-font), sans-serif;
-    height: 100%;
+    height: fit-content;
     box-sizing: border-box;
-    padding: 60px 0;
+    padding-top: 60px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -210,11 +212,13 @@ footer {
 
 .footer-content {
     width: 75%;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
 }
+
 
 .footer-icons {
     width: 12px;
@@ -299,8 +303,9 @@ footer {
 }
 
 .btn-remove {
-    width: 20px;
-    height: 20px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
     background-color: var(--cart-background-color);
 }
 
@@ -501,5 +506,9 @@ button {
     .cart-text {
         font-family: var(--third-font), sans-serif;
         font-size: 1.05rem;
+    }
+
+    footer {
+        font-size: 1rem;
     }
 }
