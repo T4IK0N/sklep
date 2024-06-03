@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style/common.css">
-        <link rel="stylesheet" href="style/index.css">
+        <link rel="stylesheet" href="style/wyszukiwarka.css">
         <script src="scripts/common.js" defer></script>
         <title>Strona internetowa</title>
     </head>
@@ -46,8 +46,33 @@
 
         <hr class="whiteLine">
 
-        <main>
-
+        <main class="vertical-padding horizontal-padding">
+            <h1 class="font-bayon">ZNALEZIONO 9 OFERT</h1>
+            <div class=" vertical-padding product-list">
+                <div class="product">
+                    <div class="product-top-half">
+                        <img src="img/placeholder.png" alt="zelazko" class="product-img"/>
+                    </div>
+                    <div class="product-bottom-half">
+                        <div class="product-description">
+                            <span>Żelazko TEFAL Easygliss</span>
+                            <span>
+                                <strong>499,99zł</strong>
+                            </span>
+                        </div>
+                        <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="page-selector">
+                <a href="#"><<</a>
+                <a href="#">
+                    <strong>
+                        <u>1</u>
+                    </strong>
+                </a>
+                <a href="#">>></a>
+            </div>
         </main>
 
         <hr class="whiteLine">
@@ -82,6 +107,9 @@
                             </li>
                             <li>
                                 <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                            </li>
+                            <li>
+                                <a href="kontakt.html">Kontakt</a>
                             </li>
                         </ul>
                     </div>
@@ -134,4 +162,10 @@
             </div>
         </div>
     </body>
+    <script>
+        let product = document.querySelector(".product");
+        for (let i = 0; i < 8; i++) {
+            product.parentElement.appendChild(product.cloneNode(true));
+        }
+    </script>
 </html>

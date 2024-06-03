@@ -47,8 +47,89 @@
 
         <hr class="whiteLine">
 
-        <main>
-            DOSTAWA-I-PLATNOSCI.HTML
+        <main class="vertical-padding horizontal-padding">
+            <form class="payment halt gap">
+                <div class="payment-left">
+                    <h2>Płatność i Wysyłka</h2>
+                    <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                    <div class="halt gap">
+                        <div class="payment-input-field gap flex-column">
+                            <label for="imie">Imię</label>
+                            <input type="text" class="payment-input" name="imie" id="imie" placeholder="Imię..." required/>
+                        </div>
+                        <div class="payment-input-field gap flex-column">
+                            <label for="nazwisko">Nazwisko</label>
+                            <input type="text" class="payment-input" name="nazwisko" id="nazwisko" placeholder="Nazwisko..." required/>
+                        </div>
+                    </div>
+                    <label>Kraj / region</label>
+                    <h2>Polska</h2>
+                    <div class="payment-input-field gap flex-column">
+                        <label for="ulica">Ulica</label>
+                        <input type="text" class="payment-input" name="ulica" id="ulica" placeholder="Nazwa ulicy, numer budynku / bloku" required/>
+                        <input type="text" class="payment-input" name="ulica-dodatkowe" id="ulica-dodatkowe" placeholder="Ciąg dalszy zamówienia (opcjonalnie)" required/>
+                    </div>
+                    <div class="halt gap">
+                        <div class="payment-input-field gap flex-column">
+                            <label for="kod-pocztowy">Kod pocztowy</label>
+                            <input type="text" class="payment-input" name="kod-pocztowy" id="kod-pocztowy" placeholder="Kod pocztowy..." required/>
+                        </div>
+                        <div class="payment-input-field gap flex-column">
+                            <label for="miasto">Miasto</label>
+                            <input type="text" class="payment-input" name="miasto" id="miasto" placeholder="Miasto..." required/>
+                        </div>
+                    </div>
+                    <div class="payment-input-field gap flex-column">
+                        <label for="telefon">Numer telefonu</label>
+                        <input type="text" class="payment-input" name="telefon" id="telefon" placeholder="Numer telefonu..." required/>
+                    </div>
+                    <div class="payment-input-field gap flex-column">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="payment-input" name="email" id="email" placeholder="E-mail..." required/>
+                    </div>
+                </div>
+                <div class="payment-right">
+                    <h2>Twoje zamówienie</h2>
+                    <div class="payment-delivery-option">
+                        <div class="payment-delivery-option-section">
+                            <h3>Produkt</h3>
+                            <h3>Kwota</h3>
+                        </div>
+                        <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                        <div class="payment-delivery-option-section">
+                            <span>1x Żelazko TEFAL Easygliss</span>
+                            <span>499,99 zł</span>
+                        </div>
+                        <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                        <div class="payment-delivery-option-section">
+                            <h3>Kwota</h3>
+                            <strong>499,499 zł</strong>
+                        </div>
+                        <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                        <div class="payment-delivery-option-section">
+                            <h3>Wysyłka</h3>
+                            <div>
+                                <input type="checkbox" id="idk"/>
+                                <label for="idk">InPost Paczkomat 24/7: 0,00zł</label>
+                            </div>
+                        </div>
+                        <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                        <button>Wybierz paczkomat</button>
+                        <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                        <div class="payment-delivery-option-section">
+                            <h3>Łącznie</h3>
+                            <strong>999,98 zł</strong>
+                        </div>
+                    </div>
+                </div>
+                <hr class="whiteLineButItsNotActuallyWhiteInsteadItsGray"/>
+                <div class="payment-page-finalize">
+                    <div>
+                        <p>Płatności online Przelewy24. Zapłać przelewem elektronicznym, przelewem tradycyjnym lub kartą płatniczą.</p>
+                    </div>
+                    <button>KUPUJĘ I PŁACĘ</button>
+                </div>
+            </form>
         </main>
         
         <hr class="whiteLine">
@@ -83,6 +164,9 @@
                             </li>
                             <li>
                                 <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                            </li>
+                            <li>
+                                <a href="kontakt.html">Kontakt</a>
                             </li>
                         </ul>
                     </div>

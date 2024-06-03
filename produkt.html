@@ -5,9 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style/common.css">
-        <link rel="stylesheet" href="style/polityka-prywatnosci.css">
+        <link rel="stylesheet" href="style/produkt.css">
         <script src="scripts/common.js" defer></script>
-        <script src="scripts/polityka-prywatnosci.js" defer></script>
         <title>Strona internetowa</title>
     </head>
     <body>
@@ -47,15 +46,44 @@
 
         <hr class="whiteLine">
 
-        <main class="horizontal-padding">
-            <h1 id="title-subpage" class="font-poppins">
-                POLITYKA PRYWATNOŚCI
-            </h1>
-            <section id="hero-subpage">
-            
-            </section>
+        <main class="vertical-padding horizontal-padding">
+            <div class="product-information vertical-padding">
+                <div class="product-information-left">
+                    <img src="img/placeholder.png" alt="nwm"/>
+                </div>
+                <div class="product-information-right">
+                    <div class="product-information-divider">
+                        <h1>Żelazko TEFAL Easygliss</h1>
+                        <h3>3 osub kupiło ten produkt</h3>
+                    </div>
+                    <div class="product-information-divider">
+                        <span>Rodzaj: AGD</span>
+                        <div class="product-variations flex-row">
+                            <img src="img/placeholder.png" alt="nwm"/>
+                            <img src="img/placeholder.png" alt="nwm"/>
+                            <img src="img/placeholder.png" alt="nwm"/>
+                        </div>
+                    </div>
+                    <div class="product-information-divider">
+                        <span class="price">499,99 zł</span>
+                        <div class="add-to-cart flex-row">
+                            <input type="number" id="product-count" class="gray-bg"/>
+                            <label for="product-count">
+                                <button class="gray-bg">DODAJ DO KOSZYKA</button>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                <h3 class="font-bayon">OPIS PRODUKTU</h3>
+                <p>Mmm żelazko pyuszne mnianm  mniamn</p>
+                <h3 class="font-bayon">SPECYFIKACJA</h3>
+                <p>Rodzaj: AGD</p>
+                <p>Kolor: czarny</p>
+            </div>
         </main>
-        
+
         <hr class="whiteLine">
 
         <footer class="horizontal-padding">
@@ -139,7 +167,7 @@
                     <p class="cart-total">Kwota</p>
                     <p id="cart-total" class="cart-total"></p>
                 </div>
-                <button onclick="placeOrder()" class="btn-order">ZAMÓWIENIE</button>
+                <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
             </div>
         </div>
     </body>
