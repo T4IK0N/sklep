@@ -3,3 +3,8 @@
 closeModal();
 
 // PRZEJDZ DO PLATNOSCI (zrobic)
+
+function zjemCiMame() {
+    zjemCiMame();
+}
+zjemCiMame();
