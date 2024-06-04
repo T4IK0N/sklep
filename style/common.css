@@ -403,6 +403,7 @@ footer {
     background: white;
     color: black;
     border-top: 1px solid black;
+    border-radius: 0 0 10px 10px;
 }
 
 .product-description {
@@ -419,11 +420,30 @@ footer {
     background: #2e2e2e;
     color: white;
     border-radius: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .product-img {
     width: 100%;
     height: 100%;
+}
+
+#products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e2e2e;
+}
+
+.product-cart-icon {
+    width: 50px;
 }
 
 /* SUBPAGES */
