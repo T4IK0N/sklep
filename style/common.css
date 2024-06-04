@@ -429,23 +429,6 @@ footer {
     height: 100%;
 }
 
-#products {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.product-cart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #2e2e2e;
-}
-
-.product-cart-icon {
-    width: 50px;
-}
-
 /* SUBPAGES */
 
 /* OTHER */
