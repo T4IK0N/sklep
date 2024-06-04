@@ -48,8 +48,14 @@
         <hr class="whiteLine">
 
         <main class="vertical-padding horizontal-padding">
-            <h1 class="font-bayon">ZNALEZIONO 9 OFERT</h1>
-            <div class=" vertical-padding product-list">
+            <div class="searching-div">
+                <h1 class="font-bayon">ZNALEZIONO 9 OFERT</h1>
+                <div class="filter-div"> <!--tutaj trzeba przypierdolić js'a do listy rozwijanej-->
+                    <img src="icons/filter.png">
+                    <p><u>Filtry</u></p>
+                </div>
+            </div>
+            <div class="vertical-padding product-list">
                 <div class="product">
                     <div class="product-top-half">
                         <img src="img/product.jpg" alt="zelazko" class="product-img"/>
@@ -61,7 +67,9 @@
                                 <strong>499,99zł</strong>
                             </span>
                         </div>
-                        <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)"></button>
+                        <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">
+                            <img src="icons/bag.png" class="product-cart-icon">
+                        </button>
                     </div>
                 </div>
             </div>
