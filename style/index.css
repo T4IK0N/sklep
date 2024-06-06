@@ -11,10 +11,6 @@
     height: calc(100dvh - var(--nav-height));
     min-height: 600px;
     position: absolute;
-    background-color: #000;
-    background-image: url(../img/hero.jpg);
-    background-size: cover;
-    background-position: 0% 40%;
 }
 
 .hero-bg > img {
@@ -24,7 +20,7 @@
 }
 
 .hero-title > h1 {
-    font-size: 450%;
+    font-size: 600%;
     margin-top: -70px;
 }
 
@@ -37,6 +33,7 @@
     display: grid;
     grid-template-columns: 1fr 350px;
     height: 100%;
+    padding: 0 10dvw;
 }
 
 .hero-container > div {
@@ -86,10 +83,6 @@
     align-items: flex-start;
 }
 
-.h1-produkty {
-    margin-top: -200px;
-}
-
 /*.hero-product {*/
 /*    gap: 10px;*/
 /*}*/
@@ -116,65 +109,67 @@
     z-index: -1;
 }
 
-@media(min-width: 2200px) {
+@media (min-width: 2200px) {
     .hero-product > img {
         width: 300px;
     }
 }
 
 @media only screen and (max-width: 850px) {
+    .hero-bg {
+        height: 1000px;
+        width: 100%;
+    }
 
     .hero-content {
-        width: 300px;
+        width: 100%;
         gap: 5%;
+        padding: 50px 0;
     }
 
     .hero-product > img {
         width: 70%;
     }
 
-    .hero-title > h1 {
-        font-size: 360%;
-        margin-top: -50px;
+    .hero-title {
+        margin-top: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10dvw;
     }
 
-    .h1-produkty {
-        margin-top: -145px;
+    .hero-title > h1 {
+        font-size: 500%;
+        margin-top: -70px;
     }
 
     .hero-title > h3 {
-        font-size: 150%;
-        margin-top: -10px;
+        font-size: 200%;
+        margin-top: -5px;
     }
 
     .hero-product {
         font-size: 90%;
     }
 
-    /*.siusiak {*/
-    /*    sperma: 30ml;*/
-    /*    stulejka: 30cm;*/
-    /*    kutas: 12mm;*/
-    /*    jajca-obwod: 20cm;*/
-    /*    jajco-obwod: 8cm;*/
-    /*    moszna: 22cm;*/
-    /*}*/
-
-    /*.cipka {*/
-    /*    glebokosc: 4m;*/
-    /*    dlugosc: 2m;*/
-    /*    szerokosc: 10cm;*/
-    /*}*/
-
     .crooked {
-        font-size: 800%;
+        font-size: 400%;
         margin-bottom: -100px;
         z-index: -1;
     }
-}
 
-@media only screen and (max-width: 650px) {
+    .hero-container {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 0;
+    }
+
+    #products {
+        padding-top: 200px;
+    }
+
     .product-list {
-        grid-template-columns: repeat(1, 1fr);
+        margin-top: 45px;
     }
 }

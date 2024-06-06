@@ -4,7 +4,7 @@ closeModal();
 
 // PRZEJDZ DO PLATNOSCI (zrobic)
 
-function zjemCiMame() {
-    zjemCiMame();
-}
-zjemCiMame();
+// function zjemCiMame() {
+//     zjemCiMame();
+// }
+// zjemCiMame();
