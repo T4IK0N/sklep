@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-<!--    sex-->
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +36,13 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="nav-item nav-cart">
+                    <div class="search-icon-div2">
+                        <a href="wyszukiwarka.html" class="search-button">
+                            <img src="icons/search.png" class="search-icon" alt=""/>
+                        </a>
+                    </div>
                     <div id="cart-icon-container" onclick="cart_function()" class="cart-icon-container">
                         <img src="icons/cart.png" class="cart-icon" alt=""/>
                         <p class="cart-text">Koszyk (0)</p>
@@ -63,15 +68,15 @@
                         <div class="hero-product-container">
                             <div class="hero-product">
                                 <img src="img/bargain.jpg"/>
-                                <strong>LAMPKA NOCNA</strong>
+                                <span><strong>LAMPKA NOCNA</strong></span>
                                 <p>Tylko teraz przesyłka za darmo!</p>
                             </div>
                         </div>
-                        <button class="product-cart-btn" onclick="addToCart('TELEFON', 129.99)">DODAJ DO KOSZYKA</button>
+                        <button class="product-cart-btn-special" onclick="addToCart('TELEFON', 129.99)">DODAJ DO KOSZYKA</button>
                     </div>
                 </div>
             </section>
-            <section id="products" class="horizontal-padding vertical-padding">
+            <section id="products" class="horizontal-padding">
                 <h1 class="crooked font-bayon new-products">NOWE <span class="h1-produkty">PRODUKTY</span></h1>
                 <div class="product-list">
                     <div class="product">

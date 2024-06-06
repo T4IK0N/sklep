@@ -40,7 +40,6 @@ h1 {
     color: white;
     font-weight: 700;
     font-size: 1rem;
-    font-family: var(--first-font);
     background: #404040;
 }
 .cart-page-product-misc {

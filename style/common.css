@@ -4,7 +4,7 @@
 
 :root {
     --background-color: #212121;
-    --horizontal-padding: 17%;
+    --horizontal-padding: 10dvw;
     --vertical-padding: 50px;
     --main-font: 'Inter';
     --second-font: 'Bayon';
@@ -130,6 +130,10 @@ nav {
     overflow: hidden;
     background-color: #fff;
     /* border: 1px solid; */
+}
+
+.search-icon-div2 {
+    display: none;
 }
 
 .search-input {
@@ -571,5 +575,25 @@ button {
 
     footer {
         font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nav-search {
+        display: none;
+    }
+
+    .search-icon-div2 {
+
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .product-list {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
