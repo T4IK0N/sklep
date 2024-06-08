@@ -19,7 +19,7 @@
     --footer-height: 200px;
 }
 
-.material-symbols-light--close {
+.material-symbols-light--close { /* Symbol close */
     display: inline-block;
     width: 1em;
     height: 1em;
@@ -32,6 +32,8 @@
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
 }
+
+/* SPECIAL CLASSES */
 
 .horizontal-padding {
     padding-left: var(--horizontal-padding);
@@ -61,9 +63,86 @@
     justify-content: flex-end;
 }
 
+/* GENERAL */
 * {
     margin: 0;
     padding: 0;
+}
+
+.whiteLine {
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    margin: 0;
+    border: 0;
+}
+
+.whiteLineButItsNotActuallyWhiteInsteadItsGray {
+    width: 100%;
+    height: 1px;
+    background: gray;
+    margin: 0;
+    border: 0;
+}
+
+.font-bayon {
+    font-family: var(--second-font), sans-serif;
+    font-weight: 400;
+}
+
+.inter-light-font {
+    font-weight: var(--font-light);
+}
+
+.font-poppins {
+    font-family: var(--third-font), sans-serif;
+    font-size: 0.7rem;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+input,
+select {
+    border: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+select { /* Chrome and Firefox */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select::-ms-expand { /* IE10 */
+    display: none;
+}
+
+button {
+    margin: 0;
+    padding: 10px 20px;
+    /* border-radius: 10px; */
+    font-weight: 700;
+    font-family: var(--third-font), sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+/* IE and Firefox */
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Chrome */
+html::webkit-scrollbar {
+    display: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -112,6 +191,7 @@ nav {
 
 .nav-div {
     font-family: var(--third-font), sans-serif;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -248,11 +328,10 @@ main {
 /* FOOTER */
 
 footer {
-    min-height: 200px;
     height: fit-content;
     background: #000;
     font-size: 0.75rem;
-    padding-top: 50px;
+    padding: 50px 0;
 }
 
 .footer-div {
@@ -434,85 +513,6 @@ footer {
     height: 100%;
 }
 
-/* SUBPAGES */
-
-/* OTHER */
-
-/* @keyframes html {
-    0% {
-        transform: none;
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-} */
-
-.whiteLine {
-    width: 100%;
-    height: 1px;
-    background: #fff;
-    margin: 0;
-    border: 0;
-}
-
-.whiteLineButItsNotActuallyWhiteInsteadItsGray {
-    width: 100%;
-    height: 1px;
-    background: gray;
-    margin: 0;
-    border: 0;
-}
-
-.font-bayon {
-    font-family: var(--second-font), sans-serif;
-    font-weight: 400;
-}
-
-.inter-light-font {
-    font-weight: var(--font-light);
-}
-
-.font-poppins {
-    font-family: var(--third-font), sans-serif;
-    font-size: 0.7rem;
-}
-
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-input,
-select {
-    border: 0;
-    margin: 0;
-}
-
-li {
-    list-style: none;
-}
-
-select { /* Chrome and Firefox */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-select::-ms-expand { /* IE10 */
-    display: none;
-}
-
-button {
-    margin: 0;
-    padding: 10px 20px;
-    /* border-radius: 10px; */
-    font-weight: 700;
-    font-family: var(--third-font), sans-serif;
-    border: none;
-    cursor: pointer;
-}
-
-
 @media (min-width: 2200px) {
     .search-input {
         padding: 10px 30px;
@@ -598,7 +598,7 @@ button {
         margin-right: 10px;
     }
 
-    .search-icon-div-media {
+    .nav-search-media:hover {
 
     }
 

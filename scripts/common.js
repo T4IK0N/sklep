@@ -148,3 +148,5 @@ function closeModalOnClickOutside(event) {
 
 closeModal();
 updateCartIcon();
+
+// SEARCH
