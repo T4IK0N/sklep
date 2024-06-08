@@ -1,6 +1,6 @@
 // PRODUCTS
 
-let product = document.querySelector(".product");
+let product = document.querySelector(".product-anchor");
 if (product) {
     let container1 = document.querySelector(".product-list:nth-child(2)");
     if (container1) {

@@ -113,12 +113,6 @@ function closeModal() {
         console.log('zamknalem modal');
     }
 }
-
-function isCloseModal() {
-    const modal = document.getElementById('cart-modal');
-    return modal.style.display === "none";
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', closeModalOnClickOutside);
 });
@@ -150,3 +144,4 @@ closeModal();
 updateCartIcon();
 
 // SEARCH
+
