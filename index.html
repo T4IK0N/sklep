@@ -15,19 +15,16 @@
             <div class="nav-div">
                 <div class="nav-item nav-logo">
                     <a href="index.html">
-                        <img src="icons/logo.png" class="logo"/>
+                        <img src="icons/logo.png" class="logo" id="logo"/>
                     </a>
                 </div>
-
-
-                <div class="nav-item nav-search">
+                <div class="nav-item nav-search" id="nav-search">
                     <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">
-                    <div class="category-div">
-                        <select class="search-select font-poppins">
-                            <option selected="">Kategorie</option>
-                            <option>opcja 1</option>
-                            <option>opcja 2</option>
-                        </select>
+                    <div class="dropdown" id="dropdown" onclick="setMenuPosition()">
+                        <div class="select-div">
+                            <div class="dropbtn">Kategorie</div>
+                            <!-- dropdown options below -->
+                        </div>
                         <div class="select-icon-div">
                             <img src="icons/sort_down.png" class="select-icon" alt="">
                         </div>
@@ -39,12 +36,27 @@
                     </div>
                 </div>
 
+                <!-- second nav-search (only icon) -->
+                <div class="nav-item nav-search-media" id="nav-search-media">
+                    <div class="search-icon-div-media">
+                        <a href="wyszukiwarka.html" class="search-button-media">
+                            <img src="icons/search-media.png" class="search-icon-media" alt=""/>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="nav-item nav-cart">
-                    <div id="cart-icon-container" onclick="cart_function()" class="cart-icon-container">
+                    <div id="cart-icon-container" onclick="cart_function(); setModulePosition()" class="cart-icon-container">
                         <img src="icons/cart.png" class="cart-icon" alt=""/>
                         <p class="cart-text">Koszyk (0)</p>
                     </div>
                 </div>
+            </div>
+            <!-- dropdown options -->
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="#">Opcja 1</a>
+                <a href="#">Opcja 2</a>
+                <a href="#">Opcja 3</a>
             </div>
         </nav>
 
@@ -76,11 +88,12 @@
             <section id="products" class="horizontal-padding">
                 <h1 class="crooked font-bayon new-products">NOWE OFERTY</h1>
                 <div class="product-list">
-                    <a class="product-anchor" href="produkt.html">
                         <div class="product">
-                            <div class="product-top-half">
-                                <img src="img/product.jpg" alt="zelazko" class="product-img"/>
-                            </div>
+                            <a class="product-anchor" href="wyszukiwarka.html">
+                                <div class="product-top-half">
+                                    <img src="img/product.jpg" alt="zelazko" class="product-img"/>
+                                </div>
+                            </a>
                             <div class="product-bottom-half">
                                 <div class="product-description">
                                     <span>Żelazko TEFAL Easygliss</span>
@@ -192,6 +205,7 @@
                 <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
             </div>
         </div>
+
         <!-- Search Mod HTML -->
 
 <!--        <div class="nav-item nav-search">-->

@@ -1,6 +1,6 @@
 // PRODUCTS
 
-let product = document.querySelector(".product-anchor");
+let product = document.querySelector(".product");
 if (product) {
     let container1 = document.querySelector(".product-list:nth-child(2)");
     if (container1) {
@@ -16,3 +16,4 @@ if (product) {
         }
     }
 }
+

@@ -143,5 +143,70 @@ function closeModalOnClickOutside(event) {
 closeModal();
 updateCartIcon();
 
-// SEARCH
+// PRODUCTS MENU
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelector('.dropbtn').addEventListener('click', function() {
+        document.getElementById('dropdown-content').classList.toggle('show');
+    });
 
+    // Remove on click out of menu
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            let dropdowns = document.getElementsByClassName('dropdown-content');
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+    // Remove on resize
+    window.addEventListener('resize', () => {
+        let dropdowns = document.getElementsByClassName('dropdown-content');
+        for (let i = 0; i < dropdowns.length; i++) {
+            dropdowns[i].classList.remove('show');
+        }
+    });
+});
+
+// POSITION MODAL
+
+function setModulePosition() {
+    const modal = document.getElementById('cart-modal');
+    const cart = document.getElementById('cart-icon-container').getBoundingClientRect();
+    const cartWidth = document.getElementById('cart-icon-container').clientWidth;
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth <= 1000) {
+        const leftPosition = (cart.left - 1.5*cartWidth);
+        const topPosition = (cart.bottom);
+
+        modal.style.left = `${leftPosition}px`;
+        modal.style.top = `${topPosition}px`;
+    } else {
+        const leftPosition = (cart.left);
+        const topPosition = (cart.bottom);
+
+        modal.style.left = `${leftPosition}px`;
+        modal.style.top = `${topPosition}px`;
+    }
+}
+
+// POSITION OF SEARCH
+
+function setMenuPosition() {
+    const menu = document.getElementById('dropdown-content');
+    const drop = document.getElementById('dropdown').getBoundingClientRect();
+
+    const leftPosition = drop.left;
+    const topPosition = (drop.bottom + 1);
+
+    menu.style.left = `${leftPosition}px`;
+    menu.style.top = `${topPosition}px`;
+}
+
+window.addEventListener('resize', setModulePosition);
+window.addEventListener('resize', setMenuPosition);
+window.addEventListener('load', setModulePosition);
+window.addEventListener('load', setMenuPosition);
