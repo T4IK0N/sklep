@@ -83,7 +83,7 @@
     border: 0;
 }
 
-.whiteLineButItsNotActuallyWhiteInsteadItsGray {
+.grayLine {
     width: 100%;
     height: 1px;
     background: gray;

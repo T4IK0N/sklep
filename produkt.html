@@ -65,40 +65,42 @@
 <hr class="whiteLine">
 
 <section class="padding-sec">
-    <main>
+    <main class="vertical-padding">
         <div class="product-information">
             <div class="product-information-left">
-                <img src="img/product.jpg" alt="nwm"/>
+                <img class="main-image" src="img/product.jpg" />
+                <div class="product-variations flex-row">
+                    <img src="img/product.jpg" />
+                    <img src="img/product.jpg" />
+                    <img src="img/product.jpg" />
+                </div>
             </div>
             <div class="product-information-right">
                 <div class="product-information-divider">
-                    <h1>Żelazko TEFAL Easygliss</h1>
+                    <h1 class="product-title">Żelazko TEFAL Easygliss</h1>
                 </div>
                 <div class="product-information-divider">
-                    <span>Rodzaj: AGD</span>
-                    <div class="product-variations flex-row">
-                        <img src="img/product.jpg" alt="nwm"/>
-                        <img src="img/product.jpg" alt="nwm"/>
-                        <img src="img/product.jpg" alt="nwm"/>
+                    <div class="description">
+                        <div class="description-part">
+                            <h3 class="font-bayon">Opis produktu</h3>
+                            <p>Mmm żelazko pyuszne mnianm  mniamn</p>
+                        </div>
+                        <div class="description-part">
+                            <h3 class="font-bayon">Specyfikacja</h3>
+                            <p>Rodzaj: AGD <br> Kolor: czarny</p>
+                        </div>
                     </div>
                 </div>
-                <div class="product-information-divider">
-                    <span class="price">499,99 zł</span>
+                <div class="product-information-divider" id="price-div">
+                    <span id="price">499,99 zł</span>
                     <div class="add-to-cart flex-row">
-                        <input type="number" id="product-count" class="gray-bg"/>
+                        <input type="number" id="product-count" min="1" max="10" value="1"/>
                         <label for="product-count">
                             <button class="gray-bg" id="add-product" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">DODAJ DO KOSZYKA</button>
                         </label>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="description">
-            <h3 class="font-bayon">OPIS PRODUKTU</h3>
-                <p>Mmm żelazko pyuszne mnianm  mniamn</p>
-            <h3 class="font-bayon">SPECYFIKACJA</h3>
-                <p>Rodzaj: AGD</p>
-                <p>Kolor: czarny</p>
         </div>
     </main>
 </section>
