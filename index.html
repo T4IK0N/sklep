@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style/common.css">
-        <link rel="stylesheet" href="style/index.css">
-        <script src="scripts/common.js" defer></script>
-        <script src="scripts/index.js" defer></script>
-        <title>Strona internetowa</title>
-    </head>
-    <body>
-        <nav class="horizontal-padding">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/common.css">
+    <link rel="stylesheet" href="style/index.css">
+    <script src="scripts/common.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+    <title>Strona internetowa</title>
+</head>
+<body>
+    <section class="padding-sec">
+        <nav>
             <div class="nav-div">
                 <div class="nav-item nav-logo">
                     <a href="index.html">
@@ -59,14 +60,17 @@
                 <a href="#">Opcja 3</a>
             </div>
         </nav>
+    </section>
 
-        <hr class="whiteLine">
+    <hr class="whiteLine">
 
+    <div class="hero-bg">
+        <img src="img/hero.jpg" alt=""/>
+    </div>
+
+    <section class="padding-sec">
         <main>
             <section id="hero">
-                <div class="hero-bg">
-                    <img src="img/hero.jpg" alt=""/>
-                </div>
                 <div class="hero-container">
                     <div class="hero-title font-bayon">
                         <h1>NAJLEPSZE</h1>
@@ -85,30 +89,29 @@
                     </div>
                 </div>
             </section>
-            <section id="products" class="horizontal-padding">
+            <section id="products">
                 <h1 class="crooked font-bayon new-products">NOWE OFERTY</h1>
                 <div class="product-list">
-                        <div class="product">
-                            <a class="product-anchor" href="wyszukiwarka.html">
-                                <div class="product-top-half">
-                                    <img src="img/product.jpg" alt="zelazko" class="product-img"/>
-                                </div>
-                            </a>
-                            <div class="product-bottom-half">
-                                <div class="product-description">
-                                    <span>Żelazko TEFAL Easygliss</span>
-                                    <span>
-                                        <strong>499,99zł</strong>
-                                    </span>
-                                </div>
-                                <div class="product-cart">
-                                    <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">
-                                        <img src="icons/bag.png" class="product-cart-icon">
-                                    </button>
-                                </div>
+                    <div class="product">
+                        <a class="product-anchor" href="produkt.html">
+                            <div class="product-top-half">
+                                <img src="img/product.jpg" alt="zelazko" class="product-img"/>
+                            </div>
+                        </a>
+                        <div class="product-bottom-half">
+                            <div class="product-description">
+                                <span>Żelazko TEFAL Easygliss</span>
+                                <span>
+                                    <strong>499,99zł</strong>
+                                </span>
+                            </div>
+                            <div class="product-cart">
+                                <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">
+                                    <img src="icons/bag.png" class="product-cart-icon">
+                                </button>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <h1 class="crooked font-bayon">POLECANE</h1>
                 <div class="product-list">
@@ -118,115 +121,101 @@
                 </a>
             </section>
         </main>
+    </section>
 
-        <hr class="whiteLine">
+    <hr class="whiteLine">
 
-        <footer class="horizontal-padding">
-            <div class="footer-div">
-                <div class="footer-logo">
-                    <a href="index.html">
-                        <img src="icons/logo.png" class="logo" alt=""/>
-                    </a>
+    <section id="padding-sec-footer">
+        <section class="padding-sec">
+            <footer>
+                <div class="footer-div">
+                    <div class="footer-logo">
+                        <a href="index.html">
+                            <img src="icons/logo.png" class="logo" alt=""/>
+                        </a>
+                    </div>
+                    <div class="footer-content">
+                        <div class="footer-content-item">
+                            <label for="footer-contact">Kontakt</label>
+                            <ul id="footer-contact" class="inter-light-font">
+                                <li>
+                                    <a href="mailto:admin@example.com">admin@example.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-content-item">
+                            <label for="footer-info">Informacje</label>
+                            <ul id="footer-info" class="inter-light-font">
+                                <li>
+                                    <a href="regulamin.html">Regulamin</a>
+                                </li>
+                                <li>
+                                    <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                                </li>
+                                <li>
+                                    <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                </li>
+                                <li>
+                                    <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                </li>
+                                <li>
+                                    <a href="kontakt.html">Kontakt</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-content-item">
+                            <label for="footer-media">Nasze media</label>
+                            <ul id="footer-media" class="inter-light-font">
+                                <li>
+                                    <a href="#">
+                                        <img src="icons/instagram.png" class="footer-icons" alt=""/>
+                                        <span>Instagram</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="icons/facebook.png" class="footer-icons" alt=""/>
+                                        <span>Facebook</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-content-item">
+                            <label for="footer-promo">Strona wykonana przez G&G</label>
+                            <ul id="footer-promo" class="inter-light-font">
+                                <li>
+                                    <a href="https://ggweb.pl/">
+                                        <u>ggweb.pl</u>
+                                    </a>
+                                    <a href="#"><img src="icons/whatsapp.png" class="footer-icons" alt=""></a>
+                                    <a href="#"><img src="icons/instagram.png" class="footer-icons" alt=""></a>
+                                    <a href="#"><img src="icons/facebook.png" class="footer-icons" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="footer-content">
-                    <div class="footer-content-item">
-                        <label for="footer-contact">Kontakt</label>
-                        <ul id="footer-contact" class="inter-light-font">
-                            <li>
-                                <a href="mailto:admin@example.com">admin@example.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-content-item">
-                        <label for="footer-info">Informacje</label>
-                        <ul id="footer-info" class="inter-light-font">
-                            <li>
-                                <a href="regulamin.html">Regulamin</a>
-                            </li>
-                            <li>
-                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
-                            </li>
-                            <li>
-                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
-                            </li>
-                            <li>
-                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
-                            </li>
-                            <li>
-                                <a href="kontakt.html">Kontakt</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-content-item">
-                        <label for="footer-media">Nasze media</label>
-                        <ul id="footer-media" class="inter-light-font">
-                            <li>
-                                <a href="#">
-                                    <img src="icons/instagram.png" class="footer-icons" alt=""/>
-                                    <span>Instagram</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="icons/facebook.png" class="footer-icons" alt=""/>
-                                    <span>Facebook</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-content-item">
-                        <label for="footer-promo">Strona wykonana przez G&G</label>
-                        <ul id="footer-promo" class="inter-light-font">
-                            <li>
-                                <a href="https://ggweb.pl/">
-                                    <u>ggweb.pl</u>
-                                </a>
-                                <a href="#"><img src="icons/whatsapp.png" class="footer-icons" alt=""></a>
-                                <a href="#"><img src="icons/instagram.png" class="footer-icons" alt=""></a>
-                                <a href="#"><img src="icons/facebook.png" class="footer-icons" alt=""></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </section>
+    </section>
 
         <!-- Cart Modal HTML -->
-        <div id="cart-modal" class="modal">
-            <div id="modal-content" class="modal-content">
-                <div class="modal-content-div">
-                    <div id="cart-items" class="cart-items"></div>
-                </div>
-                <hr class="cartLine">
-                <div class="modal-price inter-light-font">
-                    <p class="cart-total">Kwota</p>
-                    <p id="cart-total" class="cart-total"></p>
-                </div>
-                <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
+    <div id="cart-modal" class="modal">
+        <div id="modal-content" class="modal-content">
+            <div class="modal-content-div">
+                <div id="cart-items" class="cart-items"></div>
             </div>
+            <hr class="cartLine">
+            <div class="modal-price inter-light-font">
+                <p class="cart-total">Kwota</p>
+                <p id="cart-total" class="cart-total"></p>
+            </div>
+            <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
         </div>
+    </div>
 
-        <!-- Search Mod HTML -->
-
-<!--        <div class="nav-item nav-search">-->
-<!--            <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">-->
-<!--            <div class="category-div">-->
-<!--                <select class="search-select font-poppins">-->
-<!--                    <option selected="">Kategorie</option>-->
-<!--                    <option>opcja 1</option>-->
-<!--                    <option>opcja 2</option>-->
-<!--                </select>-->
-<!--                <div class="select-icon-div">-->
-<!--                    <img src="icons/sort_down.png" class="select-icon" alt="">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="search-icon-div">-->
-<!--                <a href="wyszukiwarka.html" class="search-button">-->
-<!--                    <img src="icons/search.png" class="search-icon" alt=""/>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
+    <!-- Search Mod HTML -->
 
 
-    </body>
+</body>
 </html>

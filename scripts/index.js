@@ -17,3 +17,19 @@ if (product) {
     }
 }
 
+// FUNCTION FROM COMMON.JS
+
+function closeModalOnClickOutside(event) {
+    const modal = document.getElementById('cart-modal');
+    const cartIcon = document.getElementById('cart-icon-container');
+    const buttonSpecial = document.getElementById('product-cart-btn-special');
+    const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
+
+
+    if (modal.style.display !== "none" &&
+        !modal.contains(event.target) &&
+        !cartIcon.contains(event.target) &&
+        !buttonSpecial.contains(event.target)) {
+        closeModal();
+    }
+}

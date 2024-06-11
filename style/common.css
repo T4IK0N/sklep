@@ -4,7 +4,7 @@
 
 :root {
     --background-color: #212121;
-    --horizontal-padding: 10dvw;
+    --horizontal-padding: 120px;
     --vertical-padding: 50px;
     --main-font: 'Inter';
     --second-font: 'Bayon';
@@ -33,12 +33,18 @@
     mask-size: 100% 100%;
 }
 
-/* SPECIAL CLASSES */
 
-.horizontal-padding {
-    padding-left: var(--horizontal-padding);
-    padding-right: var(--horizontal-padding);
+#padding-sec-footer {
+    width: 100%;
+    background-color: black;
 }
+
+.padding-sec {
+    width: calc(100% - 2*var(--horizontal-padding));
+    padding: 0 var(--horizontal-padding);
+}
+
+/* SPECIAL CLASSES */
 
 .vertical-padding {
     padding-top: var(--vertical-padding);
@@ -231,10 +237,6 @@ nav {
     opacity: 0.5;
 }
 
-
-
-
-
 .dropdown {
     display: flex;
     align-items: center;
@@ -265,7 +267,7 @@ nav {
     display: none;
     position: absolute;
     background-color: var(--cart-background-color);
-    min-width: 120px;
+    min-width: 100px;
     z-index: 1000;
 }
 
@@ -276,28 +278,9 @@ nav {
     display: block;
 }
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1
-}
-
 .show {
     display: block;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .search-icon-div {
     width: 45px;
@@ -565,63 +548,37 @@ footer {
     height: 100%;
 }
 
-@media (min-width: 2200px) {
-    .search-input {
-        padding: 10px 30px;
-        font-size: 0.8rem;
-        width: 300px;
-    }
-
-    .search-icon {
-        width: 18px;
-        height: fit-content;
-    }
-
-    .font-poppins {
-        font-size: 0.9rem;
-    }
-
-    .select-icon {
-        width: 25px;
-        height: 25px;
-    }
-
-    .select-icon-div {
-        justify-content: flex-start;
-        width: fit-content;
-    }
-
-    .nav-cart {
-        width: 130px;
-    } 
-    
-    .cart-icon-container {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .cart-icon {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .cart-text {
-        font-family: var(--third-font), sans-serif;
-        font-size: 1.05rem;
-    }
-
-    footer {
-        font-size: 1rem;
-    }
+#products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /*ZAMIAST KLASY VERTICAL PADDING*/
+    padding-bottom: 50px;
 }
 
-@media only screen and (max-width: 1000px) {
+.product-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2e2e2e;
+}
+
+.product-cart-icon {
+    width: 50px;
+}
+
+.new-products {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 1050px) {
     .product-list {
         grid-template-columns: repeat(2, 1fr);
     }
-
+}
+@media only screen and (max-width: 800px) {
     .nav-search {
         display: none;
     }

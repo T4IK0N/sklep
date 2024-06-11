@@ -1,19 +1,24 @@
+main {
+    padding-bottom: 50px;
+}
+
 .product-information {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    gap: 20px;
-    grid-template-rows: 400px;
-    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 100px 0;
 }
 .product-information-left {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     overflow: hidden;
+    height: 100%;
+    width: 50%;
 }
 .product-information-left > img {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 .product-information-right {
     display: flex;
@@ -49,6 +54,6 @@
 .add-to-cart {
     gap: 15px;
 }
-.description {
-    font-size: 250%;
+.description > h3 {
+    font-size: 350%;
 }

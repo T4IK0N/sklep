@@ -117,29 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', closeModalOnClickOutside);
 });
 
-function closeModalOnClickOutside(event) {
-    const modal = document.getElementById('cart-modal');
-    const cartIcon = document.getElementById('cart-icon-container');
-    const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
-    const buttonSpecial = document.getElementById('product-cart-btn-special');
-    // const removeButtons = Array.from(document.getElementsByClassName('cart-item-remove'));
-
-    const isButtonClick = buttons.some(button => button.contains(event.target));
-    // const isButtonRemoveClick = removeButtons.some(button => button.contains(event.target));
- 
-    // console.log('Clicked element:', event.target);
-    // console.log('isButtonClick:', isButtonClick);
-    // console.log('isButtonRemoveClick:', isButtonRemoveClick);
-    
-    if (modal.style.display !== "none" && 
-        !modal.contains(event.target) && 
-        !cartIcon.contains(event.target) &&
-        !buttonSpecial.contains(event.target) &&
-        !isButtonClick ) {
-        closeModal();
-    }
-}
-
 closeModal();
 updateCartIcon();
 
@@ -178,7 +155,7 @@ function setModulePosition() {
     const cartWidth = document.getElementById('cart-icon-container').clientWidth;
     const windowWidth = window.innerWidth;
 
-    if (windowWidth <= 1000) {
+    if (windowWidth <= 800) {
         const leftPosition = (cart.left - 1.5*cartWidth);
         const topPosition = (cart.bottom);
 
@@ -210,3 +187,42 @@ window.addEventListener('resize', setModulePosition);
 window.addEventListener('resize', setMenuPosition);
 window.addEventListener('load', setModulePosition);
 window.addEventListener('load', setMenuPosition);
+
+// RESPONSIVE PADDING
+
+function changeHorizontalPadding() {
+    let innerWidth = 1300;
+    const windowWidth = window.innerWidth;
+    const calc = (windowWidth - innerWidth) / 2;
+    const newHorizontalPadding = `${calc}px`;
+    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+
+    if (calc <= 0) {
+        const calc2 = (windowWidth - innerWidth) / 2 + 150;
+        const newHorizontalPadding = `${calc2}px`;
+
+        document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+        if (calc2 <= 0) {
+            const calc3 = (windowWidth - innerWidth) / 2 + 275;
+            const newHorizontalPadding = `${calc3}px`;
+
+            document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+
+            if (calc3 <= 0) {
+                const calc4 = (windowWidth - innerWidth) / 2 + 350;
+                const newHorizontalPadding = `${calc4}px`;
+
+                document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+
+                if (calc4 <= 0) {
+                    const newHorizontalPadding = '1dvw';
+
+                    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+                }
+            }
+        }
+    }
+}
+
+window.addEventListener('load', changeHorizontalPadding);
+window.addEventListener('resize', changeHorizontalPadding);
