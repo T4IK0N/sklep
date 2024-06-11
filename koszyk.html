@@ -68,7 +68,7 @@
     <main>
         <section id="cart">
             <div id="cart-products">
-                <h3 class="title">Twoje produkty</h3>
+                <h3 class="font-bayon title">KOSZYK</h3>
                 <div id="product-list">
                     <div class="product-div">
                         <div class="product-div-element product-div-left">
@@ -76,21 +76,67 @@
                                 <img src="img/bargain.jpg">
                             </div>
                             <div class="product-description">
-                                <h3 class="product-title">Żelazko TEFAL Easygliss</h3>
-                                <p>Kolor: Czarny</p>
-                                <span>Ilość: 2</span>
-                                <p>Cena: 499,99 zł</p>
+                                <div>
+                                    <h3 class="product-title">Żelazko TEFAL Easygliss</h3>
+                                    <p>Kolor: Czarny</p>
+                                    <span>Ilość: 2</span>
+                                </div>
+                                <input type="number" min="1" max="10" value="1"/>
                             </div>
                         </div>
                         <div class="product-div-element product-div-right">
-                            <button>X</button>
-                            <input type="number" name="" id="">
+                            <div class="delete-div" onclick="deleteProduct()">
+                                <img src="icons/close.png" class="delete-img"/>
+                            </div>
+                            <p>499,99 zł</p>
+                        </div>
+                    </div>
+                    <div class="product-div">
+                        <div class="product-div-element product-div-left">
+                            <div class="product-image">
+                                <img src="img/bargain.jpg">
+                            </div>
+                            <div class="product-description">
+                                <div>
+                                    <h3 class="product-title">Żelazko TEFAL Easygliss</h3>
+                                    <p>Kolor: Czarny</p>
+                                    <span>Ilość: 2</span>
+                                </div>
+                                <input type="number" min="1" max="10" value="1"/>
+                            </div>
+                        </div>
+                        <div class="product-div-element product-div-right">
+                            <div class="delete-div" onclick="deleteProduct()">
+                                <img src="icons/close.png" class="delete-img"/>
+                            </div>
+                            <p>499,99 zł</p>
+                        </div>
+                    </div>
+                    <div class="product-div">
+                        <div class="product-div-element product-div-left">
+                            <div class="product-image">
+                                <img src="img/bargain.jpg">
+                            </div>
+                            <div class="product-description">
+                                <div>
+                                    <h3 class="product-title">Żelazko TEFAL Easygliss</h3>
+                                    <p>Kolor: Czarny</p>
+                                    <span>Ilość: 2</span>
+                                </div>
+                                <input type="number" min="1" max="10" value="1"/>
+                            </div>
+                        </div>
+                        <div class="product-div-element product-div-right">
+                            <div class="delete-div" onclick="deleteProduct()">
+                                <img src="icons/close.png" class="delete-img"/>
+                            </div>
+                            <p>499,99 zł</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="cart-price">
-                <h3 class="title">Do zapłaty</h3>
+                <h3 class="font-bayon title">CENA</h3>
             </div>
         </section>
     </main>

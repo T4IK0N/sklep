@@ -1,39 +1,51 @@
+:root {
+    --cart-padding: 25px;
+}
+
+* {
+    font-weight: var(--font-light);
+}
+
 main {
     background-color: #434343;
 }
 
 #cart {
+    min-height: calc(100dvh - var(--nav-height) - 201px);
     width: 100%;
     height: 100%;
     display: flex;
     gap: 25px;
     align-content: center;
     box-sizing: border-box;
-    padding: 25px;
+    padding: var(--cart-padding);
+}
+
+#cart-products,
+#cart-price {
+    background-color: var(--background-color);
+    padding: var(--cart-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 #cart-products {
     width: 65%;
-    background-color: var(--background-color);
 }
 
 #cart-price {
     width: 35%;
-    background-color: var(--background-color);
 }
 
 .title {
     font-size: 200%;
-    font-family: var(--third-font);
 }
 
 #product-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    gap: 25px;
 }
 
 .product-div {
@@ -41,16 +53,18 @@ main {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
 
 .product-div-left {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
 }
 
 .product-div-right {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -61,7 +75,49 @@ main {
     height: 100%;
 }
 
+.product-image {
+    display: flex;
+}
+
 .product-image > img {
-    width: 100px;
+    width: 175px;
     height: fit-content;
 }
+
+.product-description {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-description > input {
+    appearance: none;
+    all: unset;
+    padding: 0;
+    padding-left: 3%;
+    box-sizing: border-box;
+    width: 55px;
+    height: 50px;
+    border: 1px solid #666;
+}
+
+.product-div-right > p {
+    font-weight: var(--font-regular);
+    font-size: 125%;
+}
+
+.product-title {
+    font-size: 150%;
+    font-weight: var(--font-regular);
+}
+
+.delete-div {
+    width: 25px;
+}
+
+.delete-img {
+    width: 25px;
+}
+

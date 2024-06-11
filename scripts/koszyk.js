@@ -17,3 +17,8 @@ function closeModalOnClickOutside(event) {
         closeModal();
     }
 }
+
+
+function deleteProduct() {
+    console.log('chuj');
+}
