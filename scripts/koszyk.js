@@ -22,3 +22,17 @@ function closeModalOnClickOutside(event) {
 function deleteProduct() {
     console.log('chuj');
 }
+
+
+// pozycja ceny w koszyku (zeby zawsze byla na gorze i w jednej pozycji)
+
+// function f() {
+//     const cart = document.getElementById('cart-price');
+//     const rect = cart.getBoundingClientRect();
+
+//     setInterval(() => {
+//         console.log(rect.top);
+//     }, 500)
+// }
+
+// window.addEventListener('resize', f());

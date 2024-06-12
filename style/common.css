@@ -88,7 +88,6 @@
     height: 1px;
     background: gray;
     margin: 0;
-    border: 0;
 }
 
 .font-bayon {
@@ -217,6 +216,8 @@ nav {
     border-radius: 25px;
     overflow: hidden;
     background-color: #fff;
+    height: 35px;
+    border: 1px solid #fff;
     /* border: 1px solid; */
 }
 
@@ -225,11 +226,11 @@ nav {
 }
 
 .search-input {
-    padding: 7px 7px 7px 20px;
+    padding-left: 20px;
     color: #fff;
     background-color: #434343;
     border-radius: 25px 0 0 25px;
-    border: 1px solid #fff !important;
+    height: 35px;
 }
 
 .search-input::placeholder {
@@ -243,8 +244,9 @@ nav {
     justify-content: space-evenly;
     flex-direction: row;
     padding: 0 12px;
-    height: 32px;
+    height: 35px;
     background-color: #434343;
+    border-left: 1px solid #fff;
 }
 
 .select-div {
