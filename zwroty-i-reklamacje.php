@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +75,7 @@
 <section class="padding-sec">
     <main>
         <h1 id="title-subpage" class="font-poppins">
-            polityka-prywatnosci.html
+            zwroty-i-reklamacje.html
         </h1>
     </main>
 </section>

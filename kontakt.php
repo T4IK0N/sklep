@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +13,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/common.css">
-    <link rel="stylesheet" href="style/produkt.css">
+    <link rel="stylesheet" href="style/wyszukiwarka.css">
     <script src="scripts/common.js" defer></script>
-    <script src="scripts/produkt.js" defer></script>
+    <script src="scripts/wyszukiwarka.js" defer></script>
     <title>Strona internetowa</title>
 </head>
 <body>
@@ -65,43 +73,10 @@
 <hr class="whiteLine">
 
 <section class="padding-sec">
-    <main class="vertical-padding">
-        <div class="product-information">
-            <div class="product-information-left">
-                <img class="main-image" src="img/product.jpg" />
-                <div class="product-variations flex-row">
-                    <img src="img/product.jpg" />
-                    <img src="img/product.jpg" />
-                    <img src="img/product.jpg" />
-                </div>
-            </div>
-            <div class="product-information-right">
-                <div class="product-information-divider">
-                    <h1 class="product-title">Żelazko TEFAL Easygliss</h1>
-                </div>
-                <div class="product-information-divider">
-                    <div class="description">
-                        <div class="description-part">
-                            <h3 class="font-bayon">Opis produktu</h3>
-                            <p>Mmm żelazko pyuszne mnianm  mniamn</p>
-                        </div>
-                        <div class="description-part">
-                            <h3 class="font-bayon">Specyfikacja</h3>
-                            <p>Rodzaj: AGD <br> Kolor: czarny</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-information-divider" id="price-div">
-                    <span id="price">499,99 zł</span>
-                    <div class="add-to-cart flex-row">
-                        <input type="number" id="product-count" min="1" max="10" value="1"/>
-                        <label for="product-count">
-                            <button class="gray-bg" id="add-product" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">DODAJ DO KOSZYKA</button>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <main>
+        <h1 id="title-subpage" class="font-poppins">
+            kontakt.html
+        </h1>
     </main>
 </section>
 
@@ -197,7 +172,5 @@
 </div>
 
 <!-- Search Mod HTML -->
-
-
 </body>
 </html>

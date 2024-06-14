@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,7 +207,7 @@
         </section>
     </section>
 
-        <!-- Cart Modal HTML -->
+    <!-- Cart Modal HTML -->
     <div id="cart-modal" class="modal">
         <div id="modal-content" class="modal-content">
             <div class="modal-content-div">

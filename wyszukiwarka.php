@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,10 +73,39 @@
 <hr class="whiteLine">
 
 <section class="padding-sec">
-    <main>
-        <h1 id="title-subpage" class="font-poppins">
-            kontakt.html
-        </h1>
+    <main class="vertical-padding">
+        <h1 class="font-bayon">ZNALEZIONO 99 OFERT</h1>
+        <div class="vertical-padding product-list">
+            <div class="product">
+                <a class="product-anchor" href="product.html">
+                    <div class="product-top-half">
+                        <img src="img/product.jpg" alt="zelazko" class="product-img"/>
+                    </div>
+                </a>
+                <div class="product-bottom-half">
+                    <div class="product-description">
+                        <span>Żelazko TEFAL Easygliss</span>
+                        <span>
+                            <strong>499,99zł</strong>
+                        </span>
+                    </div>
+                    <div class="product-cart">
+                        <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">
+                            <img src="icons/bag.png" class="product-cart-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-selector">
+            <a href="#"><<</a>
+            <a href="#">
+                <strong>
+                    <u>1</u>
+                </strong>
+            </a>
+            <a href="#">>></a>
+        </div>
     </main>
 </section>
 
@@ -164,5 +201,7 @@
 </div>
 
 <!-- Search Mod HTML -->
+
+
 </body>
 </html>
