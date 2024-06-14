@@ -36,3 +36,8 @@ function deleteProduct() {
 //     console.log("Najniższy widoczny punkt:", scrollBottom);
 //     console.log("cart rect: ", cart_rect.top, cart_rect.bottom);
 // });
+
+
+function paymentAnchor() {
+    window.location.href = 'platnosc.html';
+}

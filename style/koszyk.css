@@ -6,28 +6,26 @@
     font-weight: var(--font-light);
 }
 
-main {
-    background-color: #434343;
-}
-
 #cart {
     min-height: calc(100dvh - var(--nav-height) - 201px);
     width: 100%;
     height: 100%;
     display: flex;
-    gap: 25px;
+    gap: 50px;
     align-content: center;
     box-sizing: border-box;
-    padding: var(--cart-padding);
 }
 
 #cart-products,
 #cart-price {
     background-color: var(--background-color);
-    padding: var(--cart-padding);
     display: flex;
     flex-direction: column;
     gap: 25px;
+    background-color: #2d2d2d;
+    padding: var(--cart-padding);
+    border: 1px solid #4f4f4f;
+    margin: var(--vertical-padding) 0;
 }
 
 #cart-products {
