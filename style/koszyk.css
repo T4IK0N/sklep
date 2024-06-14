@@ -31,7 +31,7 @@ main {
 }
 
 #cart-products {
-    width: 65%;
+    width: 75%;
 }
 
 #cart-price {
@@ -121,6 +121,7 @@ main {
 
 .delete-img {
     width: 20px;
+    cursor: pointer;
 }
 
 .cart-price-div {
