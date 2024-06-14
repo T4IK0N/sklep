@@ -27,8 +27,8 @@ function loadCartFromLocalStorage() {
 //     updateCartItems();
 // }
 
-function addToCart(productName, productPrice) {
-    const data = { name: productName, price: productPrice };
+function addToCart(productImage, productName, productPrice) {
+    const data = { image: productImage, name: productName, price: productPrice };
 
     fetch('php/add_to_cart.php', {
         method: 'POST',
@@ -129,8 +129,17 @@ function updateCartItems() {
                 itemElement.classList.add('cart-item');
 
                 const itemElement2 = document.createElement('div');
-                itemElement2.classList.add('cart-item-nameAndPrice');
-                itemElement2.innerHTML = `
+                itemElement2.classList.add('cart-item-left');
+
+                const itemElement3 = document.createElement('div');
+                itemElement3.classList.add('cart-item-image');
+                itemElement3.innerHTML = `
+                <img src="img/${item.image}" alt="product-from-fetch">
+            `;
+
+                const itemElement4 = document.createElement('div');
+                itemElement4.classList.add('cart-item-nameAndPrice');
+                itemElement4.innerHTML = `
                 <span class="cart-item-name">${item.name}</span>
                 <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
             `;
@@ -145,6 +154,9 @@ function updateCartItems() {
 
                 itemElement.appendChild(itemElement2);
                 itemElement.appendChild(itemRemoveElement);
+
+                itemElement2.appendChild(itemElement3);
+                itemElement2.appendChild(itemElement4);
 
                 cartItemsContainer.appendChild(itemElement);
                 total += item.price;
@@ -253,6 +265,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 
+
+
 // POSITION MODAL
 
 function setModulePosition() {
@@ -288,11 +302,6 @@ function setMenuPosition() {
     menu.style.left = `${leftPosition}px`;
     menu.style.top = `${topPosition}px`;
 }
-
-window.addEventListener('resize', setModulePosition);
-window.addEventListener('resize', setMenuPosition);
-window.addEventListener('load', setModulePosition);
-window.addEventListener('load', setMenuPosition);
 
 // RESPONSIVE PADDING
 
@@ -330,5 +339,21 @@ function changeHorizontalPadding() {
     }
 }
 
-window.addEventListener('load', changeHorizontalPadding);
-window.addEventListener('resize', changeHorizontalPadding);
+// ALL EVENTS
+
+window.addEventListener('resize', () => {
+    changeHorizontalPadding();
+    setMenuPosition();
+    setModulePosition();
+});
+
+window.addEventListener('load', () => {
+    changeHorizontalPadding();
+    setMenuPosition();
+    setModulePosition();
+});
+
+window.addEventListener('', () => {
+    setMenuPosition();
+    setModulePosition();
+});

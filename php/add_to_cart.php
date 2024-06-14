@@ -1,8 +1,10 @@
 <?php
 
 session_start();
+
 $input = json_decode(file_get_contents('php://input'), true);
 
+$productImage = $input['image'];
 $productName = $input['name'];
 $productPrice = $input['price'];
 
@@ -18,6 +20,7 @@ foreach ($_SESSION['cart'] as &$item) {
 
 if (!$found) {
     $_SESSION['cart'][] = [
+        'image' => $productImage,
         'name' => $productName,
         'price' => $productPrice,
         'unitPrice' => $productPrice,

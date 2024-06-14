@@ -65,6 +65,14 @@
     border-radius: 5px;
 }
 
+.hero-product-container > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .hero-product-container {
     width: fit-content;
     height: fit-content;

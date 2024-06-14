@@ -4,6 +4,35 @@ session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (isset($_GET['id'])) {
+    $productId = intval($_GET['id']);
+    $sql = "SELECT products.id, products.shortName, products.fullName, products.price, products.description, productimages.image FROM products LEFT JOIN productimages ON products.id = productimages.productId WHERE products.id = $productId";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+    } else {
+        echo "Product not found";
+        exit;
+    }
+} else {
+    echo "No product ID specified";
+    exit;
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +45,7 @@ if (!isset($_SESSION['cart'])) {
     <link rel="stylesheet" href="style/produkt.css">
     <script src="scripts/common.js" defer></script>
     <script src="scripts/produkt.js" defer></script>
-    <title>Strona internetowa</title>
+    <title><?php echo htmlspecialchars($product['fullName']); ?></title>
 </head>
 <body>
 <section class="padding-sec">
@@ -76,35 +105,31 @@ if (!isset($_SESSION['cart'])) {
     <main class="vertical-padding">
         <div class="product-information">
             <div class="product-information-left">
-                <img class="main-image" src="img/product.jpg" />
+                <img class="main-image" src="img/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['shortName']); ?>" />
                 <div class="product-variations flex-row">
-                    <img src="img/product.jpg" />
-                    <img src="img/product.jpg" />
-                    <img src="img/product.jpg" />
+                    <img src="img/<?php echo htmlspecialchars($product['image']); ?>" />
+                    <!-- Additional images can be added here if available -->
                 </div>
             </div>
             <div class="product-information-right">
                 <div class="product-information-divider">
-                    <h1 class="product-title">Żelazko TEFAL Easygliss</h1>
+                    <h1 class="product-title"><?php echo htmlspecialchars($product['fullName']); ?></h1>
                 </div>
                 <div class="product-information-divider">
                     <div class="description">
                         <div class="description-part">
                             <h3 class="font-bayon">Opis produktu</h3>
-                            <p>Mmm żelazko pyuszne mnianm  mniamn</p>
+                            <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                         </div>
-                        <div class="description-part">
-                            <h3 class="font-bayon">Specyfikacja</h3>
-                            <p>Rodzaj: AGD <br> Kolor: czarny</p>
-                        </div>
+                        <!-- Additional sections like specifications can be added here -->
                     </div>
                 </div>
                 <div class="product-information-divider" id="price-div">
-                    <span id="price">499,99 zł</span>
+                    <span id="price"><?php echo number_format($product['price'], 2, ',', '') . ' zł'; ?></span>
                     <div class="add-to-cart flex-row">
                         <input type="number" id="product-count" min="1" max="10" value="1"/>
                         <label for="product-count">
-                            <button class="gray-bg" id="add-product" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">DODAJ DO KOSZYKA</button>
+                            <button class="gray-bg" id="add-product" onclick="addToCart('<?php echo htmlspecialchars($product['fullName']); ?>', <?php echo $product['price']; ?>)">DODAJ DO KOSZYKA</button>
                         </label>
                     </div>
                 </div>
@@ -112,7 +137,6 @@ if (!isset($_SESSION['cart'])) {
         </div>
     </main>
 </section>
-
 
 <hr class="whiteLine">
 

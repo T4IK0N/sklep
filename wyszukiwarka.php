@@ -4,6 +4,21 @@ session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shop";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT products.id, products.shortName, products.price, productimages.image FROM products LEFT JOIN productimages ON products.id = productimages.productId";
+$result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -77,54 +92,35 @@ if (!isset($_SESSION['cart'])) {
         <h1 class="font-bayon">ZNALEZIONO 99 OFERT</h1>
         <div class="vertical-padding product-list">
             <?php
-            // Konfiguracja bazy danych
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "shop";
-
-            // Tworzenie połączenia
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            // Sprawdzanie połączenia
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // Zapytanie SQL
-            $sql = "SELECT products.id, products.fullName, products.price, productimages.image FROM products LEFT JOIN productimages ON products.id = productimages.productId";
-            $result = $conn->query($sql);
-
-            // Generowanie HTML
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo '
-                        <div class="product">
-                            <a class="product-anchor" href="product.html?id=' . $row["id"] . '">
-                                <div class="product-top-half">
-                                    <img src="img/' . $row["image"] . '" alt="' . $row["fullName"] . '" class="product-img"/>
-                                </div>
-                            </a>
-                            <div class="product-bottom-half">
-                                <div class="product-description">
-                                    <span>' . $row["fullName"] . '</span>
-                                    <span>
-                                        <strong>' . number_format($row["price"], 2, ',', '') . 'zł</strong>
-                                    </span>
-                                </div>
-                                <div class="product-cart">
-                                    <button class="product-cart-btn" onclick="addToCart(\'' . $row["fullName"] . '\', ' . $row["price"] . ')">
-                                        <img src="icons/bag.png" class="product-cart-icon">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>';
+            <div class="product">
+                <a class="product-anchor" href="produkt.php?id=' . $row["id"] . '">
+                    <div class="product-top-half">
+                        <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '" class="product-img"/>
+                    </div>
+                </a>
+                <div class="product-bottom-half">
+                    <div class="product-description">
+                        <span>' . $row["shortName"] . '</span>
+                        <span>
+                            <strong>' . number_format($row["price"], 2, ',', '') . ' zł</strong>
+                        </span>
+                    </div>
+                    <div class="product-cart">
+                        <button class="product-cart-btn" onclick="addToCart(\'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
+                            <img src="icons/bag.png" class="product-cart-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        ';
                 }
             } else {
                 echo "0 results";
             }
 
-            // Zamknięcie połączenia
             $conn->close();
             ?>
         </div>

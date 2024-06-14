@@ -81,7 +81,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="product-div">
                         <div class="product-div-element product-div-left">
                             <div class="product-image">
-                                <img src="img/product.jpg">
+                                <img src="img/zelazko_tefal1.jpg">
                             </div>
                             <div class="product-description">
                                 <div>
@@ -107,7 +107,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="product-div">
                         <div class="product-div-element product-div-left">
                             <div class="product-image">
-                                <img src="img/bargain.jpg">
+                                <img src="img/lampka_nocna_kall1.jpg">
                             </div>
                             <div class="product-description">
                                 <div>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="product-div">
                         <div class="product-div-element product-div-left">
                             <div class="product-image">
-                                <img src="img/product.jpg">
+                                <img src="img/zelazko_tefal1.jpg">
                             </div>
                             <div class="product-description">
                                 <div>
@@ -159,7 +159,7 @@ if (!isset($_SESSION['cart'])) {
                     <div class="product-div">
                         <div class="product-div-element product-div-left">
                             <div class="product-image">
-                                <img src="img/bargain.jpg">
+                                <img src="img/lampka_nocna_kall1.jpg">
                             </div>
                             <div class="product-description">
                                 <div>
