@@ -23,7 +23,7 @@ if (!isset($_SESSION['cart'])) {
     <nav>
         <div class="nav-div">
             <div class="nav-item nav-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="icons/logo.png" class="logo" id="logo"/>
                 </a>
             </div>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['cart'])) {
                     </div>
                 </div>
                 <div class="search-icon-div">
-                    <a href="wyszukiwarka.html" class="search-button">
+                    <a href="wyszukiwarka.php" class="search-button">
                         <img src="icons/search.png" class="search-icon" alt=""/>
                     </a>
                 </div>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['cart'])) {
             <!-- second nav-search (only icon) -->
             <div class="nav-item nav-search-media" id="nav-search-media">
                 <div class="search-icon-div-media">
-                    <a href="wyszukiwarka.html" class="search-button-media">
+                    <a href="wyszukiwarka.php" class="search-button-media">
                         <img src="icons/search-media.png" class="search-icon-media" alt=""/>
                     </a>
                 </div>
@@ -76,26 +76,57 @@ if (!isset($_SESSION['cart'])) {
     <main class="vertical-padding">
         <h1 class="font-bayon">ZNALEZIONO 99 OFERT</h1>
         <div class="vertical-padding product-list">
-            <div class="product">
-                <a class="product-anchor" href="product.html">
-                    <div class="product-top-half">
-                        <img src="img/product.jpg" alt="zelazko" class="product-img"/>
-                    </div>
-                </a>
-                <div class="product-bottom-half">
-                    <div class="product-description">
-                        <span>Żelazko TEFAL Easygliss</span>
-                        <span>
-                            <strong>499,99zł</strong>
-                        </span>
-                    </div>
-                    <div class="product-cart">
-                        <button class="product-cart-btn" onclick="addToCart('Żelazko TEFAL Easygliss', 499.99)">
-                            <img src="icons/bag.png" class="product-cart-icon">
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <?php
+            // Konfiguracja bazy danych
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "shop";
+
+            // Tworzenie połączenia
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Sprawdzanie połączenia
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Zapytanie SQL
+            $sql = "SELECT products.id, products.fullName, products.price, productimages.image FROM products LEFT JOIN productimages ON products.id = productimages.productId";
+            $result = $conn->query($sql);
+
+            // Generowanie HTML
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo '
+                        <div class="product">
+                            <a class="product-anchor" href="product.html?id=' . $row["id"] . '">
+                                <div class="product-top-half">
+                                    <img src="img/' . $row["image"] . '" alt="' . $row["fullName"] . '" class="product-img"/>
+                                </div>
+                            </a>
+                            <div class="product-bottom-half">
+                                <div class="product-description">
+                                    <span>' . $row["fullName"] . '</span>
+                                    <span>
+                                        <strong>' . number_format($row["price"], 2, ',', '') . 'zł</strong>
+                                    </span>
+                                </div>
+                                <div class="product-cart">
+                                    <button class="product-cart-btn" onclick="addToCart(\'' . $row["fullName"] . '\', ' . $row["price"] . ')">
+                                        <img src="icons/bag.png" class="product-cart-icon">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>';
+                }
+            } else {
+                echo "0 results";
+            }
+
+            // Zamknięcie połączenia
+            $conn->close();
+            ?>
         </div>
         <div class="page-selector">
             <a href="#"><<</a>
@@ -109,6 +140,7 @@ if (!isset($_SESSION['cart'])) {
     </main>
 </section>
 
+
 <hr class="whiteLine">
 
 <section id="padding-sec-footer">
@@ -116,7 +148,7 @@ if (!isset($_SESSION['cart'])) {
         <footer>
             <div class="footer-div">
                 <div class="footer-logo">
-                    <a href="index.html">
+                    <a href="index.php">
                         <img src="icons/logo.png" class="logo" alt=""/>
                     </a>
                 </div>
@@ -133,19 +165,19 @@ if (!isset($_SESSION['cart'])) {
                         <label for="footer-info">Informacje</label>
                         <ul id="footer-info" class="inter-light-font">
                             <li>
-                                <a href="regulamin.html">Regulamin</a>
+                                <a href="regulamin.php">Regulamin</a>
                             </li>
                             <li>
-                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                                <a href="polityka-prywatnosci.php">Polityka prywatności</a>
                             </li>
                             <li>
-                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                <a href="dostawa-i-platnosci.php">Dostawa i płatność</a>
                             </li>
                             <li>
-                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                <a href="zwroty-i-reklamacje.php">Zwroty i reklamacje</a>
                             </li>
                             <li>
-                                <a href="kontakt.html">Kontakt</a>
+                                <a href="kontakt.php">Kontakt</a>
                             </li>
                         </ul>
                     </div>
@@ -201,7 +233,5 @@ if (!isset($_SESSION['cart'])) {
 </div>
 
 <!-- Search Mod HTML -->
-
-
 </body>
 </html>

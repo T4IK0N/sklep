@@ -12,25 +12,58 @@ function loadCartFromLocalStorage() {
     return savedCart ? JSON.parse(savedCart) : [];
 }
 
+// function addToCart(productName, productPrice) {
+//     const existingProductIndex = cart.findIndex(item => item.name === productName);
+//     if (existingProductIndex !== -1) {
+//         cart[existingProductIndex].quantity += 1;
+//         cart[existingProductIndex].price += productPrice;
+//     } else {
+//         const product = { name: productName, price: productPrice, unitPrice: productPrice, quantity: 1 };
+//         cart.push(product);
+//         cartCount++;
+//     }
+//     saveCartToLocalStorage();
+//     updateCartIcon();
+//     updateCartItems();
+// }
+
 function addToCart(productName, productPrice) {
-    const existingProductIndex = cart.findIndex(item => item.name === productName);
-    if (existingProductIndex !== -1) {
-        cart[existingProductIndex].quantity += 1;
-        cart[existingProductIndex].price += productPrice;
-    } else {
-        const product = { name: productName, price: productPrice, unitPrice: productPrice, quantity: 1 };
-        cart.push(product);
-        cartCount++;
-    }
-    saveCartToLocalStorage();
-    updateCartIcon();
-    updateCartItems();
+    const data = { name: productName, price: productPrice };
+
+    fetch('php/add_to_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            updateCartIcon();
+            updateCartItems();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
+
+// function updateCartIcon() {
+//     const cartIconText = document.querySelector('.cart-icon-container p');
+//     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+//     cartIconText.textContent = `Koszyk (${totalItems})`;
+// }
+
 function updateCartIcon() {
-    const cartIconText = document.querySelector('.cart-icon-container p');
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartIconText.textContent = `Koszyk (${totalItems})`;
+    fetch('php/fetch_cart.php')
+        .then(response => response.json())
+        .then(cart => {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-icon-container p').textContent = `Koszyk (${totalItems})`;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 function cart_function() {
@@ -49,52 +82,112 @@ function showModal() {
     modal.style.display = "block";
 }
 
+// function updateCartItems() {
+//     const cartItemsContainer = document.getElementById('cart-items');
+//     cartItemsContainer.innerHTML = '';
+//     let total = 0;
+//
+//     cart.forEach((item, index) => {
+//         const itemElement = document.createElement('div');
+//         itemElement.classList.add('cart-item');
+//
+//         const itemElement2 = document.createElement('div');
+//         itemElement2.classList.add('cart-item-nameAndPrice');
+//         itemElement2.innerHTML = `
+//             <span class="cart-item-name">${item.name}</span>
+//             <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
+//         `;
+//
+//         const itemRemoveElement = document.createElement('div');
+//         itemRemoveElement.classList.add('cart-item-remove');
+//         itemRemoveElement.innerHTML = `
+//             <button class="btn-remove" onclick="removeFromCart(${index})">
+//                 <span class="material-symbols-light--close remove-icon"></span>
+//             </button>
+//         `;
+//
+//         itemElement.appendChild(itemElement2);
+//         itemElement.appendChild(itemRemoveElement);
+//
+//         cartItemsContainer.appendChild(itemElement);
+//         total += item.price;
+//     });
+//
+//     document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
+// }
+
 function updateCartItems() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = '';
-    let total = 0;
+    fetch('php/fetch_cart.php')
+        .then(response => response.json())
+        .then(cart => {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
 
-    cart.forEach((item, index) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('cart-item');
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
 
-        const itemElement2 = document.createElement('div');
-        itemElement2.classList.add('cart-item-nameAndPrice');
-        itemElement2.innerHTML = `
-            <span class="cart-item-name">${item.name}</span>
-            <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
-        `;
+                const itemElement2 = document.createElement('div');
+                itemElement2.classList.add('cart-item-nameAndPrice');
+                itemElement2.innerHTML = `
+                <span class="cart-item-name">${item.name}</span>
+                <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
+            `;
 
-        const itemRemoveElement = document.createElement('div');
-        itemRemoveElement.classList.add('cart-item-remove');
-        itemRemoveElement.innerHTML = `
-            <button class="btn-remove" onclick="removeFromCart(${index})">
-                <span class="material-symbols-light--close remove-icon"></span>
-            </button>
-        `;
+                const itemRemoveElement = document.createElement('div');
+                itemRemoveElement.classList.add('cart-item-remove');
+                itemRemoveElement.innerHTML = `
+                <button class="btn-remove" onclick="removeFromCart(${index})">
+                    <span class="material-symbols-light--close remove-icon"></span>
+                </button>
+            `;
 
-        itemElement.appendChild(itemElement2);
-        itemElement.appendChild(itemRemoveElement);
+                itemElement.appendChild(itemElement2);
+                itemElement.appendChild(itemRemoveElement);
 
-        cartItemsContainer.appendChild(itemElement);
-        total += item.price;
-    });
+                cartItemsContainer.appendChild(itemElement);
+                total += item.price;
+            });
 
-    document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
+            document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
+
+// function removeFromCart(index) {
+//     if (cart[index].quantity > 1) {
+//         cart[index].quantity -= 1;
+//         cart[index].price -= cart[index].unitPrice;
+//     } else {
+//         cart.splice(index, 1);
+//     }
+//     cartCount = Math.max(0, cartCount - 1);
+//     saveCartToLocalStorage();
+//     updateCartIcon();
+//     updateCartItems();
+// }
 
 function removeFromCart(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-        cart[index].price -= cart[index].unitPrice;
-    } else {
-        cart.splice(index, 1);
-    }
-    cartCount = Math.max(0, cartCount - 1);
-    saveCartToLocalStorage();
-    updateCartIcon();
-    updateCartItems();
+    fetch('php/remove_from_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ index: index }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            updateCartIcon();
+            updateCartItems();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
+
 
 function redirectToSubpage(relativeUrl) {
     window.location.href = relativeUrl;
@@ -103,7 +196,7 @@ function redirectToSubpage(relativeUrl) {
 function placeOrder() {
     closeModal();
     updateCartIcon();
-    redirectToSubpage('koszyk.html');
+    redirectToSubpage('koszyk.php');
 }
 
 function closeModal() {

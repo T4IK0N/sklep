@@ -23,7 +23,7 @@ if (!isset($_SESSION['cart'])) {
     <nav>
         <div class="nav-div">
             <div class="nav-item nav-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="icons/logo.png" class="logo" id="logo"/>
                 </a>
             </div>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['cart'])) {
                     </div>
                 </div>
                 <div class="search-icon-div">
-                    <a href="wyszukiwarka.html" class="search-button">
+                    <a href="wyszukiwarka.php" class="search-button">
                         <img src="icons/search.png" class="search-icon" alt=""/>
                     </a>
                 </div>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['cart'])) {
             <!-- second nav-search (only icon) -->
             <div class="nav-item nav-search-media" id="nav-search-media">
                 <div class="search-icon-div-media">
-                    <a href="wyszukiwarka.html" class="search-button-media">
+                    <a href="wyszukiwarka.php" class="search-button-media">
                         <img src="icons/search-media.png" class="search-icon-media" alt=""/>
                     </a>
                 </div>
@@ -113,6 +113,7 @@ if (!isset($_SESSION['cart'])) {
     </main>
 </section>
 
+
 <hr class="whiteLine">
 
 <section id="padding-sec-footer">
@@ -120,7 +121,7 @@ if (!isset($_SESSION['cart'])) {
         <footer>
             <div class="footer-div">
                 <div class="footer-logo">
-                    <a href="index.html">
+                    <a href="index.php">
                         <img src="icons/logo.png" class="logo" alt=""/>
                     </a>
                 </div>
@@ -137,19 +138,19 @@ if (!isset($_SESSION['cart'])) {
                         <label for="footer-info">Informacje</label>
                         <ul id="footer-info" class="inter-light-font">
                             <li>
-                                <a href="regulamin.html">Regulamin</a>
+                                <a href="regulamin.php">Regulamin</a>
                             </li>
                             <li>
-                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                                <a href="polityka-prywatnosci.php">Polityka prywatności</a>
                             </li>
                             <li>
-                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                <a href="dostawa-i-platnosci.php">Dostawa i płatność</a>
                             </li>
                             <li>
-                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                <a href="zwroty-i-reklamacje.php">Zwroty i reklamacje</a>
                             </li>
                             <li>
-                                <a href="kontakt.html">Kontakt</a>
+                                <a href="kontakt.php">Kontakt</a>
                             </li>
                         </ul>
                     </div>
@@ -205,7 +206,5 @@ if (!isset($_SESSION['cart'])) {
 </div>
 
 <!-- Search Mod HTML -->
-
-
 </body>
 </html>

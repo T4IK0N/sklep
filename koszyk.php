@@ -23,7 +23,7 @@ if (!isset($_SESSION['cart'])) {
     <nav>
         <div class="nav-div">
             <div class="nav-item nav-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="icons/logo.png" class="logo" id="logo"/>
                 </a>
             </div>
@@ -35,12 +35,12 @@ if (!isset($_SESSION['cart'])) {
                         <!-- dropdown options below -->
                     </div>
                     <div class="select-icon-div">
-                        <img src="icons/sort_down.png" class="select-icon" />
+                        <img src="icons/sort_down.png" class="select-icon" alt="">
                     </div>
                 </div>
                 <div class="search-icon-div">
-                    <a href="wyszukiwarka.html" class="search-button">
-                        <img src="icons/search.png" class="search-icon" />
+                    <a href="wyszukiwarka.php" class="search-button">
+                        <img src="icons/search.png" class="search-icon" alt=""/>
                     </a>
                 </div>
             </div>
@@ -48,15 +48,15 @@ if (!isset($_SESSION['cart'])) {
             <!-- second nav-search (only icon) -->
             <div class="nav-item nav-search-media" id="nav-search-media">
                 <div class="search-icon-div-media">
-                    <a href="wyszukiwarka.html" class="search-button-media">
-                        <img src="icons/search-media.png" class="search-icon-media" />
+                    <a href="wyszukiwarka.php" class="search-button-media">
+                        <img src="icons/search-media.png" class="search-icon-media" alt=""/>
                     </a>
                 </div>
             </div>
 
             <div class="nav-item nav-cart">
                 <div id="cart-icon-container" onclick="cart_function(); setModulePosition()" class="cart-icon-container">
-                    <img src="icons/cart.png" class="cart-icon" />
+                    <img src="icons/cart.png" class="cart-icon" alt=""/>
                     <p class="cart-text">Koszyk (0)</p>
                 </div>
             </div>
@@ -209,8 +209,8 @@ if (!isset($_SESSION['cart'])) {
         <footer>
             <div class="footer-div">
                 <div class="footer-logo">
-                    <a href="index.html">
-                        <img src="icons/logo.png" class="logo" />
+                    <a href="index.php">
+                        <img src="icons/logo.png" class="logo" alt=""/>
                     </a>
                 </div>
                 <div class="footer-content">
@@ -226,19 +226,19 @@ if (!isset($_SESSION['cart'])) {
                         <label for="footer-info">Informacje</label>
                         <ul id="footer-info" class="inter-light-font">
                             <li>
-                                <a href="regulamin.html">Regulamin</a>
+                                <a href="regulamin.php">Regulamin</a>
                             </li>
                             <li>
-                                <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+                                <a href="polityka-prywatnosci.php">Polityka prywatności</a>
                             </li>
                             <li>
-                                <a href="dostawa-i-platnosci.html">Dostawa i płatność</a>
+                                <a href="dostawa-i-platnosci.php">Dostawa i płatność</a>
                             </li>
                             <li>
-                                <a href="zwroty-i-reklamacje.html">Zwroty i reklamacje</a>
+                                <a href="zwroty-i-reklamacje.php">Zwroty i reklamacje</a>
                             </li>
                             <li>
-                                <a href="kontakt.html">Kontakt</a>
+                                <a href="kontakt.php">Kontakt</a>
                             </li>
                         </ul>
                     </div>
@@ -247,13 +247,13 @@ if (!isset($_SESSION['cart'])) {
                         <ul id="footer-media" class="inter-light-font">
                             <li>
                                 <a href="#">
-                                    <img src="icons/instagram.png" class="footer-icons" />
+                                    <img src="icons/instagram.png" class="footer-icons" alt=""/>
                                     <span>Instagram</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img src="icons/facebook.png" class="footer-icons" />
+                                    <img src="icons/facebook.png" class="footer-icons" alt=""/>
                                     <span>Facebook</span>
                                 </a>
                             </li>
@@ -266,9 +266,9 @@ if (!isset($_SESSION['cart'])) {
                                 <a href="https://ggweb.pl/">
                                     <u>ggweb.pl</u>
                                 </a>
-                                <a href="#"><img src="icons/whatsapp.png" class="footer-icons" ></a>
-                                <a href="#"><img src="icons/instagram.png" class="footer-icons" ></a>
-                                <a href="#"><img src="icons/facebook.png" class="footer-icons" ></a>
+                                <a href="#"><img src="icons/whatsapp.png" class="footer-icons" alt=""></a>
+                                <a href="#"><img src="icons/instagram.png" class="footer-icons" alt=""></a>
+                                <a href="#"><img src="icons/facebook.png" class="footer-icons" alt=""></a>
                             </li>
                         </ul>
                     </div>
@@ -294,7 +294,5 @@ if (!isset($_SESSION['cart'])) {
 </div>
 
 <!-- Search Mod HTML -->
-
-
 </body>
 </html>

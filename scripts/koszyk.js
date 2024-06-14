@@ -39,5 +39,5 @@ function deleteProduct() {
 
 
 function paymentAnchor() {
-    window.location.href = 'platnosc.html';
+    window.location.href = 'platnosc.php';
 }
