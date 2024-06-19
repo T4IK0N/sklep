@@ -48,9 +48,9 @@ if (!isset($_SESSION['cart'])) {
             <!-- second nav-search (only icon) -->
             <div class="nav-item nav-search-media" id="nav-search-media">
                 <div class="search-icon-div-media">
-                    <a href="wyszukiwarka.php" class="search-button-media">
-                        <img src="icons/search-media.png" class="search-icon-media" alt=""/>
-                    </a>
+                    <div id="search-button-media">
+                        <img src="icons/search-media.png" class="search-icon-media"/>
+                    </div>
                 </div>
             </div>
 
@@ -62,11 +62,7 @@ if (!isset($_SESSION['cart'])) {
             </div>
         </div>
         <!-- dropdown options -->
-        <div class="dropdown-content" id="dropdown-content">
-            <a href="#">Opcja 1</a>
-            <a href="#">Opcja 2</a>
-            <a href="#">Opcja 3</a>
-        </div>
+        <div class="dropdown-content" id="dropdown-content"></div>
     </nav>
 </section>
 
@@ -294,5 +290,20 @@ if (!isset($_SESSION['cart'])) {
 </div>
 
 <!-- Search Mod HTML -->
+<div id="search-mod">
+    <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">
+    <div class="dropdown" id="dropdown" onclick="setMenuPosition()">
+        <div class="select-icon-div">
+            <div class="dropbtn">
+                <img src="icons/sort_down.png" class="select-icon">
+            </div>
+        </div>
+    </div>
+    <div class="search-icon-div">
+        <a href="wyszukiwarka.php" class="search-button">
+            <img src="icons/search.png" class="search-icon" alt=""/>
+        </a>
+    </div>
+</div>
 </body>
 </html>

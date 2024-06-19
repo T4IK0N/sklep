@@ -18,11 +18,10 @@
 
 #cart-products,
 #cart-price {
-    background-color: var(--background-color);
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-color: #2d2d2d;
+    background-color: #282828;
     padding: var(--cart-padding);
     border: 1px solid #4f4f4f;
     margin: var(--vertical-padding) 0;
@@ -137,14 +136,6 @@
     width: 100%;
 }
 
-.cart-price-div-first {
-    display: flex;
-    justify-content: column;
-    width: 100%;
-    flex-direction: column;
-    gap: 30px;
-}
-
 .final-price > p {
     font-weight: 800;
 }
@@ -154,4 +145,8 @@
     font-size: 100%;
     height: 50px;
     font-weight: 700;
+}
+
+#dropdown-content a {
+    font-weight: 400;
 }

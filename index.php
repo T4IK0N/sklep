@@ -10,32 +10,58 @@ $username = "root";
 $password = "";
 $dbname = "shop";
 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$specialProductId = 2;
+$specialProductId = 3;
 $sqlSpecial = "SELECT products.id, products.shortName, products.price, productimages.image 
                FROM products 
                LEFT JOIN productimages ON products.id = productimages.productId 
-               WHERE products.id = $specialProductId";
-$resultSpecial = $conn->query($sqlSpecial);
+               WHERE products.id = ?";
+$stmtSpecial = $conn->prepare($sqlSpecial);
+
+$stmtSpecial->bind_param("i", $specialProductId);
+
+$stmtSpecial->execute();
+$resultSpecial = $stmtSpecial->get_result();
 
 if ($resultSpecial->num_rows > 0) {
     $specialProduct = $resultSpecial->fetch_assoc();
 } else {
-    echo "Special product not found";
+    $errorMsg = 'Special product not found';
+    $stmtSpecial->close();
+    $conn->close();
+
+
+    header("Location: php/error.php?errorMsg=" . urlencode($errorMsg));
+    exit();
 }
 
-// Fetch other products
-$sql = "SELECT products.id, products.shortName, products.price, productimages.image 
-        FROM products 
-        LEFT JOIN productimages ON products.id = productimages.productId 
-        WHERE products.id != $specialProductId";
-$result = $conn->query($sql);
+$stmtSpecial->close();
+
+
+$sql = "SELECT products.id, products.shortName, products.price, (
+            SELECT productimages.image 
+            FROM productimages 
+            WHERE productimages.productId = products.id 
+            LIMIT 1
+        ) AS image
+        FROM products
+        WHERE products.id != ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $specialProductId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+
+$stmt->close();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,9 +105,9 @@ $result = $conn->query($sql);
                 <!-- second nav-search (only icon) -->
                 <div class="nav-item nav-search-media" id="nav-search-media">
                     <div class="search-icon-div-media">
-                        <a href="wyszukiwarka.php" class="search-button-media">
+                        <div id="search-button-media">
                             <img src="icons/search-media.png" class="search-icon-media"/>
-                        </a>
+                        </div>
                     </div>
                 </div>
 
@@ -93,11 +119,7 @@ $result = $conn->query($sql);
                 </div>
             </div>
             <!-- dropdown options -->
-            <div class="dropdown-content" id="dropdown-content">
-                <a href="#">Opcja 1</a>
-                <a href="#">Opcja 2</a>
-                <a href="#">Opcja 3</a>
-            </div>
+            <div class="dropdown-content" id="dropdown-content"></div>
         </nav>
     </section>
 
@@ -116,7 +138,7 @@ $result = $conn->query($sql);
                         <h1>OKAZJE</h1>
                         <h3>SPECJALNIE DLA CIEBIE</h3>
                     </div>
-                    <div class="hero-content">
+                    <div class="hero-content" id="hero-content-main">
                         <div class="hero-product">
                             <img src="img/<?php echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName']; ?>"/>
                             <div class="hero-product-container">
@@ -141,7 +163,9 @@ $result = $conn->query($sql);
                                 <div class="product">
                                     <a class="product-anchor" href="produkt.php?id=' . $row["id"] . '">
                                         <div class="product-top-half">
-                                            <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '" class="product-img"/>
+                                            <div class="product-img-container">
+                                                <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '" class="product-img"/>
+                                            </div>
                                         </div>
                                     </a>
                                     <div class="product-bottom-half">
@@ -169,7 +193,7 @@ $result = $conn->query($sql);
                     }
                     ?>
                 </div>
-                <h1 class="crooked font-bayon">POLECANE</h1>
+<!--                <h1 class="crooked font-bayon">POLECANE</h1>-->
                 <div class="product-list">
                     <?php
                     if ($result->num_rows > 0) {
@@ -205,11 +229,9 @@ $result = $conn->query($sql);
                     } else {
                         echo "0 results";
                     }
-
-                    $conn->close();
                     ?>
                 </div>
-                <a href="wyszukiwarka.php">
+                <a href="wyszukiwarka.php" class="search-anchor">
                     <strong>Zobacz wszystkie produkty</strong>
                 </a>
             </section>
@@ -309,6 +331,39 @@ $result = $conn->query($sql);
 
     <!-- Search Mod HTML -->
 
+    <div id="search-mod">
+        <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">
+        <div class="dropdown" id="dropdown" onclick="setMenuPosition()">
+            <div class="select-icon-div">
+                <div class="dropbtn">
+                    <img src="icons/sort_down.png" class="select-icon">
+                </div>
+            </div>
+        </div>
+        <div class="search-icon-div">
+            <a href="wyszukiwarka.php" class="search-button">
+                <img src="icons/search.png" class="search-icon" alt=""/>
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero content second -->
+    <div class="hero-content" id="hero-content-second">
+        <div class="hero-product">
+            <img src="img/<?php echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName']; ?>"/>
+            <div class="hero-product-container">
+                <div>
+                    <span><strong><?php echo $specialProduct['shortName']; ?></strong></span>
+                    <p>Tylko teraz przesyłka za darmo!</p>
+                </div>
+                <button id="product-cart-btn-special" onclick="addToCart('<?php echo $specialProduct['image']; ?>', '<?php echo $specialProduct['shortName']; ?>', <?php echo $specialProduct['price']; ?>)">DODAJ DO KOSZYKA</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

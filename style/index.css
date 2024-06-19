@@ -42,6 +42,14 @@
     justify-content: center;
 }
 
+#hero-content-main {
+    display: flex;
+}
+
+#hero-content-second {
+    display: none;
+}
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -88,7 +96,7 @@
     z-index: -1;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1025px) {
     .hero-title > h1 {
         font-size: 400%;
         margin-top: -50px;
@@ -128,7 +136,7 @@
     }
 }
 
-@media only screen and (max-width: 650px) { /* TELEFONY I PRZEGLĄDARKI */
+@media only screen and (max-width: 650px) { /* TELEFONY */
     #hero {
         height: 1100px;
     }
@@ -146,10 +154,30 @@
         box-sizing: border-box;
     }
 
+    #hero-content-main {
+        display: none;
+    }
+
+    #hero-content-second {
+        display: flex;
+    }
+
     .hero-content {
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 60%;
+        left: 0;
         width: 100%;
-        height: 60%;
+        height: 65%;
+        display: flex;
         gap: 5%;
+        opacity: 1;
+        background: rgb(34, 34, 34, 0.7);
+    }
+
+    .hero-product {
+        font-size: 90%;
     }
 
     .hero-product > img {
@@ -173,10 +201,6 @@
     .hero-title > h3 {
         font-size: 200%;
         margin-top: -5px;
-    }
-
-    .hero-product {
-        font-size: 90%;
     }
 
     .crooked {

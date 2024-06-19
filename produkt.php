@@ -18,17 +18,24 @@ if ($conn->connect_error) {
 
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
-    $sql = "SELECT products.id, products.shortName, products.fullName, products.price, products.description, productimages.image FROM products LEFT JOIN productimages ON products.id = productimages.productId WHERE products.id = $productId";
+    $sql = "SELECT products.id, products.shortName, products.fullName, products.price, products.brand, products.description, productimages.image
+            FROM products
+            LEFT JOIN productimages ON products.id = productimages.productId
+            WHERE products.id = $productId";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $product = $result->fetch_assoc();
     } else {
-        echo "Product not found";
+        $errorMsg = 'Product not found';
+        echo '<script>window.location.href = \'php/error.php?errorMsg=' . urlencode($errorMsg) . '\'</script>';
+
         exit;
     }
 } else {
-    echo "No product ID specified";
+    $errorMsg = 'No product ID specified';
+    echo '<script>window.location.href = \'php/error.php?errorMsg=' . urlencode($errorMsg) . '\'</script>';
+
     exit;
 }
 
@@ -45,7 +52,7 @@ $conn->close();
     <link rel="stylesheet" href="style/produkt.css">
     <script src="scripts/common.js" defer></script>
     <script src="scripts/produkt.js" defer></script>
-    <title><?php echo htmlspecialchars($product['fullName']); ?></title>
+    <title><?php echo htmlspecialchars($product['shortName']); ?></title>
 </head>
 <body>
 <section class="padding-sec">
@@ -77,9 +84,9 @@ $conn->close();
             <!-- second nav-search (only icon) -->
             <div class="nav-item nav-search-media" id="nav-search-media">
                 <div class="search-icon-div-media">
-                    <a href="wyszukiwarka.php" class="search-button-media">
-                        <img src="icons/search-media.png" class="search-icon-media" alt=""/>
-                    </a>
+                    <div id="search-button-media">
+                        <img src="icons/search-media.png" class="search-icon-media"/>
+                    </div>
                 </div>
             </div>
 
@@ -91,11 +98,7 @@ $conn->close();
             </div>
         </div>
         <!-- dropdown options -->
-        <div class="dropdown-content" id="dropdown-content">
-            <a href="#">Opcja 1</a>
-            <a href="#">Opcja 2</a>
-            <a href="#">Opcja 3</a>
-        </div>
+        <div class="dropdown-content" id="dropdown-content"></div>
     </nav>
 </section>
 
@@ -107,8 +110,17 @@ $conn->close();
             <div class="product-information-left">
                 <img class="main-image" src="img/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['shortName']); ?>" />
                 <div class="product-variations flex-row">
-                    <img src="img/<?php echo htmlspecialchars($product['image']); ?>" />
-                    <!-- Additional images can be added here if available -->
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '
+                                <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '"/>
+                            ';
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                    ?>
                 </div>
             </div>
             <div class="product-information-right">
@@ -119,6 +131,7 @@ $conn->close();
                     <div class="description">
                         <div class="description-part">
                             <h3 class="font-bayon">Opis produktu</h3>
+                            <p>Marka: <?php echo nl2br(htmlspecialchars($product['brand'])); ?></p>
                             <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                         </div>
                         <!-- Additional sections like specifications can be added here -->
@@ -230,5 +243,21 @@ $conn->close();
 </div>
 
 <!-- Search Mod HTML -->
+
+<div id="search-mod">
+    <input type="text" class="search-input font-poppins" placeholder="Szukaj tutaj...">
+    <div class="dropdown" id="dropdown" onclick="setMenuPosition()">
+        <div class="select-icon-div">
+            <div class="dropbtn">
+                <img src="icons/sort_down.png" class="select-icon">
+            </div>
+        </div>
+    </div>
+    <div class="search-icon-div">
+        <a href="wyszukiwarka.php" class="search-button">
+            <img src="icons/search.png" class="search-icon" alt=""/>
+        </a>
+    </div>
+</div>
 </body>
 </html>

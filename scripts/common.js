@@ -1,31 +1,59 @@
+// SEARCHING
+
+const searchInput = document.querySelector('.search-input');
+const categoryDropdown = document.querySelector('.dropbtn');
+const searchButton = document.querySelector('.search-button');
+let selectedCategory = '';
+
+function loadCategories() {
+    fetch('php/load_categories.php')
+        .then(response => response.json())
+        .then(data => {
+            const dropdownContent = document.getElementById('dropdown-content');
+            dropdownContent.innerHTML = '';
+            data.categories.forEach(category => {
+                const option = document.createElement('a');
+                option.textContent = category.name;
+                option.dataset.id = category.id;
+                option.addEventListener('click', () => {
+                    categoryDropdown.textContent = category.name;
+                    selectedCategory = category.name;
+                });
+                dropdownContent.appendChild(option);
+            });
+        });
+}
+
+function performSearch(navigate = false) {
+    const query = searchInput.value;
+    let category = selectedCategory || '';
+
+    if (navigate) {
+        window.location.href = `wyszukiwarka.php?query=${query}&category=${category}`;
+    }
+}
+
+searchInput.addEventListener('input', function() {
+    performSearch();
+});
+
+searchInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        performSearch(true);
+    }
+});
+
+categoryDropdown.addEventListener('click', function() {
+    loadCategories();
+});
+
+searchButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    performSearch(true);
+});
+
 // MODAL
-
-let cart = loadCartFromLocalStorage();
-let cartCount = cart.length;
-
-function saveCartToLocalStorage() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function loadCartFromLocalStorage() {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-}
-
-// function addToCart(productName, productPrice) {
-//     const existingProductIndex = cart.findIndex(item => item.name === productName);
-//     if (existingProductIndex !== -1) {
-//         cart[existingProductIndex].quantity += 1;
-//         cart[existingProductIndex].price += productPrice;
-//     } else {
-//         const product = { name: productName, price: productPrice, unitPrice: productPrice, quantity: 1 };
-//         cart.push(product);
-//         cartCount++;
-//     }
-//     saveCartToLocalStorage();
-//     updateCartIcon();
-//     updateCartItems();
-// }
 
 function addToCart(productImage, productName, productPrice) {
     const data = { image: productImage, name: productName, price: productPrice };
@@ -46,13 +74,6 @@ function addToCart(productImage, productName, productPrice) {
             console.error('Error:', error);
         });
 }
-
-
-// function updateCartIcon() {
-//     const cartIconText = document.querySelector('.cart-icon-container p');
-//     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-//     cartIconText.textContent = `Koszyk (${totalItems})`;
-// }
 
 function updateCartIcon() {
     fetch('php/fetch_cart.php')
@@ -82,40 +103,6 @@ function showModal() {
     modal.style.display = "block";
 }
 
-// function updateCartItems() {
-//     const cartItemsContainer = document.getElementById('cart-items');
-//     cartItemsContainer.innerHTML = '';
-//     let total = 0;
-//
-//     cart.forEach((item, index) => {
-//         const itemElement = document.createElement('div');
-//         itemElement.classList.add('cart-item');
-//
-//         const itemElement2 = document.createElement('div');
-//         itemElement2.classList.add('cart-item-nameAndPrice');
-//         itemElement2.innerHTML = `
-//             <span class="cart-item-name">${item.name}</span>
-//             <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
-//         `;
-//
-//         const itemRemoveElement = document.createElement('div');
-//         itemRemoveElement.classList.add('cart-item-remove');
-//         itemRemoveElement.innerHTML = `
-//             <button class="btn-remove" onclick="removeFromCart(${index})">
-//                 <span class="material-symbols-light--close remove-icon"></span>
-//             </button>
-//         `;
-//
-//         itemElement.appendChild(itemElement2);
-//         itemElement.appendChild(itemRemoveElement);
-//
-//         cartItemsContainer.appendChild(itemElement);
-//         total += item.price;
-//     });
-//
-//     document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
-// }
-
 function updateCartItems() {
     fetch('php/fetch_cart.php')
         .then(response => response.json())
@@ -128,59 +115,54 @@ function updateCartItems() {
                 const itemElement = document.createElement('div');
                 itemElement.classList.add('cart-item');
 
-                const itemElement2 = document.createElement('div');
-                itemElement2.classList.add('cart-item-left');
+                if (item.unitPrice !== null) {
+                    const itemElement2 = document.createElement('div');
+                    itemElement2.classList.add('cart-item-left');
 
-                const itemElement3 = document.createElement('div');
-                itemElement3.classList.add('cart-item-image');
-                itemElement3.innerHTML = `
-                <img src="img/${item.image}" alt="product-from-fetch">
-            `;
+                    const itemElement3 = document.createElement('div');
+                    itemElement3.classList.add('cart-item-image');
+                    itemElement3.innerHTML = `
+                        <img src="img/${item.image}" alt="product-from-fetch">
+                    `;
 
-                const itemElement4 = document.createElement('div');
-                itemElement4.classList.add('cart-item-nameAndPrice');
-                itemElement4.innerHTML = `
-                <span class="cart-item-name">${item.name}</span>
-                <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
-            `;
+                    const itemElement4 = document.createElement('div');
+                    itemElement4.classList.add('cart-item-nameAndPrice');
+                    itemElement4.innerHTML = `
+                        <span class="cart-item-name">${item.name}</span>
+                        <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
+                    `;
 
-                const itemRemoveElement = document.createElement('div');
-                itemRemoveElement.classList.add('cart-item-remove');
-                itemRemoveElement.innerHTML = `
-                <button class="btn-remove" onclick="removeFromCart(${index})">
-                    <span class="material-symbols-light--close remove-icon"></span>
-                </button>
-            `;
+                    const itemRemoveElement = document.createElement('div');
+                    itemRemoveElement.classList.add('cart-item-remove');
+                    itemRemoveElement.innerHTML = `
+                        <button class="btn-remove" onclick="removeFromCart(${index})">
+                            <span class="material-symbols-light--close remove-icon"></span>
+                        </button>
+                    `;
 
-                itemElement.appendChild(itemElement2);
-                itemElement.appendChild(itemRemoveElement);
+                    itemElement.appendChild(itemElement2);
+                    itemElement.appendChild(itemRemoveElement);
 
-                itemElement2.appendChild(itemElement3);
-                itemElement2.appendChild(itemElement4);
+                    itemElement2.appendChild(itemElement3);
+                    itemElement2.appendChild(itemElement4);
 
-                cartItemsContainer.appendChild(itemElement);
-                total += item.price;
+                    cartItemsContainer.appendChild(itemElement);
+                    total += item.quantity * item.unitPrice;
+                }
             });
 
             document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart-message">Koszyk jest pusty.</div>';
+                document.getElementById('cart-total').textContent = '0.00 zł';
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
 
-// function removeFromCart(index) {
-//     if (cart[index].quantity > 1) {
-//         cart[index].quantity -= 1;
-//         cart[index].price -= cart[index].unitPrice;
-//     } else {
-//         cart.splice(index, 1);
-//     }
-//     cartCount = Math.max(0, cartCount - 1);
-//     saveCartToLocalStorage();
-//     updateCartIcon();
-//     updateCartItems();
-// }
 
 function removeFromCart(index) {
     fetch('php/remove_from_cart.php', {
@@ -211,61 +193,75 @@ function placeOrder() {
     redirectToSubpage('koszyk.php');
 }
 
+
 function closeModal() {
     const modal = document.getElementById('cart-modal');
     if (modal.style.display !== "none") {
         modal.style.display = "none";
-        console.log('zamknalem modal');
     }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('click', closeModalOnClickOutside);
-});
 
 closeModal();
 updateCartIcon();
 
-function closeModalOnClickOutside(event) {
-    const modal = document.getElementById('cart-modal');
-    const cartIcon = document.getElementById('cart-icon-container');
+// RESPONSIVE PADDING
 
+function changeHorizontalPadding() {
+    let innerWidth = 1300;
+    const windowWidth = window.innerWidth;
+    const calc = (windowWidth - innerWidth) / 2;
+    const newHorizontalPadding = `${calc}px`;
+    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
 
-    if (modal.style.display !== "none" &&
-        !modal.contains(event.target) &&
-        !cartIcon.contains(event.target)) {
-        closeModal();
-    }
-}
+    if (calc <= 0) {
+        const calc2 = (windowWidth - innerWidth) / 2 + 150;
+        const newHorizontalPadding = `${calc2}px`;
 
+        document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+        if (calc2 <= 0) {
+            const calc3 = (windowWidth - innerWidth) / 2 + 275;
+            const newHorizontalPadding = `${calc3}px`;
 
-// PRODUCTS MENU
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.querySelector('.dropbtn').addEventListener('click', function() {
-        document.getElementById('dropdown-content').classList.toggle('show');
-    });
+            document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
 
-    // Remove on click out of menu
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            let dropdowns = document.getElementsByClassName('dropdown-content');
-            for (let i = 0; i < dropdowns.length; i++) {
-                let openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+            if (calc3 <= 0) {
+                const calc4 = (windowWidth - innerWidth) / 2 + 350;
+                const newHorizontalPadding = `${calc4}px`;
+
+                document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
+
+                if (calc4 <= 0) {
+                    const newHorizontalPadding = '4dvw';
+
+                    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
                 }
             }
         }
     }
-    // Remove on resize
-    window.addEventListener('resize', () => {
-        let dropdowns = document.getElementsByClassName('dropdown-content');
-        for (let i = 0; i < dropdowns.length; i++) {
-            dropdowns[i].classList.remove('show');
-        }
-    });
-});
+}
 
+// THIS FUNC IS VERY USEFUL AND HAVE TO BE OVERWRITE IN OTHER FIELS
 
+function closeModalOnClickOutside(event) {
+    const modal = document.getElementById('cart-modal');
+    const cartIcon = document.getElementById('cart-icon-container');
+    // const buttons = Array.from(document.getElementsByClassName('product-cart-btn'));
+    // const buttonSpecial = document.getElementById('product-cart-btn-special');
+    // const removeButtons = Array.from(document.getElementsByClassName('cart-item-remove'));
+    // const isButtonClick = buttons.some(button => button.contains(event.target));
+    // const isButtonRemoveClick = removeButtons.some(button => button.contains(event.target));
+
+    // console.log('Clicked element:', event.target);
+    // console.log('isButtonClick:', isButtonClick);
+    // console.log('isButtonRemoveClick:', isButtonRemoveClick);
+
+    if (modal.style.display !== "none" &&
+        !modal.contains(event.target) &&
+        !cartIcon.contains(event.target)) {
+        // console.log('zamknalem modal z funkcji closeModalOnOutside');
+        closeModal();
+    }
+}
 
 // POSITION MODAL
 
@@ -303,41 +299,53 @@ function setMenuPosition() {
     menu.style.top = `${topPosition}px`;
 }
 
-// RESPONSIVE PADDING
+// SHOW PRODUCTS MENU
 
-function changeHorizontalPadding() {
-    let innerWidth = 1300;
-    const windowWidth = window.innerWidth;
-    const calc = (windowWidth - innerWidth) / 2;
-    const newHorizontalPadding = `${calc}px`;
-    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
-
-    if (calc <= 0) {
-        const calc2 = (windowWidth - innerWidth) / 2 + 150;
-        const newHorizontalPadding = `${calc2}px`;
-
-        document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
-        if (calc2 <= 0) {
-            const calc3 = (windowWidth - innerWidth) / 2 + 275;
-            const newHorizontalPadding = `${calc3}px`;
-
-            document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
-
-            if (calc3 <= 0) {
-                const calc4 = (windowWidth - innerWidth) / 2 + 350;
-                const newHorizontalPadding = `${calc4}px`;
-
-                document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
-
-                if (calc4 <= 0) {
-                    const newHorizontalPadding = '1dvw';
-
-                    document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
-                }
-            }
-        }
+function closeMenu() {
+    const dropdownContent = document.getElementById('dropdown-content');
+    if (dropdownContent.style.display !== "none") {
+        dropdownContent.style.display = "none";
     }
 }
+
+function closeMenuOnClickOutside(event) {
+    const dropdown = document.getElementById('dropdown');
+
+    if (dropdown.style.display !== "none" &&
+        !dropdown.contains(event.target)) {
+        closeMenu();
+    }
+}
+
+document.querySelector('#dropdown').addEventListener('click', function () {
+    const dropdownContent = document.getElementById('dropdown-content');
+    dropdownContent.style.display = "block";
+});
+
+// SHOW SEARCH-MOD
+
+function closeSearch() {
+    const searchMod = document.getElementById('search-mod');
+    if (searchMod.style.display !== "none") {
+        searchMod.style.display = "none";
+    }
+}
+
+function closeSearchOnClickOutside(event) {
+    const search = document.getElementById('search-mod');
+    const searchButton = document.getElementById('search-button-media');
+
+    if (search.style.display !== "none" &&
+        !search.contains(event.target) &&
+        !searchButton.contains(event.target)) {
+        closeSearch();
+    }
+}
+
+document.querySelector('#search-button-media').addEventListener('click', function () {
+    const searchMod = document.getElementById('search-mod');
+    searchMod.style.display = "flex";
+});
 
 // ALL EVENTS
 
@@ -345,6 +353,9 @@ window.addEventListener('resize', () => {
     changeHorizontalPadding();
     setMenuPosition();
     setModulePosition();
+    if (window.innerWidth > 800) {
+        closeSearch();
+    }
 });
 
 window.addEventListener('load', () => {
@@ -353,7 +364,8 @@ window.addEventListener('load', () => {
     setModulePosition();
 });
 
-window.addEventListener('', () => {
-    setMenuPosition();
-    setModulePosition();
+window.addEventListener('click', (event) => {
+    closeModalOnClickOutside(event);
+    closeSearchOnClickOutside(event);
+    closeMenuOnClickOutside(event);
 });
