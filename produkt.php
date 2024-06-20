@@ -7,9 +7,10 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "admin";
 $dbname = "shop";
 
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
