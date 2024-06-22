@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => { //DOM
-
 // OVERWRITE FUNCTION closeModalOnClickOutside FROM COMMON.JS
 
 window.closeModalOnClickOutside = function(event) {
@@ -18,53 +16,9 @@ window.closeModalOnClickOutside = function(event) {
     }
 }
 
-// DROPDOOWN (MENU CATEGORIES) & SEARCHING IN NAVBAR
+// OVERWRITE FUNCTION performSearch FROM COMMON.JS
 
-const searchInput = document.querySelector('.search-input');
-const categoryDropdown = document.querySelector('.dropbtn');
-const searchButton = document.querySelector('.search-button');
-let selectedCategory = '';
-
-searchInput.addEventListener('input', function() {
-    performSearch();
-});
-
-searchInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        performSearch(true);
-    }
-});
-
-categoryDropdown.addEventListener('click', function() {
-    loadCategories();
-});
-
-searchButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    performSearch(true);
-});
-
-function loadCategories() {
-    fetch('php/load_categories.php')
-        .then(response => response.json())
-        .then(data => {
-            const dropdownContent = document.getElementById('dropdown-content');
-            dropdownContent.innerHTML = '';
-            data.categories.forEach(category => {
-                const option = document.createElement('a');
-                option.textContent = category.name;
-                option.dataset.id = category.id;
-                option.addEventListener('click', () => {
-                    categoryDropdown.textContent = category.name;
-                    selectedCategory = category.name;
-                });
-                dropdownContent.appendChild(option);
-            });
-        });
-}
-
-function performSearch(navigate = false) {
+window.performSearch = function(navigate=false) {
     const query = searchInput.value;
     let category = selectedCategory || '';
 
@@ -74,33 +28,31 @@ function performSearch(navigate = false) {
         fetch(`php/search_products.php?query=${query}&category=${category}`)
             .then(response => response.json())
             .then(data => {
-                // titleOfSearch();
-
                 const productContainer = document.querySelector('.product-list');
                 productContainer.innerHTML = '';
                 data.products.forEach(product => {
                     const productDiv = document.createElement('div');
                     productDiv.classList.add('product');
                     productDiv.innerHTML = `
-                        <a class="product-anchor" href="produkt.php?id=${product.id}">
-                            <div class="product-top-half">
-                                <div class="product-img-container">
-                                    <img src="img/${product.image}" alt="${product.shortName}" class="product-img"/>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="product-bottom-half">
-                            <div class="product-description">
-                                <span>${product.shortName}</span>
-                                <span><strong>${product.price} zł</strong></span>
-                            </div>
-                            <div class="product-cart">
-                                <button class="product-cart-btn" onclick="addToCart('${product.image}', '${product.shortName}', ${product.price})">
-                                    <img src="icons/bag.png" class="product-cart-icon">
-                                </button>
+                    <a class="product-anchor" href="produkt.php?id=${product.id}">
+                        <div class="product-top-half">
+                            <div class="product-img-container">
+                                <img src="img/${product.image}" alt="${product.shortName}" class="product-img"/>
                             </div>
                         </div>
-                    `;
+                    </a>
+                    <div class="product-bottom-half">
+                        <div class="product-description">
+                            <span>${product.shortName}</span>
+                            <span><strong>${product.price} zł</strong></span>
+                        </div>
+                        <div class="product-cart">
+                            <button class="product-cart-btn" onclick="addToCart('${product.image}', '${product.shortName}', ${product.price})">
+                                <img src="icons/bag.png" class="product-cart-icon">
+                            </button>
+                        </div>
+                    </div>
+                `;
                     productContainer.appendChild(productDiv);
                 });
             });
@@ -223,6 +175,3 @@ function titleOfSearch() {
 titleOfSearch();
 document.addEventListener('keydown', titleOfSearch);
 document.addEventListener('keyup', titleOfSearch);
-
-
-}); // DOM

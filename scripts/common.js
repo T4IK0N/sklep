@@ -1,4 +1,4 @@
-// SEARCHING
+// SEARCHING IN NAVBAR
 
 const searchInput = document.querySelector('.search-input');
 const categoryDropdown = document.querySelector('.dropbtn');
@@ -13,6 +13,7 @@ function loadCategories() {
             dropdownContent.innerHTML = '';
             data.categories.forEach(category => {
                 const option = document.createElement('a');
+                option.classList.add('dropdown-anchor');
                 option.textContent = category.name;
                 option.dataset.id = category.id;
                 option.addEventListener('click', () => {
@@ -21,6 +22,7 @@ function loadCategories() {
                 });
                 dropdownContent.appendChild(option);
             });
+            setMenuPosition();
         });
 }
 
@@ -33,22 +35,23 @@ function performSearch(navigate = false) {
     }
 }
 
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', function () {
     performSearch();
 });
 
-searchInput.addEventListener('keydown', function(event) {
+
+searchInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         performSearch(true);
     }
 });
 
-categoryDropdown.addEventListener('click', function() {
+categoryDropdown.addEventListener('click', function () {
     loadCategories();
 });
 
-searchButton.addEventListener('click', function(event) {
+searchButton.addEventListener('click', function (event) {
     event.preventDefault();
     performSearch(true);
 });
@@ -56,7 +59,7 @@ searchButton.addEventListener('click', function(event) {
 // MODAL
 
 function addToCart(productImage, productName, productPrice) {
-    const data = { image: productImage, name: productName, price: productPrice };
+    const data = {image: productImage, name: productName, price: productPrice};
 
     fetch('php/add_to_cart.php', {
         method: 'POST',
@@ -95,9 +98,9 @@ function cart_function() {
 function showModal() {
     const modal = document.getElementById('cart-modal');
     const cartIcon = document.getElementById('cart-icon-container');
-    
+
     const rect = cartIcon.getBoundingClientRect();
-    
+
     modal.style.top = `${rect.bottom + window.scrollY}px`;
     modal.style.left = `${rect.left + window.scrollX}px`;
     modal.style.display = "block";
@@ -122,23 +125,23 @@ function updateCartItems() {
                     const itemElement3 = document.createElement('div');
                     itemElement3.classList.add('cart-item-image');
                     itemElement3.innerHTML = `
-                        <img src="img/${item.image}" alt="product-from-fetch">
-                    `;
+                    <img src="img/${item.image}" alt="product-from-fetch">
+                `;
 
                     const itemElement4 = document.createElement('div');
                     itemElement4.classList.add('cart-item-nameAndPrice');
                     itemElement4.innerHTML = `
-                        <span class="cart-item-name">${item.name}</span>
-                        <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
-                    `;
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
+                `;
 
                     const itemRemoveElement = document.createElement('div');
                     itemRemoveElement.classList.add('cart-item-remove');
                     itemRemoveElement.innerHTML = `
-                        <button class="btn-remove" onclick="removeFromCart(${index})">
-                            <span class="material-symbols-light--close remove-icon"></span>
-                        </button>
-                    `;
+                    <button class="btn-remove" onclick="removeFromCart(${index})">
+                        <span class="material-symbols-light--close remove-icon"></span>
+                    </button>
+                `;
 
                     itemElement.appendChild(itemElement2);
                     itemElement.appendChild(itemRemoveElement);
@@ -170,7 +173,7 @@ function removeFromCart(index) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ index: index }),
+        body: JSON.stringify({index: index}),
     })
         .then(response => response.json())
         .then(data => {
@@ -272,7 +275,7 @@ function setModulePosition() {
     const windowWidth = window.innerWidth;
 
     if (windowWidth <= 800) {
-        const leftPosition = (cart.left - 1.5*cartWidth);
+        const leftPosition = (cart.left - 1.5 * cartWidth);
         const topPosition = (cart.bottom);
 
         modal.style.left = `${leftPosition}px`;
@@ -290,9 +293,10 @@ function setModulePosition() {
 
 function setMenuPosition() {
     const menu = document.getElementById('dropdown-content');
+    const menuWidth = menu.clientWidth;
     const drop = document.getElementById('dropdown').getBoundingClientRect();
 
-    const leftPosition = drop.left;
+    const leftPosition = drop.right - menuWidth;
     const topPosition = (drop.bottom + 1);
 
     menu.style.left = `${leftPosition}px`;
@@ -322,39 +326,55 @@ document.querySelector('#dropdown').addEventListener('click', function () {
     dropdownContent.style.display = "block";
 });
 
+
 // SHOW SEARCH-MOD
 
+function showSearch() {
+    const navSearch = document.getElementById('nav-search');
+    if (navSearch.style.display === "none") {
+        navSearch.style.display = "flex";
+    }
+}
+
 function closeSearch() {
-    const searchMod = document.getElementById('search-mod');
-    if (searchMod.style.display !== "none") {
-        searchMod.style.display = "none";
+    const navSearch = document.getElementById('nav-search');
+    if (navSearch.style.display !== "none") {
+        navSearch.style.display = "none";
     }
 }
 
 function closeSearchOnClickOutside(event) {
-    const search = document.getElementById('search-mod');
+    const navSearch = document.getElementById('nav-search');
     const searchButton = document.getElementById('search-button-media');
+    const dropdownContent = document.getElementById('dropdown-content');
 
-    if (search.style.display !== "none" &&
-        !search.contains(event.target) &&
-        !searchButton.contains(event.target)) {
+    if (navSearch.style.display !== "none" &&
+        !navSearch.contains(event.target) &&
+        !searchButton.contains(event.target) &&
+        !dropdownContent.contains(event.target)) {
         closeSearch();
     }
 }
 
 document.querySelector('#search-button-media').addEventListener('click', function () {
-    const searchMod = document.getElementById('search-mod');
-    searchMod.style.display = "flex";
+    const navSearch = document.getElementById('nav-search');
+    navSearch.style.display = "flex";
 });
 
 // ALL EVENTS
+
+document.getElementById('dropdown').addEventListener('click', () => {
+    setMenuPosition();
+})
 
 window.addEventListener('resize', () => {
     changeHorizontalPadding();
     setMenuPosition();
     setModulePosition();
-    if (window.innerWidth > 800) {
+    if (window.innerWidth <= 800) {
         closeSearch();
+    } else {
+        showSearch();
     }
 });
 
@@ -362,10 +382,25 @@ window.addEventListener('load', () => {
     changeHorizontalPadding();
     setMenuPosition();
     setModulePosition();
+    if (window.innerWidth < 800) {
+        closeSearch();
+    } else {
+        showSearch();
+    }
 });
 
 window.addEventListener('click', (event) => {
     closeModalOnClickOutside(event);
-    closeSearchOnClickOutside(event);
     closeMenuOnClickOutside(event);
+    if (window.innerWidth < 800) {
+        closeSearchOnClickOutside(event);
+    }
 });
+
+if (document.getElementById('nav-search-media').style.display !== "none") {
+    closeSearch();
+}
+
+if (window.innerWidth <= 800) {
+    closeSearch();
+}
