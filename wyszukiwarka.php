@@ -165,7 +165,22 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             </div>
         </div>
         <!-- Filter Mod -->
-        <form method="POST" action="wyszukiwarka.php">
+        <form method="POST" action="<?php
+            $query = isset($_GET['query']) ? $_GET['query'] : '';
+            $category = isset($_GET['category']) ? $_GET['category'] : '';
+
+            if ($category == '') {
+                $formAction = "wyszukiwarka.php?query=$query";
+            } else if ($query == '') {
+                $formAction = "wyszukiwarka.php?&category=$category";
+            } else if ($query != '' && $category != '') {
+                $formAction = "wyszukiwarka.php?query=$query&category=$category";
+            } else {
+                $formAction = "wyszukiwarka.php";
+            }
+
+            echo $formAction
+        ?>">
             <div id="filter-mod">
 
                 <!-- -->
@@ -348,3 +363,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 </body>
 </html>
+
+<?php
+echo $sql;
+?>

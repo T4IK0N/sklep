@@ -16,6 +16,12 @@ window.closeModalOnClickOutside = function(event) {
     }
 }
 
+// function changeFormFilter(query, category) {
+//
+//     document.forms[0].action = `wyszukiwarka.php?query=${query}&category=${category}`;
+//     console.log(document.forms[0].action);
+// }
+
 // FILTER MOD (ONLY OPTIONS LIKE PRICE, BRAND ETC.)
 
 function closeFilter() {
