@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "admin";
 $dbname = "shop";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -16,50 +16,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-$specialProductId = 3;
-$sqlSpecial = "SELECT products.id, products.shortName, products.price, productimages.image 
-               FROM products 
-               LEFT JOIN productimages ON products.id = productimages.productId 
-               WHERE products.id = ?";
-$stmtSpecial = $conn->prepare($sqlSpecial);
-
-$stmtSpecial->bind_param("i", $specialProductId);
-
-$stmtSpecial->execute();
-$resultSpecial = $stmtSpecial->get_result();
-
-if ($resultSpecial->num_rows > 0) {
-    $specialProduct = $resultSpecial->fetch_assoc();
-} else {
-    $errorMsg = 'Special product not found';
-    $stmtSpecial->close();
-    $conn->close();
-
-
-    header("Location: php/error.php?errorMsg=" . urlencode($errorMsg));
-    exit();
-}
-
-$stmtSpecial->close();
-
-
-$sql = "SELECT products.id, products.shortName, products.price, (
-            SELECT productimages.image 
-            FROM productimages 
-            WHERE productimages.productId = products.id 
-            LIMIT 1
-        ) AS image
-        FROM products
-        WHERE products.id != ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $specialProductId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-
-$stmt->close();
-
 ?>
 
 
@@ -142,7 +98,36 @@ $stmt->close();
                     </div>
                     <div class="hero-content" id="hero-content-main">
                         <div class="hero-product">
-                            <img src="img/<?php echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName']; ?>"/>
+                            <img src="img/<?php
+
+                            $specialProductId = 3;
+                            $sql = "SELECT products.id, products.shortName, products.price, productimages.image 
+                                           FROM products
+                                           LEFT JOIN productimages ON products.id = productimages.productId 
+                                           WHERE products.id = ?";
+                            $stmt = $conn->prepare($sql);
+
+                            $stmt->bind_param("i", $specialProductId);
+
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            if ($result->num_rows > 0) {
+                                $specialProduct = $result->fetch_assoc();
+                            } else {
+                                $errorMsg = 'Special product not found';
+                                $stmt->close();
+                                $conn->close();
+
+
+                                header("Location: php/error.php?errorMsg=" . urlencode($errorMsg));
+                                exit();
+                            }
+
+                            $stmt->close();
+
+                            echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName'];
+                            ?>"/>
                             <div class="hero-product-container">
                                 <div>
                                     <span><strong><?php echo $specialProduct['shortName']; ?></strong></span>
@@ -158,6 +143,13 @@ $stmt->close();
                 <h1 class="crooked font-bayon new-products">NOWE OFERTY</h1>
                 <div class="product-list">
                     <?php
+                    $sql = "SELECT products.id, products.shortName, products.price, (SELECT productimages.image FROM productimages WHERE productimages.productId = products.id LIMIT 1) AS image FROM products INNER JOIN newproducts ON newproducts.productId = products.id WHERE products.id != ? LIMIT 6";
+
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $specialProductId);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
                     if ($result->num_rows > 0) {
                         $counter = 0;
                         while($row = $result->fetch_assoc()) {
@@ -193,11 +185,20 @@ $stmt->close();
                     } else {
                         echo "0 results";
                     }
+
+                    $stmt->close();
                     ?>
                 </div>
-<!--                <h1 class="crooked font-bayon">POLECANE</h1>-->
+                <h1 class="crooked font-bayon new-products">POLECANE</h1>
                 <div class="product-list">
                     <?php
+                    $sql = "SELECT products.id, products.shortName, products.price, (SELECT productimages.image FROM productimages WHERE productimages.productId = products.id LIMIT 1) AS image FROM products INNER JOIN recommendedproducts ON recommendedproducts.productId = products.id WHERE products.id != ? LIMIT 6";
+
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $specialProductId);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
                     if ($result->num_rows > 0) {
                         $counter = 0;
                         while($row = $result->fetch_assoc()) {
@@ -205,7 +206,9 @@ $stmt->close();
                                 <div class="product">
                                     <a class="product-anchor" href="produkt.php?id=' . $row["id"] . '">
                                         <div class="product-top-half">
-                                            <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '" class="product-img"/>
+                                            <div class="product-img-container">
+                                                <img src="img/' . $row["image"] . '" alt="' . $row["shortName"] . '" class="product-img"/>
+                                            </div>
                                         </div>
                                     </a>
                                     <div class="product-bottom-half">
@@ -231,6 +234,8 @@ $stmt->close();
                     } else {
                         echo "0 results";
                     }
+
+                    $stmt->close();
                     ?>
                 </div>
                 <a href="wyszukiwarka.php" class="search-anchor">

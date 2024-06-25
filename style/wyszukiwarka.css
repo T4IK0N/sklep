@@ -19,6 +19,10 @@ form {
     font-family: var(--third-font);
 }
 
+.activeProductPage {
+    font-weight: 800;
+}
+
 .page-selector {
     display: flex;
     flex-direction: row;
@@ -113,15 +117,21 @@ form {
 #price-div::placeholder {
     color: #fff;
 }
-
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 850px) {
     h1 {
         font-size: 450%;
     }
 }
 
-@media only screen and (max-width: 650px) {
+
+@media only screen and (max-width: 750px) {
     h1 {
         font-size: 350%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    h1 {
+        font-size: 250%;
     }
 }

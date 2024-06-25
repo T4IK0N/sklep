@@ -10,7 +10,6 @@ $username = "root";
 $password = "admin";
 $dbname = "shop";
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -19,7 +18,7 @@ if ($conn->connect_error) {
 
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
-    $sql = "SELECT products.id, products.shortName, products.fullName, products.price, products.brand, products.description, productimages.image
+    $sql = "SELECT products.id, products.shortName, products.fullName, products.price, products.description, productimages.image
             FROM products
             LEFT JOIN productimages ON products.id = productimages.productId
             WHERE products.id = $productId";
@@ -134,7 +133,6 @@ $conn->close();
                     <div class="description">
                         <div class="description-part">
                             <h3 class="font-bayon">Opis produktu</h3>
-                            <p>Marka: <?php echo nl2br(htmlspecialchars($product['brand'])); ?></p>
                             <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                         </div>
                         <!-- Additional sections like specifications can be added here -->
