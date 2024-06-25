@@ -35,7 +35,10 @@ $price_asc = isset($_POST['price_asc']) ? $_POST['price_asc'] : '';
 $price_desc = isset($_POST['price_desc']) ? $_POST['price_desc'] : '';
 $min_price = isset($_POST['min_price']) ? $_POST['min_price'] : '';
 $max_price = isset($_POST['max_price']) ? $_POST['max_price'] : '';
-//$brand = isset($_POST['brand']) ? $_POST['brand'] : '';
+
+$limit = 15;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
 
 if ($min_price) {
     $sql .= " AND price >= $min_price";
@@ -43,6 +46,19 @@ if ($min_price) {
 if ($max_price) {
     $sql .= " AND price <= $max_price";
 }
+
+$totalResult = $conn->query($sql);
+$totalProducts = $totalResult->num_rows;
+
+if ($totalProducts === 1) {
+    $foundWord = 'OFERTE';
+} else if ($totalProducts >= 2 && $totalProducts <= 4) {
+    $foundWord = 'OFERTY';
+} else {
+    $foundWord = 'OFERT';
+}
+
+$totalPages = ceil($totalProducts / $limit);
 
 if ($price_asc) {
     $sql .= " ORDER BY price ASC";
@@ -52,42 +68,22 @@ if ($price_desc) {
     $sql .= " ORDER BY price DESC";
 }
 
-//if ($brand && $brand !== 'wszystkie') {
-//    $sql = "SELECT products.id, products.shortName, products.price, (
-//            SELECT productimages.image
-//            FROM productimages
-//            WHERE productimages.productId = products.id
-//            LIMIT 1
-//        ) AS image
-//        FROM products
-//        JOIN categories ON categories.id = products.categoryId
-//        WHERE products.shortName LIKE '%$query%' AND products.brand = '$brand'";
-//}
+$sql .= " LIMIT $limit OFFSET $offset";
 
 $result = $conn->query($sql);
 
 $products = [];
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $products[] = $row;
     }
 }
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-    echo json_encode(['products' => $products]);
+    echo json_encode(['products' => $products, 'totalPages' => $totalPages, 'currentPage' => $page, 'totalProducts' => $totalProducts]);
     $conn->close();
     exit();
 }
-
-//$brands_sql = "SELECT DISTINCT brand FROM products WHERE brand IS NOT NULL";
-//$brands_result = $conn->query($brands_sql);
-//
-//$brands = [];
-//if ($brands_result->num_rows > 0) {
-//    while($row = $brands_result->fetch_assoc()) {
-//        $brands[] = $row['brand'];
-//    }
-//}
 
 ?>
 
@@ -159,7 +155,10 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 <section class="padding-sec">
     <main class="vertical-padding">
         <div id="search-top">
-            <h1 class="font-bayon" id="offer-found"></h1>
+            <h1 class="font-bayon" id="offer-found">
+            <!-- ZNALEZIONO X OFERT -->
+                <?php echo 'ZNALEZIONO ' . $totalProducts . ' ' . $foundWord?>
+            </h1>
             <div id="filter-div">
                 <img src="icons/filter.png" alt="filters" id="filter-icon" />
                 <p id="filter-text">Filtry</p>
@@ -183,10 +182,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
                 <!-- -->
 
-<!--                <div class="filter-element" id="filter-brand">-->
-<!--                    <p>Marka</p>-->
-<!--                </div>-->
-
                 <button type="submit">Filtruj</button>
             </div>
             <div class="filter-expand" id="sort-div">
@@ -203,24 +198,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 <input type="number" name="min_price" placeholder="Min">
                 <input type="number" name="max_price" placeholder="Max">
             </div>
-<!--            <div class="filter-expand" id="brand-div">-->
-<!--                <div class="brand-labels">-->
-<!--                    <div>-->
-<!--                        <input type="radio" name="brand" value="wszystkie">-->
-<!--                        <label for="">Wszystkie</label>-->
-<!--                    </div>-->
-<!--                    --><?php
-//
-//                    foreach ($brands as $brand_option) {
-//                        echo '<div>';
-//                        echo '<input type="radio" name="brand" value="' . $brand_option . '"/>';
-//                        echo '<label for="' . $brand_option . '">' . $brand_option . '</label>';
-//                        echo '</div>';
-//                    }
-//
-//                    ?>
-<!--                </div>-->
-<!--            </div>-->
         </form>
 
         <div class="vertical-padding product-list" id="product-list">
@@ -254,13 +231,25 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             ?>
         </div>
         <div class="page-selector">
-            <a href="#"><<</a>
-            <a href="#">
-                <strong>
-                    <u>1</u>
-                </strong>
-            </a>
-            <a href="#">>></a>
+            <?php if ($totalPages == 1): ?>
+                <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo "1"; ?>" class="activeProductPage">
+                    1
+                </a>
+            <?php endif; ?>
+            <?php if ($totalPages > 1): ?>
+                <?php if ($page > 1): ?>
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page - 1; ?>"><<</a>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $i; ?>"
+                        <?php if ($i == $page): ?> class="activeProductPage" <?php endif; ?>>
+                        <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
+                <?php if ($page < $totalPages): ?>
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page + 1; ?>">>></a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     </main>
 </section>

@@ -1,3 +1,4 @@
+// let numberOfProductDivs = document.querySelectorAll('div.product').length;
 // OVERWRITE FUNCTION closeModalOnClickOutside FROM COMMON.JS
 
 window.closeModalOnClickOutside = function(event) {
@@ -11,51 +12,7 @@ window.closeModalOnClickOutside = function(event) {
         !modal.contains(event.target) &&
         !cartIcon.contains(event.target) &&
         !isButtonClick ) {
-        // console.log('zamknalem modal z funckji closeModalOnOutsideSearch')
         closeModal();
-    }
-}
-
-// OVERWRITE FUNCTION performSearch FROM COMMON.JS
-
-window.performSearch = function(navigate=false) {
-    const query = searchInput.value;
-    let category = selectedCategory || '';
-
-    if (navigate) {
-        window.location.href = `wyszukiwarka.php?query=${query}&category=${category}`;
-    } else {
-        fetch(`php/search_products.php?query=${query}&category=${category}`)
-            .then(response => response.json())
-            .then(data => {
-                const productContainer = document.querySelector('.product-list');
-                productContainer.innerHTML = '';
-                data.products.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('product');
-                    productDiv.innerHTML = `
-                    <a class="product-anchor" href="produkt.php?id=${product.id}">
-                        <div class="product-top-half">
-                            <div class="product-img-container">
-                                <img src="img/${product.image}" alt="${product.shortName}" class="product-img"/>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="product-bottom-half">
-                        <div class="product-description">
-                            <span>${product.shortName}</span>
-                            <span><strong>${product.price} zł</strong></span>
-                        </div>
-                        <div class="product-cart">
-                            <button class="product-cart-btn" onclick="addToCart('${product.image}', '${product.shortName}', ${product.price})">
-                                <img src="icons/bag.png" class="product-cart-icon">
-                            </button>
-                        </div>
-                    </div>
-                `;
-                    productContainer.appendChild(productDiv);
-                });
-            });
     }
 }
 
@@ -73,7 +30,6 @@ function closeFilterOnClickOutside(event) {
     const filterMod = document.getElementById('filter-mod');
     const sortDiv = document.getElementById('sort-div');
     const priceDiv = document.getElementById('price-div');
-    // const brandDiv = document.getElementById('brand-div');
 
     if (filterButton.style.display !== "none" &&
         !filterButton.contains(event.target) &&
@@ -125,12 +81,9 @@ function closeFilterExpandOnClickOutside(event, name) {
 }
 const sort = "sort";
 const price = "price";
-// const brand = "brand";
 
 window.addEventListener('click', (event) => {
     closeFilterOnClickOutside(event);
-    // expandFilter(brand);
-    // closeFilterExpandOnClickOutside(event, brand);
 });
 
 window.addEventListener('mouseover', (event) => {
@@ -142,36 +95,8 @@ window.addEventListener('mouseover', (event) => {
 
 document.getElementById('filter-div').addEventListener('click', () => {
     setPositionFilterExpand(price)
-    // setPositionFilterExpand(brand)
 });
 
 window.addEventListener('resize', () => {
     setPositionFilterExpand(price)
-    // setPositionFilterExpand(brand)
 });
-
-
-// HOW MANY FOUND PRODUCTS
-
-function titleOfSearch() {
-    const productList = document.getElementById('product-list');
-    const offerFound = document.getElementById('offer-found');
-    let productWord = "";
-
-    if (productList) {
-        const productCount = productList.getElementsByClassName('product').length;
-        if (productCount === 1) {
-            productWord = "OFERTE";
-        } else if (productCount >= 2 && productCount <= 4) {
-            productWord = "OFERTY";
-        } else {
-            productWord = "OFERT";
-        }
-
-        offerFound.innerHTML = `ZNALEZIONO ${productCount} ${productWord}`;
-    }
-}
-
-titleOfSearch();
-document.addEventListener('keydown', titleOfSearch);
-document.addEventListener('keyup', titleOfSearch);
