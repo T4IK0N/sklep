@@ -54,7 +54,8 @@ function createItems() {
                 const itemElementLeft = document.createElement('div');
                 itemElementLeft.classList.add('product-div-element', 'product-div-left');
 
-                const itemImage = document.createElement('div');
+                const itemImage = document.createElement('a');
+                itemImage.href = `produkt.php?id=${item.id}`;
                 itemImage.classList.add('product-image');
                 itemImage.innerHTML = `<img src="img/${item.image}">`;
 
@@ -131,4 +132,8 @@ function isCartEmpty() {
 window.addEventListener('load', () => {
     isCartEmpty();
     createItems();
+})
+
+document.getElementById('cart-products').addEventListener('click', () => {
+    isCartEmpty();
 })

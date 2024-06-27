@@ -102,7 +102,7 @@ if (!isset($_SESSION['cart'])) {
             <div id="cart-products">
                 <h3 class="font-bayon title"></h3>
                 <div id="product-list">
-
+                    <!--function create items-->
                 </div>
             </div>
             <div id="cart-price">

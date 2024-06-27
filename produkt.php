@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "admin";
 $dbname = "shop";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -28,14 +28,12 @@ if (isset($_GET['id'])) {
         $product = $result->fetch_assoc();
     } else {
         $errorMsg = 'Product not found';
-        echo '<script>window.location.href = \'php/error.php?errorMsg=' . urlencode($errorMsg) . '\'</script>';
-
+        header('Location: php/error.php?errorMsg=' . urlencode($errorMsg));
         exit;
     }
 } else {
     $errorMsg = 'No product ID specified';
-    echo '<script>window.location.href = \'php/error.php?errorMsg=' . urlencode($errorMsg) . '\'</script>';
-
+    header('Location: php/error.php?errorMsg=' . urlencode($errorMsg));
     exit;
 }
 
@@ -143,7 +141,7 @@ $conn->close();
                     <div class="add-to-cart flex-row">
                         <input type="number" id="product-count" min="1" max="10" value="1"/>
                         <label for="product-count">
-                            <button class="gray-bg" id="add-product" onclick="addToCart('<?php echo htmlspecialchars($product['fullName']); ?>', <?php echo $product['price']; ?>)">DODAJ DO KOSZYKA</button>
+                            <button class="gray-bg" id="add-product" onclick="addToCart('<?php echo $product['id']; ?>', '<?php echo $product['image']; ?>', '<?php echo $product['shortName']; ?>', <?php echo $product['price']; ?>)">DODAJ DO KOSZYKA</button>
                         </label>
                     </div>
                 </div>

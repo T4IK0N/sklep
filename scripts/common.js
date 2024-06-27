@@ -70,8 +70,8 @@ searchButton.addEventListener('click', function (event) {
 
 // MODAL
 
-function addToCart(productImage, productName, productPrice) {
-    const data = {image: productImage, name: productName, price: productPrice};
+function addToCart(productID, productImage, productName, productPrice) {
+    const data = {id: productID, image: productImage, name: productName, price: productPrice};
 
     fetch('php/add_to_cart.php', {
         method: 'POST',
@@ -134,7 +134,8 @@ function updateCartItems() {
                     const itemElement2 = document.createElement('div');
                     itemElement2.classList.add('cart-item-left');
 
-                    const itemElement3 = document.createElement('div');
+                    const itemElement3 = document.createElement('a');
+                    itemElement3.href = `produkt.php?id=${item.id}`;
                     itemElement3.classList.add('cart-item-image');
                     itemElement3.innerHTML = `
                     <img src="img/${item.image}" alt="product-from-fetch">
@@ -169,7 +170,7 @@ function updateCartItems() {
             document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
 
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="empty-cart-message">Koszyk jest pusty.</div>';
+                cartItemsContainer.innerHTML = '<div id="empty-cart-message">Koszyk jest pusty</div>';
                 document.getElementById('cart-total').textContent = '0.00 zł';
             }
         })

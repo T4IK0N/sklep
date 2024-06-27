@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "admin";
 $dbname = "shop";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -212,11 +212,11 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             <div class="filter-expand" id="price-div">
                 <div class="expand-price">
                     <label for="min_price" id="label_minPrice" class="label_price">Min</label>
-                    <input type="number" name="min_price" id="min_price" class="input_price" placeholder="">
+                    <input type="number" min="0" max="10000" name="min_price" id="min_price" class="input_price" placeholder="">
                 </div>
                 <div class="expand-price">
                     <label for="max_price" id="label_maxPrice" class="label_price">Max</label>
-                    <input type="number" name="max_price" id="max_price" class="input_price" placeholder="">
+                    <input type="number" min="0" max="10000" name="max_price" id="max_price" class="input_price" placeholder="">
                 </div>
             </div>
         </form>
@@ -241,7 +241,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                                 </span>
                             </div>
                             <div class="product-cart">
-                                <button class="product-cart-btn" onclick="addToCart(\'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
+                                <button class="product-cart-btn" onclick="addToCart(\'' . $row["id"] . '\', \'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
                                     <img src="icons/bag.png" class="product-cart-icon">
                                 </button>
                             </div>

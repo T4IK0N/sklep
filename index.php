@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "admin";
 $dbname = "shop";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -98,42 +98,42 @@ if ($conn->connect_error) {
                     </div>
                     <div class="hero-content" id="hero-content-main">
                         <div class="hero-product">
-                            <img src="img/<?php
+                            <a href="produkt.php?id=<?php $specialProductId = 3; echo $specialProductId; ?>">
+                                <img src="img/<?php
+                                $sql = "SELECT products.id, products.shortName, products.price, productimages.image 
+                                               FROM products
+                                               LEFT JOIN productimages ON products.id = productimages.productId 
+                                               WHERE products.id = ?";
+                                $stmt = $conn->prepare($sql);
 
-                            $specialProductId = 3;
-                            $sql = "SELECT products.id, products.shortName, products.price, productimages.image 
-                                           FROM products
-                                           LEFT JOIN productimages ON products.id = productimages.productId 
-                                           WHERE products.id = ?";
-                            $stmt = $conn->prepare($sql);
+                                $stmt->bind_param("i", $specialProductId);
 
-                            $stmt->bind_param("i", $specialProductId);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
 
-                            $stmt->execute();
-                            $result = $stmt->get_result();
+                                if ($result->num_rows > 0) {
+                                    $specialProduct = $result->fetch_assoc();
+                                } else {
+                                    $errorMsg = 'Special product not found';
+                                    $stmt->close();
+                                    $conn->close();
 
-                            if ($result->num_rows > 0) {
-                                $specialProduct = $result->fetch_assoc();
-                            } else {
-                                $errorMsg = 'Special product not found';
+
+                                    header("Location: php/error.php?errorMsg=" . urlencode($errorMsg));
+                                    exit();
+                                }
+
                                 $stmt->close();
-                                $conn->close();
 
-
-                                header("Location: php/error.php?errorMsg=" . urlencode($errorMsg));
-                                exit();
-                            }
-
-                            $stmt->close();
-
-                            echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName'];
-                            ?>"/>
+                                echo $specialProduct['image']; ?>" alt="<?php echo $specialProduct['shortName'];
+                                ?>"/>
+                            </a>
                             <div class="hero-product-container">
                                 <div>
                                     <span><strong><?php echo $specialProduct['shortName']; ?></strong></span>
                                     <p>Tylko teraz przesyłka za darmo!</p>
                                 </div>
-                                <button id="product-cart-btn-special" onclick="addToCart('<?php echo $specialProduct['image']; ?>', '<?php echo $specialProduct['shortName']; ?>', <?php echo $specialProduct['price']; ?>)">DODAJ DO KOSZYKA</button>
+                                <button id="product-cart-btn-special" onclick="addToCart('<?php echo $specialProduct['id']; ?>', '<?php echo $specialProduct['image']; ?>', '<?php echo $specialProduct['shortName']; ?>', <?php echo $specialProduct['price']; ?>)">DODAJ DO KOSZYKA</button>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@ if ($conn->connect_error) {
                                             </span>
                                         </div>
                                         <div class="product-cart">
-                                            <button class="product-cart-btn" onclick="addToCart(\'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
+                                            <button class="product-cart-btn" onclick="addToCart(\'' . $row["id"] . '\', \'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
                                                 <img src="icons/bag.png" class="product-cart-icon">
                                             </button>
                                         </div>
@@ -219,7 +219,7 @@ if ($conn->connect_error) {
                                             </span>
                                         </div>
                                         <div class="product-cart">
-                                            <button class="product-cart-btn" onclick="addToCart(\'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
+                                            <button class="product-cart-btn" onclick="addToCart(\'' . $row["id"] . '\', \'' . $row["image"] . '\', \'' . $row["shortName"] . '\', ' . $row["price"] . ')">
                                                 <img src="icons/bag.png" class="product-cart-icon">
                                             </button>
                                         </div>
@@ -345,7 +345,7 @@ if ($conn->connect_error) {
                     <span><strong><?php echo $specialProduct['shortName']; ?></strong></span>
                     <p>Tylko teraz przesyłka za darmo!</p>
                 </div>
-                <button id="product-cart-btn-special" onclick="addToCart('<?php echo $specialProduct['image']; ?>', '<?php echo $specialProduct['shortName']; ?>', <?php echo $specialProduct['price']; ?>)">DODAJ DO KOSZYKA</button>
+                <button id="product-cart-btn-special" onclick="addToCart('<?php echo $specialProduct['id']; ?>', '<?php echo $specialProduct['image']; ?>', '<?php echo $specialProduct['shortName']; ?>', <?php echo $specialProduct['price']; ?>)">DODAJ DO KOSZYKA</button>
             </div>
         </div>
     </div>

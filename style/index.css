@@ -65,7 +65,7 @@
     align-items: center;
 }
 
-.hero-product > img {
+.hero-product > a > img {
     width: 250px;
     /*height: 400px;*/
     margin-bottom: 45px;
@@ -114,7 +114,7 @@
         width: 250px;
     }
 
-    .hero-product > img {
+    .hero-product > a > img {
         width: 200px;
     }
 
@@ -179,7 +179,7 @@
         font-size: 90%;
     }
 
-    .hero-product > img {
+    .hero-product > a > img {
         width: 50%;
     }
 
