@@ -100,7 +100,7 @@ if (!isset($_SESSION['cart'])) {
     <main>
         <section id="cart">
             <div id="cart-products">
-                <h3 class="font-bayon title">KOSZYK</h3>
+                <h3 class="font-bayon title"></h3>
                 <div id="product-list">
 
                 </div>

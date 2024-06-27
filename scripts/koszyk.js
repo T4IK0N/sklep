@@ -12,6 +12,7 @@ function removeFromCartFull(index) {
         .then(data => {
             updateCartIcon();
             updateCartItems();
+            createItems();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -19,7 +20,22 @@ function removeFromCartFull(index) {
 }
 
 function updateCartQuantity(index, value) {
-
+    fetch('php/update_cart_quantity.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({index: index, value: value}),
+    })
+        .then(response => response.json())
+        .then(data => {
+            updateCartIcon();
+            updateCartItems();
+            createItems();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 function createItems() {
