@@ -1,5 +1,6 @@
 :root {
     --cart-padding: 25px;
+    --cart-margin: var(--vertical-padding) 0;
 }
 
 #cart {
@@ -19,8 +20,8 @@
     gap: 25px;
     background-color: #282828;
     padding: var(--cart-padding);
+    margin: var(--cart-margin);
     border: 1px solid #4f4f4f;
-    margin: var(--vertical-padding) 0;
 }
 
 #cart-products {
@@ -48,6 +49,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    font-family: var(--third-font);
 }
 
 .product-div-left {
@@ -74,8 +76,8 @@
 }
 
 .product-image > img {
-    width: 175px;
-    height: fit-content;
+    width: 200px;
+    height: 200px;
 }
 
 .product-description {
@@ -90,21 +92,25 @@
     appearance: none;
     all: unset;
     padding: 0;
-    padding-left: 3%;
+    padding-left: 4%;
     box-sizing: border-box;
     width: 55px;
     height: 50px;
     border: 1px solid #666;
 }
 
-.product-div-right > p {
-    font-weight: var(--font-regular);
+.price-cart-page {
+    font-weight: var(--font-light);
     font-size: 125%;
 }
 
 .product-title {
     font-size: 150%;
-    font-weight: var(--font-regular);
+    font-weight: var(--font-light);
+}
+
+.span-unitPrice {
+    font-size: 100%;
 }
 
 .delete-div {

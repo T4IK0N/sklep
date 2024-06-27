@@ -242,7 +242,7 @@ nav {
     background-color: #434343;
     border-radius: 25px 0 0 25px;
     height: 35px;
-    font-weight: 400;
+    font-weight: var(--font-regular);
     font-size: var(--nav-fontSize);
 }
 
@@ -275,7 +275,7 @@ nav {
     border: none;
     cursor: pointer;
     font-family: var(--third-font), sans-serif;
-    font-weight: 400;
+    font-weight: var(--font-regular);
     display: flex;
     flex-direction: row;
     gap: 3px;
@@ -350,7 +350,7 @@ nav {
 .cart-text {
     font-family: var(--third-font), sans-serif;
     font-size: 0.9rem;
-    font-weight: 400;
+    font-weight: var(--font-regular);
 }
 
 .halt {
@@ -503,7 +503,7 @@ footer {
 }
 
 .cart-item-price {
-    font-weight: 400;
+    font-weight: var(--font-regular);
     font-size: 0.9rem;
 }
 
@@ -537,7 +537,7 @@ footer {
     height: 40px;
     color: #fff;
     background-color: #242424;
-    font-weight: 400;
+    font-weight: var(--font-regular);
 }
 
 /* PRODUCT */
