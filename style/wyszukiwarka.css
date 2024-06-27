@@ -74,19 +74,6 @@ form {
     padding: 8px 15px;
 }
 
-.filter-expand {
-    width: fit-content;
-    height: fit-content;
-    display: none;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    background-color: #2e2e2e;
-    padding: 20px;
-    position: absolute;
-    z-index: 1000;
-}
-
 .brand-labels {
     display: flex;
     flex-direction: column;
@@ -117,6 +104,45 @@ form {
 #price-div::placeholder {
     color: #fff;
 }
+
+.filter-expand {
+    width: fit-content;
+    height: fit-content;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: #2e2e2e;
+    padding: 20px;
+    position: absolute;
+    z-index: 1000;
+}
+
+.expand-price {
+    position: relative;
+}
+
+#label_minPrice,
+#label_maxPrice {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 5px;
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.input_price:focus + .label_price,
+.input_price:not(:placeholder-shown) + .label_price {
+    top: -10px;
+    font-size: 12px;
+    color: #333;
+}
+
 @media only screen and (max-width: 850px) {
     h1 {
         font-size: 450%;

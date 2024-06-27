@@ -210,8 +210,14 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 </div>
             </div>
             <div class="filter-expand" id="price-div">
-                <input type="number" name="min_price" placeholder="Min">
-                <input type="number" name="max_price" placeholder="Max">
+                <div class="expand-price">
+                    <label for="min_price" id="label_minPrice" class="label_price">Min</label>
+                    <input type="number" name="min_price" id="min_price" class="input_price" placeholder="">
+                </div>
+                <div class="expand-price">
+                    <label for="max_price" id="label_maxPrice" class="label_price">Max</label>
+                    <input type="number" name="max_price" id="max_price" class="input_price" placeholder="">
+                </div>
             </div>
         </form>
 
@@ -363,7 +369,3 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 </body>
 </html>
-
-<?php
-echo $sql;
-?>
