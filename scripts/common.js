@@ -32,10 +32,18 @@ function loadCategories() {
 
 function performSearch(navigate = false) {
     const query = searchInput.value;
-    let category = selectedCategory || '';
+    const category = selectedCategory || '';
 
-    if (navigate) {
+    // changeFormFilter(query, category);
+
+    if (navigate && category === '') {
+        window.location.href = `wyszukiwarka.php?query=${query}`;
+    } else if (navigate && query === '') {
+        window.location.href = `wyszukiwarka.php?category=${category}`;
+    } else if (navigate && query !== '' && category !== '') {
         window.location.href = `wyszukiwarka.php?query=${query}&category=${category}`;
+    } else if (navigate && query === '' && category === '') {
+        window.location.href = `wyszukiwarka.php`;
     }
 }
 
@@ -413,6 +421,10 @@ if (document.getElementById('nav-search-media').style.display !== "none") {
     closeSearch();
 }
 
-if (window.innerWidth <= 800) {
-    closeSearch();
-}
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 800) {
+        closeSearch();
+    } else {
+        showSearch();
+    }
+})

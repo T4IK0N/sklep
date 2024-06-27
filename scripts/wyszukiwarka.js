@@ -30,7 +30,6 @@ function closeFilterOnClickOutside(event) {
     const filterMod = document.getElementById('filter-mod');
     const sortDiv = document.getElementById('sort-div');
     const priceDiv = document.getElementById('price-div');
-    // const brandDiv = document.getElementById('brand-div');
 
     if (filterButton.style.display !== "none" &&
         !filterButton.contains(event.target) &&
