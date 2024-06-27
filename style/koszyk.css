@@ -24,11 +24,12 @@
 }
 
 #cart-products {
-    width: 75%;
+    width: 70%;
+    font-weight: var(--font-light);
 }
 
 #cart-price {
-    width: 35%;
+    width: 40%;
     height: fit-content;
 }
 
@@ -74,8 +75,8 @@
 }
 
 .product-image > img {
-    width: 175px;
-    height: fit-content;
+    width: 200px;
+    height: 200px;
 }
 
 .product-description {
@@ -98,13 +99,13 @@
 }
 
 .product-div-right > p {
-    font-weight: var(--font-regular);
     font-size: 125%;
 }
 
 .product-title {
     font-size: 150%;
-    font-weight: var(--font-regular);
+    font-weight: var(--font-light);
+    font-family: var(--third-font);
 }
 
 .delete-div {

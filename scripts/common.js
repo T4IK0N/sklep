@@ -32,18 +32,10 @@ function loadCategories() {
 
 function performSearch(navigate = false) {
     const query = searchInput.value;
-    const category = selectedCategory || '';
+    let category = selectedCategory || '';
 
-    // changeFormFilter(query, category);
-
-    if (navigate && category === '') {
-        window.location.href = `wyszukiwarka.php?query=${query}`;
-    } else if (navigate && query === '') {
-        window.location.href = `wyszukiwarka.php?category=${category}`;
-    } else if (navigate && query !== '' && category !== '') {
+    if (navigate) {
         window.location.href = `wyszukiwarka.php?query=${query}&category=${category}`;
-    } else if (navigate && query === '' && category === '') {
-        window.location.href = `wyszukiwarka.php`;
     }
 }
 
@@ -70,8 +62,9 @@ searchButton.addEventListener('click', function (event) {
 
 // MODAL
 
+// Add to Cart functionality with AJAX
 function addToCart(productImage, productName, productPrice) {
-    const data = {image: productImage, name: productName, price: productPrice};
+    const data = { image: productImage, name: productName, price: productPrice };
 
     fetch('php/add_to_cart.php', {
         method: 'POST',
@@ -90,6 +83,7 @@ function addToCart(productImage, productName, productPrice) {
         });
 }
 
+// Update Cart Icon
 function updateCartIcon() {
     fetch('php/fetch_cart.php')
         .then(response => response.json())
@@ -102,22 +96,7 @@ function updateCartIcon() {
         });
 }
 
-function cart_function() {
-    showModal();
-    updateCartItems();
-}
-
-function showModal() {
-    const modal = document.getElementById('cart-modal');
-    const cartIcon = document.getElementById('cart-icon-container');
-
-    const rect = cartIcon.getBoundingClientRect();
-
-    modal.style.top = `${rect.bottom + window.scrollY}px`;
-    modal.style.left = `${rect.left + window.scrollX}px`;
-    modal.style.display = "block";
-}
-
+// Update Cart Items
 function updateCartItems() {
     fetch('php/fetch_cart.php')
         .then(response => response.json())
@@ -130,40 +109,43 @@ function updateCartItems() {
                 const itemElement = document.createElement('div');
                 itemElement.classList.add('cart-item');
 
-                if (item.unitPrice !== null) {
-                    const itemElement2 = document.createElement('div');
-                    itemElement2.classList.add('cart-item-left');
+                const itemElement2 = document.createElement('div');
+                itemElement2.classList.add('cart-item-left');
 
-                    const itemElement3 = document.createElement('div');
-                    itemElement3.classList.add('cart-item-image');
-                    itemElement3.innerHTML = `
-                    <img src="img/${item.image}" alt="product-from-fetch">
-                `;
+                const itemElement3 = document.createElement('div');
+                itemElement3.classList.add('cart-item-image');
+                itemElement3.innerHTML = `<img src="img/${item.image}" alt="product-from-fetch">`;
 
-                    const itemElement4 = document.createElement('div');
-                    itemElement4.classList.add('cart-item-nameAndPrice');
-                    itemElement4.innerHTML = `
+                const itemElement4 = document.createElement('div');
+                itemElement4.classList.add('cart-item-nameAndPrice');
+                itemElement4.innerHTML = `
                     <span class="cart-item-name">${item.name}</span>
                     <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
                 `;
 
-                    const itemRemoveElement = document.createElement('div');
-                    itemRemoveElement.classList.add('cart-item-remove');
-                    itemRemoveElement.innerHTML = `
+                const itemRemoveElement = document.createElement('div');
+                itemRemoveElement.classList.add('cart-item-remove');
+                itemRemoveElement.innerHTML = `
                     <button class="btn-remove" onclick="removeFromCart(${index})">
                         <span class="material-symbols-light--close remove-icon"></span>
                     </button>
                 `;
 
-                    itemElement.appendChild(itemElement2);
-                    itemElement.appendChild(itemRemoveElement);
+                const itemQuantityElement = document.createElement('div');
+                itemQuantityElement.classList.add('cart-item-quantity');
+                itemQuantityElement.innerHTML = `
+                    <input type="number" value="${item.quantity}" min="1" onchange="updateCartItemQuantity(${index}, this.value)">
+                `;
 
-                    itemElement2.appendChild(itemElement3);
-                    itemElement2.appendChild(itemElement4);
+                itemElement.appendChild(itemElement2);
+                itemElement.appendChild(itemRemoveElement);
+                itemElement.appendChild(itemQuantityElement);
 
-                    cartItemsContainer.appendChild(itemElement);
-                    total += item.quantity * item.unitPrice;
-                }
+                itemElement2.appendChild(itemElement3);
+                itemElement2.appendChild(itemElement4);
+
+                cartItemsContainer.appendChild(itemElement);
+                total += item.quantity * item.unitPrice;
             });
 
             document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
@@ -178,14 +160,14 @@ function updateCartItems() {
         });
 }
 
-
+// Remove from Cart
 function removeFromCart(index) {
     fetch('php/remove_from_cart.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({index: index}),
+        body: JSON.stringify({ index: index }),
     })
         .then(response => response.json())
         .then(data => {
@@ -197,6 +179,24 @@ function removeFromCart(index) {
         });
 }
 
+// Update Cart Item Quantity
+function updateCartItemQuantity(index, quantity) {
+    fetch('php/update_cart_quantity.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ index: index, quantity: quantity }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            updateCartIcon();
+            updateCartItems();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
 
 function redirectToSubpage(relativeUrl) {
     window.location.href = relativeUrl;
@@ -208,7 +208,6 @@ function placeOrder() {
     redirectToSubpage('koszyk.php');
 }
 
-
 function closeModal() {
     const modal = document.getElementById('cart-modal');
     if (modal.style.display !== "none") {
@@ -218,6 +217,7 @@ function closeModal() {
 
 closeModal();
 updateCartIcon();
+
 
 // RESPONSIVE PADDING
 
@@ -421,10 +421,6 @@ if (document.getElementById('nav-search-media').style.display !== "none") {
     closeSearch();
 }
 
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 800) {
-        closeSearch();
-    } else {
-        showSearch();
-    }
-})
+if (window.innerWidth <= 800) {
+    closeSearch();
+}
