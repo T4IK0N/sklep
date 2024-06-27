@@ -70,9 +70,8 @@ searchButton.addEventListener('click', function (event) {
 
 // MODAL
 
-// Add to Cart functionality with AJAX
 function addToCart(productImage, productName, productPrice) {
-    const data = { image: productImage, name: productName, price: productPrice };
+    const data = {image: productImage, name: productName, price: productPrice};
 
     fetch('php/add_to_cart.php', {
         method: 'POST',
@@ -91,7 +90,6 @@ function addToCart(productImage, productName, productPrice) {
         });
 }
 
-// Update Cart Icon
 function updateCartIcon() {
     fetch('php/fetch_cart.php')
         .then(response => response.json())
@@ -104,7 +102,22 @@ function updateCartIcon() {
         });
 }
 
-// Update Cart Items
+function cart_function() {
+    showModal();
+    updateCartItems();
+}
+
+function showModal() {
+    const modal = document.getElementById('cart-modal');
+    const cartIcon = document.getElementById('cart-icon-container');
+
+    const rect = cartIcon.getBoundingClientRect();
+
+    modal.style.top = `${rect.bottom + window.scrollY}px`;
+    modal.style.left = `${rect.left + window.scrollX}px`;
+    modal.style.display = "block";
+}
+
 function updateCartItems() {
     fetch('php/fetch_cart.php')
         .then(response => response.json())
@@ -117,43 +130,40 @@ function updateCartItems() {
                 const itemElement = document.createElement('div');
                 itemElement.classList.add('cart-item');
 
-                const itemElement2 = document.createElement('div');
-                itemElement2.classList.add('cart-item-left');
+                if (item.unitPrice !== null) {
+                    const itemElement2 = document.createElement('div');
+                    itemElement2.classList.add('cart-item-left');
 
-                const itemElement3 = document.createElement('div');
-                itemElement3.classList.add('cart-item-image');
-                itemElement3.innerHTML = `<img src="img/${item.image}" alt="product-from-fetch">`;
+                    const itemElement3 = document.createElement('div');
+                    itemElement3.classList.add('cart-item-image');
+                    itemElement3.innerHTML = `
+                    <img src="img/${item.image}" alt="product-from-fetch">
+                `;
 
-                const itemElement4 = document.createElement('div');
-                itemElement4.classList.add('cart-item-nameAndPrice');
-                itemElement4.innerHTML = `
+                    const itemElement4 = document.createElement('div');
+                    itemElement4.classList.add('cart-item-nameAndPrice');
+                    itemElement4.innerHTML = `
                     <span class="cart-item-name">${item.name}</span>
                     <span class="cart-item-price">${item.quantity} x ${item.unitPrice.toFixed(2)} zł</span>
                 `;
 
-                const itemRemoveElement = document.createElement('div');
-                itemRemoveElement.classList.add('cart-item-remove');
-                itemRemoveElement.innerHTML = `
+                    const itemRemoveElement = document.createElement('div');
+                    itemRemoveElement.classList.add('cart-item-remove');
+                    itemRemoveElement.innerHTML = `
                     <button class="btn-remove" onclick="removeFromCart(${index})">
                         <span class="material-symbols-light--close remove-icon"></span>
                     </button>
                 `;
 
-                const itemQuantityElement = document.createElement('div');
-                itemQuantityElement.classList.add('cart-item-quantity');
-                itemQuantityElement.innerHTML = `
-                    <input type="number" value="${item.quantity}" min="1" onchange="updateCartItemQuantity(${index}, this.value)">
-                `;
+                    itemElement.appendChild(itemElement2);
+                    itemElement.appendChild(itemRemoveElement);
 
-                itemElement.appendChild(itemElement2);
-                itemElement.appendChild(itemRemoveElement);
-                itemElement.appendChild(itemQuantityElement);
+                    itemElement2.appendChild(itemElement3);
+                    itemElement2.appendChild(itemElement4);
 
-                itemElement2.appendChild(itemElement3);
-                itemElement2.appendChild(itemElement4);
-
-                cartItemsContainer.appendChild(itemElement);
-                total += item.quantity * item.unitPrice;
+                    cartItemsContainer.appendChild(itemElement);
+                    total += item.quantity * item.unitPrice;
+                }
             });
 
             document.getElementById('cart-total').textContent = `${total.toFixed(2)} zł`;
@@ -168,14 +178,14 @@ function updateCartItems() {
         });
 }
 
-// Remove from Cart
+
 function removeFromCart(index) {
     fetch('php/remove_from_cart.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ index: index }),
+        body: JSON.stringify({index: index}),
     })
         .then(response => response.json())
         .then(data => {
@@ -187,24 +197,6 @@ function removeFromCart(index) {
         });
 }
 
-// Update Cart Item Quantity
-function updateCartItemQuantity(index, quantity) {
-    fetch('php/update_cart_quantity.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ index: index, quantity: quantity }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            updateCartIcon();
-            updateCartItems();
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}
 
 function redirectToSubpage(relativeUrl) {
     window.location.href = relativeUrl;
@@ -216,6 +208,7 @@ function placeOrder() {
     redirectToSubpage('koszyk.php');
 }
 
+
 function closeModal() {
     const modal = document.getElementById('cart-modal');
     if (modal.style.display !== "none") {
@@ -225,7 +218,6 @@ function closeModal() {
 
 closeModal();
 updateCartIcon();
-
 
 // RESPONSIVE PADDING
 

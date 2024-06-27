@@ -228,13 +228,18 @@ $cartHtml = generateCartHtml($_SESSION['cart']);
     </section>
 </section>
 
-<!-- Cart Modal -->
-<div id="cart-modal" class="cart-modal">
-    <div id="cart-items" class="cart-items">
-        <!-- Cart items will be dynamically inserted here -->
-    </div>
-    <div class="cart-total-container">
-        <span id="cart-total">0.00 zł</span>
+<!-- Cart Modal HTML -->
+<div id="cart-modal" class="modal">
+    <div id="modal-content" class="modal-content">
+        <div class="modal-content-div">
+            <div id="cart-items" class="cart-items"></div>
+        </div>
+        <hr class="cartLine">
+        <div class="modal-price inter-light-font">
+            <p class="cart-total">Kwota</p>
+            <p id="cart-total" class="cart-total"></p>
+        </div>
+        <button onclick="placeOrder()" id="btn-order" class="btn-order">ZAMÓWIENIE</button>
     </div>
 </div>
 

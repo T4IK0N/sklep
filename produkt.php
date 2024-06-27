@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "admin";
+$password = "";
 $dbname = "shop";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

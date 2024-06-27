@@ -1,13 +1,17 @@
 <?php
+
 session_start();
+$input = json_decode(file_get_contents('php://input'), true);
 
-$data = json_decode(file_get_contents('php://input'), true);
-$index = $data['index'];
+$index = $input['index'];
 
-// Remove the product from the cart session
 if (isset($_SESSION['cart'][$index])) {
-    unset($_SESSION['cart'][$index]);
-    $_SESSION['cart'] = array_values($_SESSION['cart']);
+    if ($_SESSION['cart'][$index]['quantity'] > 1) {
+        $_SESSION['cart'][$index]['quantity'] -= 1;
+        $_SESSION['cart'][$index]['price'] -= $_SESSION['cart'][$index]['unitPrice'];
+    } else {
+        array_splice($_SESSION['cart'], $index, 1);
+    }
 }
 
-echo json_encode(['success' => true, 'cart' => $_SESSION['cart']]);
+echo json_encode(['status' => 'success']);
