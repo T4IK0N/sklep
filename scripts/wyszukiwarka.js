@@ -54,6 +54,7 @@ function setPositionFilterExpand(name) {
 
     const leftPosition = button.getBoundingClientRect().left;
     expand.style.left = `${leftPosition}px`;
+    console.log(expand.style.left);
 }
 
 function expandFilter(name) {
@@ -62,9 +63,11 @@ function expandFilter(name) {
         expand.style.display = "flex";
     });
 }
+
 function closeFilterExpandOnClickOutside(event, name) {
     function closeFilterExpand(name) {
         const expandDiv = document.getElementById(`${name}-div`);
+
         if (expandDiv.style.display !== "none") {
             expandDiv.style.display = "none";
         }
@@ -84,6 +87,7 @@ const price = "price";
 
 window.addEventListener('click', (event) => {
     closeFilterOnClickOutside(event);
+    closeFilterExpandOnClickOutside(event, price);
 });
 
 window.addEventListener('mouseover', (event) => {
@@ -99,4 +103,25 @@ document.getElementById('filter-div').addEventListener('click', () => {
 
 window.addEventListener('resize', () => {
     setPositionFilterExpand(price)
+});
+
+// FILTER PRICE CHANGE TOP POSITION
+
+document.querySelectorAll('.input_price').forEach(input => {
+    document.getElementById('filter-price').addEventListener('mouseover', () => {
+        if (input.value !== '') {
+            input.previousElementSibling.classList.add('changeTopPos');
+        }
+    })
+    input.addEventListener('focus', () => {
+        input.previousElementSibling.classList.add('changeTopPos');
+    });
+    input.addEventListener('click', () => {
+        input.previousElementSibling.classList.add('changeTopPos');
+    })
+    input.addEventListener('blur', () => {
+        if (input.value === '') {
+            input.previousElementSibling.classList.remove('changeTopPos');
+        }
+    });
 });

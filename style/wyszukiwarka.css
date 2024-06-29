@@ -91,24 +91,57 @@ form {
     display: none;
     justify-content: center;
     align-items: flex-start;
-    flex-direction: column;
     background-color: #2e2e2e;
-    padding: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1000;
+}
+
+#sort-div {
+    flex-direction: column;
 }
 
 #price-div {
-    width: 100px;
-    height: 100px;
+    width: fit-content;
+    height: fit-content;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.label_price {
+    position: absolute;
+    z-index: 1000;
+    top: 20px;
+    transition: 0.5s ease-in-out;
+}
+
+.input_price {
+    position: relative;
+    padding: 0;
 }
 
 .expand-price {
-    width: 50%;
-    height: 50%;
+    width: 80px;
+    height: 35px;
+}
+
+.changeTopPos {
+    transform: translateY(-20px);
+    font-size: 90%;
+    transition: 0.5s ease-in-out;
+}
+
+.expand-price:hover > input {
+    border-bottom-color: #bbb;
+    transition: 0.5s ease-in-out;
 }
 
 .expand-price > input {
     width: 100%;
     height: 100%;
+    border-bottom: 1px solid #888;
+    transition: 0.5s ease-in-out;
 }
 
 @media only screen and (max-width: 1000px) {

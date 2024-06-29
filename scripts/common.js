@@ -247,7 +247,7 @@ function changeHorizontalPadding() {
                 document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
 
                 if (calc4 <= 0) {
-                    const newHorizontalPadding = '4dvw';
+                    const newHorizontalPadding = '2dvw';
 
                     document.documentElement.style.setProperty('--horizontal-padding', newHorizontalPadding);
                 }

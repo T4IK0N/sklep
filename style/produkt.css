@@ -23,9 +23,15 @@ main {
     box-sizing: border-box;
 }
 
-.main-image {
-    width: 100%;
+#product-image {
+    overflow: hidden;
+}
+
+#main-image {
+    transform-origin: center center;
+    object-fit: cover;
     height: 100%;
+    width: 100%;
 }
 
 .product-information-right {
@@ -121,6 +127,7 @@ input[type="number"] {
     border: 1px solid #666;
 }
 
+
 @media only screen and (max-width: 1000px) and (min-width: 650px) {
     .product-title {
         font-size: 175%;
@@ -140,11 +147,8 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 650px) {
-    .padding-sec {
-        box-sizing: border-box;
-        padding: 0;
-        padding-right: 5px;
-        width: 100%;
+    #product-image {
+        overflow: hidden;
     }
 
     .product-information {
@@ -159,12 +163,11 @@ input[type="number"] {
 
     .product-information-left {
         width: 100%;
-        padding: 0 0 5px 5px;
+        padding: 0;
     }
 
     .product-information-right {
         padding: 0;
-        padding-left: 20px;
         max-width: 100%;
         width: 100%;
     }
@@ -174,7 +177,11 @@ input[type="number"] {
     }
 
     .description-part > h3 {
-        font-size: 160%;
+        font-size: 140%;
+    }
+
+    .description-part > p {
+        font-size: 90%;
     }
 
     #price-div {

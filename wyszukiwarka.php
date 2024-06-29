@@ -31,20 +31,19 @@ $sql = "SELECT products.id, products.shortName, products.price, (
         JOIN categories ON categories.id = products.categoryId
         WHERE products.shortName LIKE '%$query%' $categoryFilter";
 
-$price_asc = isset($_POST['price_asc']) ? $_POST['price_asc'] : '';
-$price_desc = isset($_POST['price_desc']) ? $_POST['price_desc'] : '';
-$min_price = isset($_POST['min_price']) ? $_POST['min_price'] : '';
-$max_price = isset($_POST['max_price']) ? $_POST['max_price'] : '';
+$sort_order = isset($_GET['sort_order']) ? $_GET['sort_order'] : '';
+$min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
+$max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
 
 $limit = 15;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
 if ($min_price) {
-    $sql .= " AND price >= $min_price";
+    $sql .= " AND products.price >= $min_price";
 }
 if ($max_price) {
-    $sql .= " AND price <= $max_price";
+    $sql .= " AND products.price <= $max_price";
 }
 
 $totalResult = $conn->query($sql);
@@ -60,12 +59,15 @@ if ($totalProducts === 1) {
 
 $totalPages = ceil($totalProducts / $limit);
 
-if ($price_asc) {
-    $sql .= " ORDER BY price ASC";
-}
+$price_asc = false;
+$price_desc = false;
 
-if ($price_desc) {
-    $sql .= " ORDER BY price DESC";
+if ($sort_order === "asc") {
+    $sql .= " ORDER BY products.price ASC";
+    $price_asc = true;
+} else if ($sort_order === "desc") {
+    $sql .= " ORDER BY products.price DESC";
+    $price_desc = true;
 }
 
 $sql .= " LIMIT $limit OFFSET $offset";
@@ -85,7 +87,9 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     exit();
 }
 
+$conn->close();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -165,61 +169,45 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             </div>
         </div>
         <!-- Filter Mod -->
-        <form method="POST" action="<?php
-            $query = isset($_GET['query']) ? $_GET['query'] : '';
-            $category = isset($_GET['category']) ? $_GET['category'] : '';
-
-            if ($category == '') {
-                $formAction = "wyszukiwarka.php?query=$query";
-            } else if ($query == '') {
-                $formAction = "wyszukiwarka.php?&category=$category";
-            } else if ($query != '' && $category != '') {
-                $formAction = "wyszukiwarka.php?query=$query&category=$category";
-            } else {
-                $formAction = "wyszukiwarka.php";
-            }
-
-            echo $formAction
-        ?>">
+        <form method="GET" action="wyszukiwarka.php">
             <div id="filter-mod">
-
-                <!-- -->
+                <input type="hidden" name="query" value="<?php echo $query; ?>">
+                <input type="hidden" name="category" value="<?php echo $category; ?>">
 
                 <div class="filter-element" id="filter-sort">
                     <p>Sortuj</p>
                 </div>
 
-                <!-- -->
-
                 <div class="filter-element" id="filter-price">
                     <p>Cena</p>
                 </div>
 
-                <!-- -->
-
                 <button type="submit">Filtruj</button>
             </div>
+
             <div class="filter-expand" id="sort-div">
                 <div class="sort-labels">
-                    <input name="price_asc" type="radio" />
-                    <label for="price_asc">Cena rosnąco</label>
+                    <input name="sort_order" type="radio" value="asc" <?php if ($price_asc === true) echo 'checked'; ?> />
+                    <label for="sort_order">Cena rosnąco</label>
                 </div>
                 <div class="sort-labels">
-                    <input name="price_desc" type="radio" />
-                    <label for="price_desc">Cena malejąco</label>
+                    <input name="sort_order" type="radio" value="desc" <?php if ($price_desc === true) echo 'checked'; ?> />
+                    <label for="sort_order">Cena malejąco</label>
                 </div>
             </div>
+
             <div class="filter-expand" id="price-div">
                 <div class="expand-price">
                     <label for="min_price" id="label_minPrice" class="label_price">Min</label>
-                    <input type="number" min="0" max="10000" name="min_price" id="min_price" class="input_price" placeholder="">
+                    <input type="number" min="0" max="10000" name="min_price" id="min_price" class="input_price" value="<?php echo $min_price; ?>">
                 </div>
                 <div class="expand-price">
                     <label for="max_price" id="label_maxPrice" class="label_price">Max</label>
-                    <input type="number" min="0" max="10000" name="max_price" id="max_price" class="input_price" placeholder="">
+                    <input type="number" min="0" max="10000" name="max_price" id="max_price" class="input_price" value="<?php echo $max_price; ?>">
                 </div>
             </div>
         </form>
+
 
         <div class="vertical-padding product-list" id="product-list">
             <?php
@@ -253,22 +241,22 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
         </div>
         <div class="page-selector">
             <?php if ($totalPages == 1): ?>
-                <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo "1"; ?>" class="activeProductPage">
+                <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=1&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>&sort_order=<?php echo $sort_order; ?>" class="activeProductPage">
                     1
                 </a>
             <?php endif; ?>
             <?php if ($totalPages > 1): ?>
                 <?php if ($page > 1): ?>
-                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page - 1; ?>"><<</a>
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page - 1; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>&sort_order=<?php echo $sort_order; ?>"><<</a>
                 <?php endif; ?>
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $i; ?>"
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $i; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>&sort_order=<?php echo $sort_order; ?>"
                         <?php if ($i == $page): ?> class="activeProductPage" <?php endif; ?>>
                         <?php echo $i; ?>
                     </a>
                 <?php endfor; ?>
                 <?php if ($page < $totalPages): ?>
-                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page + 1; ?>">>></a>
+                    <a href="?query=<?php echo $query; ?>&category=<?php echo $category; ?>&page=<?php echo $page + 1; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>&sort_order=<?php echo $sort_order; ?>">>></a>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

@@ -50,6 +50,7 @@ $conn->close();
     <link rel="stylesheet" href="style/produkt.css">
     <script src="scripts/common.js" defer></script>
     <script src="scripts/produkt.js" defer></script>
+    <script src="scripts/zoom.js" defer></script>
     <title><?php echo htmlspecialchars($product['shortName']); ?></title>
 </head>
 <body>
@@ -108,7 +109,9 @@ $conn->close();
     <main class="vertical-padding">
         <div class="product-information">
             <div class="product-information-left">
-                <img class="main-image" src="img/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['shortName']); ?>" />
+                <div id="product-image">
+                    <img id="main-image" class="main-image" src="img/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['shortName']); ?>" />
+                </div>
                 <div class="product-variations flex-row">
                     <?php
                     if ($result->num_rows > 0) {
@@ -133,7 +136,6 @@ $conn->close();
                             <h3 class="font-bayon">Opis produktu</h3>
                             <p><?php echo nl2br(htmlspecialchars($product['description'])); ?></p>
                         </div>
-                        <!-- Additional sections like specifications can be added here -->
                     </div>
                 </div>
                 <div class="product-information-divider" id="price-div">

@@ -140,6 +140,19 @@
         height: 1100px;
     }
 
+    .hero-product > a {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-product > a > img {
+        width: 50%;
+        height: fit-content;
+    }
+
     .hero-bg {
         height: 1100px;
         width: 100%;
@@ -177,10 +190,6 @@
 
     .hero-product {
         font-size: 90%;
-    }
-
-    .hero-product > a > img {
-        width: 50%;
     }
 
     .hero-title {

@@ -70,16 +70,6 @@ if (!isset($_SESSION['cart'])) {
 
 <hr class="whiteLine">
 
-<section class="padding-sec">
-    <main>
-        <h1 id="title-subpage" class="font-poppins">
-            zwroty-i-reklamacje.php
-        </h1>
-    </main>
-</section>
-
-<hr class="whiteLine">
-
 <section id="padding-sec-footer">
     <section class="padding-sec">
         <footer>
